@@ -8,9 +8,9 @@ import java.util.UUID;
 /**
  * Created by jt, Spring Framework Guru.
  */
-public interface BeerService {
+public interface PersonService {
 
-    List<Beer> listBeers();
+    List<Beer> listPeople();
 
-    Beer getBeerById(UUID id);
+    Beer getPersonById(UUID id);
 }

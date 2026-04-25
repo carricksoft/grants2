@@ -14,11 +14,11 @@ import java.util.*;
  */
 @Slf4j
 @Service
-public class BeerServiceImpl implements BeerService {
+public class PersonServiceImpl implements PersonService {
 
     private final Map<UUID, Beer> beerMap;
 
-    public BeerServiceImpl() {
+    public PersonServiceImpl() {
         this.beerMap = new HashMap<>();
 
         Beer beer1 = Beer.builder()
@@ -63,14 +63,14 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public List<Beer> listBeers(){
+    public List<Beer> listPeople(){
+        log.debug("PersonService::ListPeople");
         return new ArrayList<>(beerMap.values());
     }
 
     @Override
-    public Beer getBeerById(UUID id) {
-
-        log.debug("Get Beer by Id - in service. Id: " + id.toString());
+    public Beer getPersonById(UUID id) {
+        log.debug("PersonService::GetPersonById");
 
         return beerMap.get(id);
     }

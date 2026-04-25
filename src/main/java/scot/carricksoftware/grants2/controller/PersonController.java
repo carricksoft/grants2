@@ -4,7 +4,7 @@
 
 package scot.carricksoftware.grants2.controller;
 
-import scot.carricksoftware.grants2.services.BeerService;
+import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.model.Beer;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,17 +19,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @RestController
 public class PersonController {
-    private final BeerService beerService;
+    private final PersonService personService;
 
     @RequestMapping("/people")
-    public List<Beer> listBeers(){
+    public List<Beer> listPeople(){
         log.debug("PersonService::ListPeople");
-        return beerService.listBeers();
+        return personService.listPeople();
     }
 
-    public Beer getBeerById(UUID id){
+    public Beer getPersonById(UUID id){
         log.debug("PersonService::GetPersonById");
-        return beerService.getBeerById(id);
+        return personService.getPersonById(id);
     }
 
 }
