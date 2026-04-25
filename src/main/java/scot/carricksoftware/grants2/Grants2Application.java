@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Grants2Application {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(Grants2Application.class, args);
     }
 

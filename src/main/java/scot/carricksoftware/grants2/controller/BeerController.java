@@ -21,15 +21,14 @@ import java.util.UUID;
 public class BeerController {
     private final BeerService beerService;
 
-    @RequestMapping("/api/v1/beer")
+    @RequestMapping("/people")
     public List<Beer> listBeers(){
+        log.debug("PersonService::ListPeople");
         return beerService.listBeers();
     }
 
     public Beer getBeerById(UUID id){
-
-        log.debug("Get Beer by Id - in controller");
-
+        log.debug("PersonService::GetPersonById");
         return beerService.getBeerById(id);
     }
 

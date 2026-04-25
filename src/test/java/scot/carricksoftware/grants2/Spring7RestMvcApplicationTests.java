@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class Spring7RestMvcApplicationTests {
 
+    @SuppressWarnings("EmptyMethod")
     @Test
     void contextLoads() {
     }
