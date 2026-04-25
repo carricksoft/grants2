@@ -10,12 +10,12 @@ import java.util.UUID;
 class BeerControllerTest {
 
     @Autowired
-    BeerController beerController;
+    PersonController personController;
 
     @Test
     void getBeerById() {
 
-        System.out.println(beerController.getBeerById(UUID.randomUUID()));
+        System.out.println(personController.getBeerById(UUID.randomUUID()));
 
     }
 }

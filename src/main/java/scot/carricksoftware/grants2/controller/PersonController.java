@@ -18,7 +18,7 @@ import java.util.UUID;
 @Slf4j
 @AllArgsConstructor
 @RestController
-public class BeerController {
+public class PersonController {
     private final BeerService beerService;
 
     @RequestMapping("/people")
