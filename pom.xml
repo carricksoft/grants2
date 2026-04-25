@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>guru.springframework</groupId>
-    <artifactId>spring-7-rest-mvc</artifactId>
+    <artifactId>grants2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-7-rest-mvc</name>
     <description>Spring 7 Rest MVC</description>

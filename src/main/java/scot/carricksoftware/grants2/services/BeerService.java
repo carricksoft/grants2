@@ -1,6 +1,6 @@
-package guru.springframework.spring7restmvc.services;
+package scot.carricksoftware.grants2.services;
 
-import guru.springframework.spring7restmvc.model.Beer;
+import scot.carricksoftware.grants2.model.Beer;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package guru.springframework.spring7restmvc.controller;
+package scot.carricksoftware.grants2.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

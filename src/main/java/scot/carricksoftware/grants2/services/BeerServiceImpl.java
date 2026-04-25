@@ -1,7 +1,7 @@
-package guru.springframework.spring7restmvc.services;
+package scot.carricksoftware.grants2.services;
 
-import guru.springframework.spring7restmvc.model.Beer;
-import guru.springframework.spring7restmvc.model.BeerStyle;
+import scot.carricksoftware.grants2.model.Beer;
+import scot.carricksoftware.grants2.model.BeerStyle;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,8 @@
-package guru.springframework.spring7restmvc.model;
+/*
+ * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
+ */
+
+package scot.carricksoftware.grants2.model;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,9 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @Builder
 @Data
 public class Beer {

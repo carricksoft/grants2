@@ -1,7 +1,11 @@
-package guru.springframework.spring7restmvc.controller;
+/*
+ * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
+ */
 
-import guru.springframework.spring7restmvc.services.BeerService;
-import guru.springframework.spring7restmvc.model.Beer;
+package scot.carricksoftware.grants2.controller;
+
+import scot.carricksoftware.grants2.services.BeerService;
+import scot.carricksoftware.grants2.model.Beer;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,9 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @Slf4j
 @AllArgsConstructor
 @RestController
