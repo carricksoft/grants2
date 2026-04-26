@@ -4,6 +4,8 @@
 
 package scot.carricksoftware.grants2.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.model.Person;
 import lombok.AllArgsConstructor;
@@ -18,16 +20,18 @@ import java.util.UUID;
 @Slf4j
 @AllArgsConstructor
 @RestController
+@RequestMapping("/people")
 public class PersonController {
     private final PersonService personService;
 
-    @RequestMapping("/people")
+    @GetMapping()
     public List<Person> listPeople(){
         log.debug("PersonService::ListPeople");
         return personService.listPeople();
     }
 
-    public Person getPersonById(UUID id){
+    @GetMapping("/{id}")
+    public Person getPersonById(@PathVariable UUID id){
         log.debug("PersonService::GetPersonById");
         return personService.getPersonById(id);
     }
