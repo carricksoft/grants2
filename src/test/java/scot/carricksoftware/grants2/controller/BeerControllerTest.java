@@ -41,7 +41,17 @@ class BeerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is (testPerson.getId().toString())))
-                .andExpect(jsonPath("$.lastName", is (testPerson.getLastName())))
-        ;
+                .andExpect(jsonPath("$.lastName", is (testPerson.getLastName())));
+    }
+
+    @Test
+    void listPeopleTest() throws Exception {
+        given(personServiceMock.listPeople()).willReturn(personService.listPeople());
+
+        mockMvc.perform(get("/people")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.length()",is(personService.listPeople().size())));
     }
 }
