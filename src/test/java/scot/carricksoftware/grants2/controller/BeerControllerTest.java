@@ -13,7 +13,7 @@ class BeerControllerTest {
     PersonController personController;
 
     @Test
-    void getBeerById() {
+    void getPersonById() {
 
         System.out.println(personController.getPersonById(UUID.randomUUID()));
 
