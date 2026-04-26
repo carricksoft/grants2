@@ -13,4 +13,6 @@ public interface PersonService {
     List<Person> listPeople();
 
     Person getPersonById(UUID id);
+
+    Person saveNewPerson(Person person);
 }

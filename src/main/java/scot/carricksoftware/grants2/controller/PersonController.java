@@ -4,8 +4,13 @@
 
 package scot.carricksoftware.grants2.controller;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.model.Person;
 import lombok.AllArgsConstructor;
@@ -26,14 +31,25 @@ public class PersonController {
 
     @GetMapping()
     public List<Person> listPeople(){
-        log.debug("PersonService::ListPeople");
+        log.debug("PersonService::listPeople");
         return personService.listPeople();
     }
 
     @GetMapping("/{id}")
     public Person getPersonById(@PathVariable UUID id){
-        log.debug("PersonService::GetPersonById");
+        log.debug("PersonService::getPersonById");
         return personService.getPersonById(id);
+    }
+
+    @SuppressWarnings({"rawtypes", "unused"})
+    @PostMapping
+    public ResponseEntity handlePost(@RequestBody Person person) {
+        log.debug("PersonService::handlePost");
+        Person savedPerson = personService.saveNewPerson(person);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location","/person/" + person.getId().toString());
+
+        return new ResponseEntity(headers,HttpStatus.CREATED);
     }
 
 }

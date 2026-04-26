@@ -14,16 +14,16 @@ import java.util.*;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    private final Map<UUID, Person> beerMap;
+    private final Map<UUID, Person> personMap;
 
     public PersonServiceImpl() {
-        this.beerMap = new HashMap<>();
+        this.personMap = new HashMap<>();
 
         Person person1 = Person.builder()
                 .id(UUID.randomUUID())
                 .version(1)
                 .firstName("Andrew Peter")
-                .secondName("Grant")
+                .lastName("Grant")
                 .certifiedYearOfBirth("1953")
                 .recordedYearOfBirth("1953")
                 .certifiedYearOfDeath("2030")
@@ -35,7 +35,7 @@ public class PersonServiceImpl implements PersonService {
                 .id(UUID.randomUUID())
                 .version(1)
                 .firstName("Andrew James")
-                .secondName("Grant")
+                .lastName("Grant")
                 .recordedYearOfBirth("1975")
                 .createdDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
@@ -45,26 +45,43 @@ public class PersonServiceImpl implements PersonService {
                 .id(UUID.randomUUID())
                 .version(1)
                 .firstName("Abigail Elizabeth")
-                .secondName("Grant")
+                .lastName("Grant")
                 .createdDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
 
-        beerMap.put(person1.getId(), person1);
-        beerMap.put(person2.getId(), person2);
-        beerMap.put(person3.getId(), person3);
+        personMap.put(person1.getId(), person1);
+        personMap.put(person2.getId(), person2);
+        personMap.put(person3.getId(), person3);
     }
 
     @Override
     public List<Person> listPeople(){
         log.debug("PersonService::ListPeople");
-        return new ArrayList<>(beerMap.values());
+        return new ArrayList<>(personMap.values());
     }
 
     @Override
     public Person getPersonById(UUID id) {
         log.debug("PersonService::GetPersonById");
 
-        return beerMap.get(id);
+        return personMap.get(id);
+    }
+
+    @Override
+    public Person saveNewPerson(Person person) {
+        Person savedPerson = Person.builder()
+                .id(UUID.randomUUID())
+                .createdDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
+                .certifiedYearOfDeath(person.getCertifiedYearOfDeath())
+                .recordedYearOfBirth(person.getRecordedYearOfBirth())
+                .certifiedYearOfDeath(person.getCertifiedYearOfDeath())
+                .version(person.getVersion())
+                .build();
+        personMap.put(savedPerson.getId(), savedPerson);
+        return savedPerson;
     }
 }

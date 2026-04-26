@@ -4,20 +4,26 @@
 
 package scot.carricksoftware.grants2.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 
 @Builder
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
     private UUID id;
     private Integer version;
     private String firstName;
-    private String secondName;
+    private String lastName;
     private String recordedYearOfBirth;
     private String certifiedYearOfBirth;
     private String certifiedYearOfDeath;
