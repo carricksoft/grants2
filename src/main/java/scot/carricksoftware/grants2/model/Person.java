@@ -18,6 +18,8 @@ public class Person {
     private Integer version;
     private String firstName;
     private String secondName;
+    private String yearOfBirth;
+    private String yearOfDeath;
     private LocalDateTime createdDate;
     private LocalDateTime updateDate;
 }
