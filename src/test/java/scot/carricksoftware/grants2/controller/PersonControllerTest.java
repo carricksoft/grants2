@@ -1,5 +1,6 @@
 package scot.carricksoftware.grants2.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -10,26 +11,41 @@ import org.springframework.test.web.servlet.MockMvc;
 import scot.carricksoftware.grants2.model.Person;
 import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.services.PersonServiceImpl;
+import tools.jackson.databind.ObjectMapper;
+
+
 
 import static org.hamcrest.core.Is.is;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @WebMvcTest(PersonController.class)
-class BeerControllerTest {
+class PersonControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
+
+    @Autowired
+    ObjectMapper objectMapper;
+
     @MockitoBean
     PersonService personServiceMock;
 
-    final PersonService personService = new PersonServiceImpl();
+    PersonService personService;
+
+    @BeforeEach
+    void setUp() {
+       personService = new PersonServiceImpl();
+    }
 
     @Test
     void getPersonByIdTest() throws Exception {
@@ -54,4 +70,20 @@ class BeerControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()",is(personService.listPeople().size())));
     }
+
+    @Test
+    void createNewPersonTest() throws Exception {
+        Person person = personService.listPeople().get(0);
+
+        given(personServiceMock.saveNewPerson(any(Person.class))).willReturn(personService.listPeople().get(1));
+
+        mockMvc.perform(post("/people")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(person)))
+                .andExpect(status().isCreated())
+                .andExpect(header().exists("Location"));
+    }
+
+  
 }
