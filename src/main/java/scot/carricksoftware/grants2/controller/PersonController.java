@@ -74,7 +74,7 @@ public class PersonController {
         log.debug("PersonService::handlePost");
         Person savedPerson = personService.saveNewPerson(person);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location","/person/" + person.getId().toString());
+        headers.add("Location","/person/" + savedPerson.getId().toString());
 
         return new ResponseEntity(headers,HttpStatus.CREATED);
     }

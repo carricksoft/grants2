@@ -73,7 +73,9 @@ class PersonControllerTest {
 
     @Test
     void createNewPersonTest() throws Exception {
-        Person person = personService.listPeople().get(0);
+        Person person = personService.listPeople().getFirst();
+        person.setVersion(null);
+        person.setId(null);
 
         given(personServiceMock.saveNewPerson(any(Person.class))).willReturn(personService.listPeople().get(1));
 
