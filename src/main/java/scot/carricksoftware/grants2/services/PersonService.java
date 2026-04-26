@@ -1,6 +1,6 @@
 package scot.carricksoftware.grants2.services;
 
-import scot.carricksoftware.grants2.model.Beer;
+import scot.carricksoftware.grants2.model.Person;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,7 +10,7 @@ import java.util.UUID;
  */
 public interface PersonService {
 
-    List<Beer> listPeople();
+    List<Person> listPeople();
 
-    Beer getPersonById(UUID id);
+    Person getPersonById(UUID id);
 }

@@ -1,6 +1,6 @@
 package scot.carricksoftware.grants2.services;
 
-import scot.carricksoftware.grants2.model.Beer;
+import scot.carricksoftware.grants2.model.Person;
 import scot.carricksoftware.grants2.model.BeerStyle;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,12 @@ import java.util.*;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    private final Map<UUID, Beer> beerMap;
+    private final Map<UUID, Person> beerMap;
 
     public PersonServiceImpl() {
         this.beerMap = new HashMap<>();
 
-        Beer beer1 = Beer.builder()
+        Person person1 = Person.builder()
                 .id(UUID.randomUUID())
                 .version(1)
                 .beerName("Galaxy Cat")
@@ -33,7 +33,7 @@ public class PersonServiceImpl implements PersonService {
                 .updateDate(LocalDateTime.now())
                 .build();
 
-        Beer beer2 = Beer.builder()
+        Person person2 = Person.builder()
                 .id(UUID.randomUUID())
                 .version(1)
                 .beerName("Crank")
@@ -45,7 +45,7 @@ public class PersonServiceImpl implements PersonService {
                 .updateDate(LocalDateTime.now())
                 .build();
 
-        Beer beer3 = Beer.builder()
+        Person person3 = Person.builder()
                 .id(UUID.randomUUID())
                 .version(1)
                 .beerName("Sunshine City")
@@ -57,19 +57,19 @@ public class PersonServiceImpl implements PersonService {
                 .updateDate(LocalDateTime.now())
                 .build();
 
-        beerMap.put(beer1.getId(), beer1);
-        beerMap.put(beer2.getId(), beer2);
-        beerMap.put(beer3.getId(), beer3);
+        beerMap.put(person1.getId(), person1);
+        beerMap.put(person2.getId(), person2);
+        beerMap.put(person3.getId(), person3);
     }
 
     @Override
-    public List<Beer> listPeople(){
+    public List<Person> listPeople(){
         log.debug("PersonService::ListPeople");
         return new ArrayList<>(beerMap.values());
     }
 
     @Override
-    public Beer getPersonById(UUID id) {
+    public Person getPersonById(UUID id) {
         log.debug("PersonService::GetPersonById");
 
         return beerMap.get(id);

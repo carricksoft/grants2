@@ -5,7 +5,7 @@
 package scot.carricksoftware.grants2.controller;
 
 import scot.carricksoftware.grants2.services.PersonService;
-import scot.carricksoftware.grants2.model.Beer;
+import scot.carricksoftware.grants2.model.Person;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +22,12 @@ public class PersonController {
     private final PersonService personService;
 
     @RequestMapping("/people")
-    public List<Beer> listPeople(){
+    public List<Person> listPeople(){
         log.debug("PersonService::ListPeople");
         return personService.listPeople();
     }
 
-    public Beer getPersonById(UUID id){
+    public Person getPersonById(UUID id){
         log.debug("PersonService::GetPersonById");
         return personService.getPersonById(id);
     }
