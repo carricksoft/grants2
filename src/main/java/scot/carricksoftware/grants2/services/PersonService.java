@@ -15,4 +15,6 @@ public interface PersonService {
     Person getPersonById(UUID id);
 
     Person saveNewPerson(Person person);
+
+    void updateById(UUID id, Person person);
 }

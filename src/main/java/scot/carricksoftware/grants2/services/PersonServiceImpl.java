@@ -57,19 +57,20 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> listPeople(){
-        log.debug("PersonService::ListPeople");
+        log.debug("PersonService::listPeople");
         return new ArrayList<>(personMap.values());
     }
 
     @Override
     public Person getPersonById(UUID id) {
-        log.debug("PersonService::GetPersonById");
+        log.debug("PersonService::getPersonById");
 
         return personMap.get(id);
     }
 
     @Override
     public Person saveNewPerson(Person person) {
+        log.debug("PersonService::saveNewPerson");
         Person savedPerson = Person.builder()
                 .id(UUID.randomUUID())
                 .createdDate(LocalDateTime.now())
@@ -83,5 +84,22 @@ public class PersonServiceImpl implements PersonService {
                 .build();
         personMap.put(savedPerson.getId(), savedPerson);
         return savedPerson;
+    }
+
+    @Override
+    public void updateById(UUID id, Person person) {
+        log.debug("PersonService::upDateById");
+        Person existingPerson = personMap.get(id);
+        existingPerson.setCertifiedYearOfBirth(person.getCertifiedYearOfBirth());
+        existingPerson.setCertifiedYearOfDeath(person.getCertifiedYearOfDeath());
+        existingPerson.setCreatedDate(person.getCreatedDate());
+        existingPerson.setFirstName(person.getFirstName());
+        existingPerson.setFirstName(person.getFirstName());
+        existingPerson.setLastName(person.getLastName());
+        existingPerson.setRecordedYearOfBirth(person.getRecordedYearOfBirth());
+        existingPerson.setUpdateDate(LocalDateTime.now());
+
+        personMap.put(existingPerson.getId(), existingPerson);
+
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.model.Person;
@@ -33,6 +34,14 @@ public class PersonController {
     public List<Person> listPeople(){
         log.debug("PersonService::listPeople");
         return personService.listPeople();
+    }
+
+    @SuppressWarnings("rawtypes")
+    @PutMapping("/{id}")
+    public ResponseEntity upDateById(@PathVariable UUID id, @RequestBody Person person) {
+        log.debug("PersonService::updateById");
+        personService.updateById(id, person);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}")
