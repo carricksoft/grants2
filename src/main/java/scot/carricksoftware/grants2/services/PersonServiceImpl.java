@@ -24,8 +24,9 @@ public class PersonServiceImpl implements PersonService {
                 .version(1)
                 .firstName("Andrew Peter")
                 .secondName("Grant")
-                .yearOfBirth("1953")
-                .yearOfDeath("2030")
+                .certifiedYearOfBirth("1953")
+                .recordedYearOfBirth("1953")
+                .certifiedYearOfDeath("2030")
                 .createdDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
@@ -35,7 +36,7 @@ public class PersonServiceImpl implements PersonService {
                 .version(1)
                 .firstName("Andrew James")
                 .secondName("Grant")
-                .yearOfBirth("1975")
+                .recordedYearOfBirth("1975")
                 .createdDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();

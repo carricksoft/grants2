@@ -18,8 +18,9 @@ public class Person {
     private Integer version;
     private String firstName;
     private String secondName;
-    private String yearOfBirth;
-    private String yearOfDeath;
+    private String recordedYearOfBirth;
+    private String certifiedYearOfBirth;
+    private String certifiedYearOfDeath;
     private LocalDateTime createdDate;
     private LocalDateTime updateDate;
 }
