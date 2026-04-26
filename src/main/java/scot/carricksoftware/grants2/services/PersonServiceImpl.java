@@ -1,5 +1,6 @@
 package scot.carricksoftware.grants2.services;
 
+import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.model.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -94,7 +95,6 @@ public class PersonServiceImpl implements PersonService {
         existingPerson.setCertifiedYearOfDeath(person.getCertifiedYearOfDeath());
         existingPerson.setCreatedDate(person.getCreatedDate());
         existingPerson.setFirstName(person.getFirstName());
-        existingPerson.setFirstName(person.getFirstName());
         existingPerson.setLastName(person.getLastName());
         existingPerson.setRecordedYearOfBirth(person.getRecordedYearOfBirth());
         existingPerson.setUpdateDate(LocalDateTime.now());
@@ -107,5 +107,30 @@ public class PersonServiceImpl implements PersonService {
     public void deleteById(UUID id) {
         log.debug("PersonService::deleteById");
         personMap.remove(id);
+    }
+
+    @Override
+    public void patchById(UUID id, Person person) {
+        log.debug("PersonService::patchById");
+        Person existingPerson = personMap.get(id);
+        if (StringUtils.hasText(person.getCertifiedYearOfBirth())) {
+            existingPerson.setCertifiedYearOfBirth(person.getCertifiedYearOfBirth());
+        }
+
+        if (StringUtils.hasText(person.getCertifiedYearOfDeath())) {
+            existingPerson.setCertifiedYearOfDeath(person.getCertifiedYearOfDeath());
+        }
+
+        if (StringUtils.hasText(person.getFirstName())) {
+            existingPerson.setFirstName(person.getFirstName());
+        }
+        if (StringUtils.hasText(person.getLastName())) {
+            existingPerson.setLastName(person.getLastName());
+        }
+        if (StringUtils.hasText(person.getRecordedYearOfBirth())) {
+            existingPerson.setRecordedYearOfBirth(person.getRecordedYearOfBirth());
+        }
+        existingPerson.setUpdateDate(LocalDateTime.now());
+        personMap.put(existingPerson.getId(), existingPerson);
     }
 }

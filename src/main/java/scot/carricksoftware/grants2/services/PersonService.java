@@ -19,4 +19,6 @@ public interface PersonService {
     void updateById(UUID id, Person person);
 
     void deleteById(UUID id);
+
+    void patchById(UUID id, Person person);
 }
