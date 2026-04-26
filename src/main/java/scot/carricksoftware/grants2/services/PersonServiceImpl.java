@@ -1,11 +1,9 @@
 package scot.carricksoftware.grants2.services;
 
 import scot.carricksoftware.grants2.model.Person;
-import scot.carricksoftware.grants2.model.BeerStyle;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -24,11 +22,8 @@ public class PersonServiceImpl implements PersonService {
         Person person1 = Person.builder()
                 .id(UUID.randomUUID())
                 .version(1)
-                .beerName("Galaxy Cat")
-                .beerStyle(BeerStyle.PALE_ALE)
-                .upc("12356")
-                .price(new BigDecimal("12.99"))
-                .quantityOnHand(122)
+                .firstName("Andrew Peter")
+                .secondName("Grant")
                 .createdDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
@@ -36,11 +31,8 @@ public class PersonServiceImpl implements PersonService {
         Person person2 = Person.builder()
                 .id(UUID.randomUUID())
                 .version(1)
-                .beerName("Crank")
-                .beerStyle(BeerStyle.PALE_ALE)
-                .upc("12356222")
-                .price(new BigDecimal("11.99"))
-                .quantityOnHand(392)
+                .firstName("Andrew James")
+                .secondName("Grant")
                 .createdDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
@@ -48,11 +40,8 @@ public class PersonServiceImpl implements PersonService {
         Person person3 = Person.builder()
                 .id(UUID.randomUUID())
                 .version(1)
-                .beerName("Sunshine City")
-                .beerStyle(BeerStyle.IPA)
-                .upc("12356")
-                .price(new BigDecimal("13.99"))
-                .quantityOnHand(144)
+                .firstName("Abigail Elizabeth")
+                .secondName("Grant")
                 .createdDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
