@@ -17,4 +17,6 @@ public interface PersonService {
     Person saveNewPerson(Person person);
 
     void updateById(UUID id, Person person);
+
+    void deleteById(UUID id);
 }

@@ -7,6 +7,7 @@ package scot.carricksoftware.grants2.controller;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,14 @@ public class PersonController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    @SuppressWarnings("rawtypes")
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable UUID id){
+        log.debug("PersonService::deleteById");
+        personService.deleteById(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
     @GetMapping("/{id}")
     public Person getPersonById(@PathVariable UUID id){
         log.debug("PersonService::getPersonById");
@@ -60,5 +69,7 @@ public class PersonController {
 
         return new ResponseEntity(headers,HttpStatus.CREATED);
     }
+
+
 
 }

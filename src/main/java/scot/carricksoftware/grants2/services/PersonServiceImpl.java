@@ -102,4 +102,10 @@ public class PersonServiceImpl implements PersonService {
         personMap.put(existingPerson.getId(), existingPerson);
 
     }
+
+    @Override
+    public void deleteById(UUID id) {
+        log.debug("PersonService::deleteById");
+        personMap.remove(id);
+    }
 }
