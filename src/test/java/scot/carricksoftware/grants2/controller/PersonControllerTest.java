@@ -2,6 +2,7 @@ package scot.carricksoftware.grants2.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import tools.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.core.Is.is;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -23,6 +25,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -101,6 +104,17 @@ class PersonControllerTest {
                 .andExpect(status().isNoContent());
 
         verify(personServiceMock).updateById(any(UUID.class), any(Person.class));
+    }
+
+    @Test
+    void deletePersonTest() throws Exception{
+        ArgumentCaptor<UUID> captor = ArgumentCaptor.forClass(UUID.class) ;
+        mockMvc.perform(delete("/people/" + testPerson.getId())
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+
+        verify(personServiceMock).deleteById(captor.capture());
+        assertThat(testPerson.getId()).isEqualTo(captor.getValue());
     }
 
   
