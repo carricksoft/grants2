@@ -39,6 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static scot.carricksoftware.grants2.controller.PersonController.PERSON_PATH;
 
 
 @WebMvcTest(PersonController.class)
@@ -78,7 +79,7 @@ class PersonControllerTest {
     void getPersonByIdTest() throws Exception {
         given(personServiceMock.getPersonById(testPerson.getId())).willReturn(testPerson);
 
-        mockMvc.perform(get("/people/" + testPerson.getId())
+        mockMvc.perform(get(PERSON_PATH + "/" + testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -90,7 +91,7 @@ class PersonControllerTest {
     void listPeopleTest() throws Exception {
         given(personServiceMock.listPeople()).willReturn(personService.listPeople());
 
-        mockMvc.perform(get("/people")
+        mockMvc.perform(get(PERSON_PATH)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -103,7 +104,7 @@ class PersonControllerTest {
         testPerson.setVersion(null);
         given(personServiceMock.saveNewPerson(any(Person.class))).willReturn(personService.listPeople().get(1));
 
-        mockMvc.perform(post("/people")
+        mockMvc.perform(post(PERSON_PATH)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(testPerson)))
@@ -113,7 +114,7 @@ class PersonControllerTest {
 
     @Test
     void putPersonTest() throws Exception {
-        mockMvc.perform(put("/people/" + testPerson.getId())
+        mockMvc.perform(put(PERSON_PATH + "/" + testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(testPerson)))
@@ -125,7 +126,7 @@ class PersonControllerTest {
     @Test
     void deletePersonTest() throws Exception {
 
-        mockMvc.perform(delete("/people/" + testPerson.getId())
+        mockMvc.perform(delete(PERSON_PATH + "/" + testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
@@ -138,7 +139,7 @@ class PersonControllerTest {
         Map<String, Object> personMap = new HashMap<>();
         personMap.put("firstName", "New Name");
 
-        mockMvc.perform(patch("/people/" + testPerson.getId())
+        mockMvc.perform(patch(PERSON_PATH + "/" + testPerson.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(personMap)))
