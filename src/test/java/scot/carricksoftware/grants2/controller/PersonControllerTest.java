@@ -47,14 +47,16 @@ class PersonControllerTest {
 
     PersonService personService;
 
+    Person testPerson;
+
     @BeforeEach
     void setUp() {
        personService = new PersonServiceImpl();
+       testPerson = personService.listPeople().getFirst();
     }
 
     @Test
     void getPersonByIdTest() throws Exception {
-        Person testPerson = personService.listPeople().getFirst();
         given(personServiceMock.getPersonById(testPerson.getId())).willReturn(testPerson);
 
         mockMvc.perform(get("/people/" + testPerson.getId())
@@ -78,27 +80,24 @@ class PersonControllerTest {
 
     @Test
     void createNewPersonTest() throws Exception {
-        Person person = personService.listPeople().getFirst();
-        person.setVersion(null);
-        person.setId(null);
-
+        testPerson.setId(null);
+        testPerson.setVersion(null);
         given(personServiceMock.saveNewPerson(any(Person.class))).willReturn(personService.listPeople().get(1));
 
         mockMvc.perform(post("/people")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(person)))
+                        .content(objectMapper.writeValueAsString(testPerson)))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"));
     }
 
     @Test
     void updatePersonTest() throws Exception{
-        Person person = personService.listPeople().getFirst();
-        mockMvc.perform(put("/people/" + person.getId())
+        mockMvc.perform(put("/people/" + testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(person)))
+                        .content(objectMapper.writeValueAsString(testPerson)))
                 .andExpect(status().isNoContent());
 
         verify(personServiceMock).updateById(any(UUID.class), any(Person.class));
