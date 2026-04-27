@@ -3,6 +3,7 @@ package scot.carricksoftware.grants2.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -15,6 +16,8 @@ import scot.carricksoftware.grants2.services.PersonServiceImpl;
 import tools.jackson.databind.ObjectMapper;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -27,6 +30,7 @@ import static org.mockito.Mockito.verify;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -41,12 +45,18 @@ class PersonControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-
     @Autowired
     ObjectMapper objectMapper;
 
     @MockitoBean
     PersonService personServiceMock;
+
+    @Captor
+    ArgumentCaptor<UUID> uuidArgumentCaptor;
+
+    @Captor
+    ArgumentCaptor<Person> personArgumentCaptor;
+
 
     PersonService personService;
 
@@ -54,8 +64,11 @@ class PersonControllerTest {
 
     @BeforeEach
     void setUp() {
-       personService = new PersonServiceImpl();
-       testPerson = personService.listPeople().getFirst();
+        personService = new PersonServiceImpl();
+        testPerson = personService.listPeople().getFirst();
+        uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
+        personArgumentCaptor = ArgumentCaptor.forClass(Person.class);
+
     }
 
     @Test
@@ -63,11 +76,11 @@ class PersonControllerTest {
         given(personServiceMock.getPersonById(testPerson.getId())).willReturn(testPerson);
 
         mockMvc.perform(get("/people/" + testPerson.getId())
-                .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is (testPerson.getId().toString())))
-                .andExpect(jsonPath("$.lastName", is (testPerson.getLastName())));
+                .andExpect(jsonPath("$.id", is(testPerson.getId().toString())))
+                .andExpect(jsonPath("$.lastName", is(testPerson.getLastName())));
     }
 
     @Test
@@ -78,7 +91,7 @@ class PersonControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.length()",is(personService.listPeople().size())));
+                .andExpect(jsonPath("$.length()", is(personService.listPeople().size())));
     }
 
     @Test
@@ -96,7 +109,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void updatePersonTest() throws Exception{
+    void updatePersonTest() throws Exception {
         mockMvc.perform(put("/people/" + testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -107,15 +120,33 @@ class PersonControllerTest {
     }
 
     @Test
-    void deletePersonTest() throws Exception{
-        ArgumentCaptor<UUID> captor = ArgumentCaptor.forClass(UUID.class) ;
+    void deletePersonTest() throws Exception {
+
         mockMvc.perform(delete("/people/" + testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
-        verify(personServiceMock).deleteById(captor.capture());
-        assertThat(testPerson.getId()).isEqualTo(captor.getValue());
+        verify(personServiceMock).deleteById(uuidArgumentCaptor.capture());
+        assertThat(testPerson.getId()).isEqualTo(uuidArgumentCaptor.getValue());
     }
 
-  
+    @Test
+    void patchPersonTest() throws Exception {
+        Map<String, Object> personMap = new HashMap<>();
+        personMap.put("firstName", "New Name");
+
+        mockMvc.perform(patch("/people/" + testPerson.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(personMap)))
+                .andExpect(status().isNoContent());
+
+        verify(personServiceMock).patchById(uuidArgumentCaptor.capture(), personArgumentCaptor.capture());
+
+        assertThat(testPerson.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+        assertThat(personMap.get("firstName")).isEqualTo(personArgumentCaptor.getValue().getFirstName());
+
+    }
+
+
 }
