@@ -14,12 +14,17 @@ import scot.carricksoftware.grants2.services.PersonServiceImpl;
 import tools.jackson.databind.ObjectMapper;
 
 
+import java.util.UUID;
 
 import static org.hamcrest.core.Is.is;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -85,6 +90,18 @@ class PersonControllerTest {
                         .content(objectMapper.writeValueAsString(person)))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"));
+    }
+
+    @Test
+    void updatePersonTest() throws Exception{
+        Person person = personService.listPeople().getFirst();
+        mockMvc.perform(put("/people/" + person.getId())
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(person)))
+                .andExpect(status().isNoContent());
+
+        verify(personServiceMock).updateById(any(UUID.class), any(Person.class));
     }
 
   
