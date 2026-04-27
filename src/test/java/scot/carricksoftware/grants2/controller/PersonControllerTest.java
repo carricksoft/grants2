@@ -1,5 +1,6 @@
 package scot.carricksoftware.grants2.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.Person;
 import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.services.PersonServiceImpl;
@@ -45,6 +47,7 @@ import static scot.carricksoftware.grants2.controller.PersonController.PERSON_PA
 
 @WebMvcTest(PersonController.class)
 @ExtendWith(MockitoExtension.class)
+@Slf4j
 class PersonControllerTest {
 
     @Autowired
@@ -97,6 +100,15 @@ class PersonControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()", is(personService.listPeople().size())));
+    }
+
+    @Test
+    void getPersonByIdNotFoundTest() throws Exception {
+
+        given(personServiceMock.getPersonById(any(UUID.class))).willThrow(NotFoundException.class);
+
+        mockMvc.perform(get(PERSON_PATH_ID, UUID.randomUUID()))
+                .andExpect(status().isNotFound());
     }
 
     @Test
