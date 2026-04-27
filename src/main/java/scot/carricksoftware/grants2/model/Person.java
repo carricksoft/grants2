@@ -4,6 +4,7 @@
 
 package scot.carricksoftware.grants2.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,13 +21,34 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Person {
+    @JsonProperty("id")
     private UUID id;
+
+    @JsonProperty("version")
     private Integer version;
+
+    @JsonProperty("firstName")
     private String firstName;
+
+    @JsonProperty("lastName")
     private String lastName;
+
+    @JsonProperty("recordedYearOfBirth")
     private String recordedYearOfBirth;
+
+
+    @JsonProperty("certifiedYearOfBirth")
     private String certifiedYearOfBirth;
+
+
+    @JsonProperty("certifiedYearOfDeath")
     private String certifiedYearOfDeath;
+
+
+    @JsonProperty("createdDate")
     private LocalDateTime createdDate;
-    private LocalDateTime updateDate;
+
+
+    @JsonProperty("updatedDate")
+    private LocalDateTime updatedDate;
 }

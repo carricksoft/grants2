@@ -29,7 +29,7 @@ public class PersonServiceImpl implements PersonService {
                 .recordedYearOfBirth("1953")
                 .certifiedYearOfDeath("2030")
                 .createdDate(LocalDateTime.now())
-                .updateDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
                 .build();
 
         Person person2 = Person.builder()
@@ -39,7 +39,7 @@ public class PersonServiceImpl implements PersonService {
                 .lastName("Grant")
                 .recordedYearOfBirth("1975")
                 .createdDate(LocalDateTime.now())
-                .updateDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
                 .build();
 
         Person person3 = Person.builder()
@@ -48,7 +48,7 @@ public class PersonServiceImpl implements PersonService {
                 .firstName("Abigail Elizabeth")
                 .lastName("Grant")
                 .createdDate(LocalDateTime.now())
-                .updateDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
                 .build();
 
         personMap.put(person1.getId(), person1);
@@ -75,7 +75,7 @@ public class PersonServiceImpl implements PersonService {
         Person savedPerson = Person.builder()
                 .id(UUID.randomUUID())
                 .createdDate(LocalDateTime.now())
-                .updateDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
                 .firstName(person.getFirstName())
                 .lastName(person.getLastName())
                 .certifiedYearOfDeath(person.getCertifiedYearOfDeath())
@@ -97,7 +97,7 @@ public class PersonServiceImpl implements PersonService {
         existingPerson.setFirstName(person.getFirstName());
         existingPerson.setLastName(person.getLastName());
         existingPerson.setRecordedYearOfBirth(person.getRecordedYearOfBirth());
-        existingPerson.setUpdateDate(LocalDateTime.now());
+        existingPerson.setUpdatedDate(LocalDateTime.now());
 
         personMap.put(existingPerson.getId(), existingPerson);
 
@@ -130,7 +130,7 @@ public class PersonServiceImpl implements PersonService {
         if (StringUtils.hasText(person.getRecordedYearOfBirth())) {
             existingPerson.setRecordedYearOfBirth(person.getRecordedYearOfBirth());
         }
-        existingPerson.setUpdateDate(LocalDateTime.now());
+        existingPerson.setUpdatedDate(LocalDateTime.now());
         personMap.put(existingPerson.getId(), existingPerson);
     }
 }

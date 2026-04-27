@@ -2,8 +2,10 @@ package scot.carricksoftware.grants2.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -40,6 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(PersonController.class)
+@ExtendWith(MockitoExtension.class)
 class PersonControllerTest {
 
     @Autowired
@@ -95,7 +98,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void createNewPersonTest() throws Exception {
+    void postNewPersonTest() throws Exception {
         testPerson.setId(null);
         testPerson.setVersion(null);
         given(personServiceMock.saveNewPerson(any(Person.class))).willReturn(personService.listPeople().get(1));
@@ -109,7 +112,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void updatePersonTest() throws Exception {
+    void putPersonTest() throws Exception {
         mockMvc.perform(put("/people/" + testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
