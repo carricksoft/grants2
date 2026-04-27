@@ -40,6 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static scot.carricksoftware.grants2.controller.PersonController.PERSON_PATH;
+import static scot.carricksoftware.grants2.controller.PersonController.PERSON_PATH_ID;
 
 
 @WebMvcTest(PersonController.class)
@@ -79,7 +80,7 @@ class PersonControllerTest {
     void getPersonByIdTest() throws Exception {
         given(personServiceMock.getPersonById(testPerson.getId())).willReturn(testPerson);
 
-        mockMvc.perform(get(PERSON_PATH + "/" + testPerson.getId())
+        mockMvc.perform(get(PERSON_PATH_ID, testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -114,7 +115,7 @@ class PersonControllerTest {
 
     @Test
     void putPersonTest() throws Exception {
-        mockMvc.perform(put(PERSON_PATH + "/" + testPerson.getId())
+        mockMvc.perform(put(PERSON_PATH_ID, testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(testPerson)))
@@ -126,7 +127,7 @@ class PersonControllerTest {
     @Test
     void deletePersonTest() throws Exception {
 
-        mockMvc.perform(delete(PERSON_PATH + "/" + testPerson.getId())
+        mockMvc.perform(delete(PERSON_PATH_ID, testPerson.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
@@ -139,7 +140,7 @@ class PersonControllerTest {
         Map<String, Object> personMap = new HashMap<>();
         personMap.put("firstName", "New Name");
 
-        mockMvc.perform(patch(PERSON_PATH + "/" + testPerson.getId())
+        mockMvc.perform(patch(PERSON_PATH_ID, testPerson.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(personMap)))
