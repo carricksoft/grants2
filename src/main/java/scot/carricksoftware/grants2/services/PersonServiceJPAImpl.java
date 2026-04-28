@@ -34,7 +34,9 @@ public class PersonServiceJPAImpl implements PersonService {
 
     @Override
     public Optional<PersonDTO> getPersonById(UUID id) {
-        return Optional.ofNullable(personMapper.personToPersonDto(personRepository.findById(id)
+        return Optional.ofNullable(personMapper
+                .personToPersonDto(personRepository
+                .findById(id)
                 .orElse(null)));
     }
 
