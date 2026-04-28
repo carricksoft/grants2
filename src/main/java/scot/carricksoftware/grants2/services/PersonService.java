@@ -1,8 +1,9 @@
 package scot.carricksoftware.grants2.services;
 
-import scot.carricksoftware.grants2.model.Person;
+import scot.carricksoftware.grants2.model.PersonDTO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -10,15 +11,15 @@ import java.util.UUID;
  */
 public interface PersonService {
 
-    List<Person> listPeople();
+    List<PersonDTO> listPeople();
 
-    Person getPersonById(UUID id);
+    Optional<PersonDTO> getPersonById(UUID id);
 
-    Person saveNewPerson(Person person);
+    PersonDTO saveNewPerson(PersonDTO personDTO);
 
-    void updateById(UUID id, Person person);
+    void updateById(UUID id, PersonDTO personDTO);
 
     void deleteById(UUID id);
 
-    void patchById(UUID id, Person person);
+    void patchById(UUID id, PersonDTO personDTO);
 }

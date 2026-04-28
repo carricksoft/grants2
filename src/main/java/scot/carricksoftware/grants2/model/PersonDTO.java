@@ -20,7 +20,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
+public class PersonDTO {
     @JsonProperty("id")
     private UUID id;
 

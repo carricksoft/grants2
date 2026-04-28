@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.services.PersonService;
-import scot.carricksoftware.grants2.model.Person;
+import scot.carricksoftware.grants2.model.PersonDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,7 +37,7 @@ public class PersonController {
     public static final String PERSON_PATH_ID = PERSON_PATH + "/{id}";
 
     @GetMapping(PERSON_PATH)
-    public List<Person> listPeople(){
+    public List<PersonDTO> listPeople(){
         log.debug("PersonService::listPeople");
         return personService.listPeople();
     }
@@ -51,17 +51,17 @@ public class PersonController {
 
     @SuppressWarnings("rawtypes")
     @PatchMapping(PERSON_PATH_ID)
-    public ResponseEntity patchById(@PathVariable UUID id, @RequestBody Person person) {
+    public ResponseEntity patchById(@PathVariable UUID id, @RequestBody PersonDTO personDTO) {
         log.debug("PersonService::patchById");
-        personService.patchById(id, person);
+        personService.patchById(id, personDTO);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @SuppressWarnings("rawtypes")
     @PutMapping(PERSON_PATH_ID)
-    public ResponseEntity upDateById(@PathVariable UUID id, @RequestBody Person person) {
+    public ResponseEntity upDateById(@PathVariable UUID id, @RequestBody PersonDTO personDTO) {
         log.debug("PersonService::updateById");
-        personService.updateById(id, person);
+        personService.updateById(id, personDTO);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
@@ -74,18 +74,18 @@ public class PersonController {
     }
 
     @GetMapping(PERSON_PATH_ID)
-    public Person getPersonById(@PathVariable UUID id){
+    public PersonDTO getPersonById(@PathVariable UUID id){
         log.debug("PersonService::getPersonById");
-        return personService.getPersonById(id);
+        return personService.getPersonById(id).orElseThrow(NotFoundException::new);
     }
 
     @SuppressWarnings({"rawtypes", "unused"})
     @PostMapping(PERSON_PATH)
-    public ResponseEntity handlePost(@RequestBody Person person) {
+    public ResponseEntity handlePost(@RequestBody PersonDTO personDTO) {
         log.debug("PersonService::handlePost");
-        Person savedPerson = personService.saveNewPerson(person);
+        PersonDTO savedPersonDTO = personService.saveNewPerson(personDTO);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location",PERSON_PATH + "/"  + savedPerson.getId().toString());
+        headers.add("Location",PERSON_PATH + "/"  + savedPersonDTO.getId().toString());
 
         return new ResponseEntity(headers,HttpStatus.CREATED);
     }

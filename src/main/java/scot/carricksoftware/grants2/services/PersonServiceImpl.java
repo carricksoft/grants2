@@ -1,7 +1,7 @@
 package scot.carricksoftware.grants2.services;
 
 import org.springframework.util.StringUtils;
-import scot.carricksoftware.grants2.model.Person;
+import scot.carricksoftware.grants2.model.PersonDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,12 @@ import java.util.*;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    private final Map<UUID, Person> personMap;
+    private final Map<UUID, PersonDTO> personMap;
 
     public PersonServiceImpl() {
         this.personMap = new HashMap<>();
 
-        Person person1 = Person.builder()
+        PersonDTO personDTO1 = PersonDTO.builder()
                 .id(UUID.randomUUID())
                 .version(1)
                 .firstName("Andrew Peter")
@@ -32,7 +32,7 @@ public class PersonServiceImpl implements PersonService {
                 .updatedDate(LocalDateTime.now())
                 .build();
 
-        Person person2 = Person.builder()
+        PersonDTO personDTO2 = PersonDTO.builder()
                 .id(UUID.randomUUID())
                 .version(1)
                 .firstName("Andrew James")
@@ -42,7 +42,7 @@ public class PersonServiceImpl implements PersonService {
                 .updatedDate(LocalDateTime.now())
                 .build();
 
-        Person person3 = Person.builder()
+        PersonDTO personDTO3 = PersonDTO.builder()
                 .id(UUID.randomUUID())
                 .version(1)
                 .firstName("Abigail Elizabeth")
@@ -51,55 +51,55 @@ public class PersonServiceImpl implements PersonService {
                 .updatedDate(LocalDateTime.now())
                 .build();
 
-        personMap.put(person1.getId(), person1);
-        personMap.put(person2.getId(), person2);
-        personMap.put(person3.getId(), person3);
+        personMap.put(personDTO1.getId(), personDTO1);
+        personMap.put(personDTO2.getId(), personDTO2);
+        personMap.put(personDTO3.getId(), personDTO3);
     }
 
     @Override
-    public List<Person> listPeople(){
+    public List<PersonDTO> listPeople(){
         log.debug("PersonService::listPeople");
         return new ArrayList<>(personMap.values());
     }
 
     @Override
-    public Person getPersonById(UUID id) {
+    public Optional<PersonDTO> getPersonById(UUID id) {
         log.debug("PersonService::getPersonById");
 
-        return personMap.get(id);
+        return Optional.of(personMap.get(id));
     }
 
     @Override
-    public Person saveNewPerson(Person person) {
+    public PersonDTO saveNewPerson(PersonDTO personDTO) {
         log.debug("PersonService::saveNewPerson");
-        Person savedPerson = Person.builder()
+        PersonDTO savedPersonDTO = PersonDTO.builder()
                 .id(UUID.randomUUID())
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
-                .firstName(person.getFirstName())
-                .lastName(person.getLastName())
-                .certifiedYearOfDeath(person.getCertifiedYearOfDeath())
-                .recordedYearOfBirth(person.getRecordedYearOfBirth())
-                .certifiedYearOfDeath(person.getCertifiedYearOfDeath())
-                .version(person.getVersion())
+                .firstName(personDTO.getFirstName())
+                .lastName(personDTO.getLastName())
+                .certifiedYearOfDeath(personDTO.getCertifiedYearOfDeath())
+                .recordedYearOfBirth(personDTO.getRecordedYearOfBirth())
+                .certifiedYearOfDeath(personDTO.getCertifiedYearOfDeath())
+                .version(personDTO.getVersion())
                 .build();
-        personMap.put(savedPerson.getId(), savedPerson);
-        return savedPerson;
+        personMap.put(savedPersonDTO.getId(), savedPersonDTO);
+        return savedPersonDTO;
     }
 
     @Override
-    public void updateById(UUID id, Person person) {
+    public void updateById(UUID id, PersonDTO personDTO) {
         log.debug("PersonService::upDateById");
-        Person existingPerson = personMap.get(id);
-        existingPerson.setCertifiedYearOfBirth(person.getCertifiedYearOfBirth());
-        existingPerson.setCertifiedYearOfDeath(person.getCertifiedYearOfDeath());
-        existingPerson.setCreatedDate(person.getCreatedDate());
-        existingPerson.setFirstName(person.getFirstName());
-        existingPerson.setLastName(person.getLastName());
-        existingPerson.setRecordedYearOfBirth(person.getRecordedYearOfBirth());
-        existingPerson.setUpdatedDate(LocalDateTime.now());
+        PersonDTO existingPersonDTO = personMap.get(id);
+        existingPersonDTO.setCertifiedYearOfBirth(personDTO.getCertifiedYearOfBirth());
+        existingPersonDTO.setCertifiedYearOfDeath(personDTO.getCertifiedYearOfDeath());
+        existingPersonDTO.setCreatedDate(personDTO.getCreatedDate());
+        existingPersonDTO.setFirstName(personDTO.getFirstName());
+        existingPersonDTO.setLastName(personDTO.getLastName());
+        existingPersonDTO.setRecordedYearOfBirth(personDTO.getRecordedYearOfBirth());
+        existingPersonDTO.setUpdatedDate(LocalDateTime.now());
 
-        personMap.put(existingPerson.getId(), existingPerson);
+        personMap.put(existingPersonDTO.getId(), existingPersonDTO);
 
     }
 
@@ -110,27 +110,27 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void patchById(UUID id, Person person) {
+    public void patchById(UUID id, PersonDTO personDTO) {
         log.debug("PersonService::patchById");
-        Person existingPerson = personMap.get(id);
-        if (StringUtils.hasText(person.getCertifiedYearOfBirth())) {
-            existingPerson.setCertifiedYearOfBirth(person.getCertifiedYearOfBirth());
+        PersonDTO existingPersonDTO = personMap.get(id);
+        if (StringUtils.hasText(personDTO.getCertifiedYearOfBirth())) {
+            existingPersonDTO.setCertifiedYearOfBirth(personDTO.getCertifiedYearOfBirth());
         }
 
-        if (StringUtils.hasText(person.getCertifiedYearOfDeath())) {
-            existingPerson.setCertifiedYearOfDeath(person.getCertifiedYearOfDeath());
+        if (StringUtils.hasText(personDTO.getCertifiedYearOfDeath())) {
+            existingPersonDTO.setCertifiedYearOfDeath(personDTO.getCertifiedYearOfDeath());
         }
 
-        if (StringUtils.hasText(person.getFirstName())) {
-            existingPerson.setFirstName(person.getFirstName());
+        if (StringUtils.hasText(personDTO.getFirstName())) {
+            existingPersonDTO.setFirstName(personDTO.getFirstName());
         }
-        if (StringUtils.hasText(person.getLastName())) {
-            existingPerson.setLastName(person.getLastName());
+        if (StringUtils.hasText(personDTO.getLastName())) {
+            existingPersonDTO.setLastName(personDTO.getLastName());
         }
-        if (StringUtils.hasText(person.getRecordedYearOfBirth())) {
-            existingPerson.setRecordedYearOfBirth(person.getRecordedYearOfBirth());
+        if (StringUtils.hasText(personDTO.getRecordedYearOfBirth())) {
+            existingPersonDTO.setRecordedYearOfBirth(personDTO.getRecordedYearOfBirth());
         }
-        existingPerson.setUpdatedDate(LocalDateTime.now());
-        personMap.put(existingPerson.getId(), existingPerson);
+        existingPersonDTO.setUpdatedDate(LocalDateTime.now());
+        personMap.put(existingPersonDTO.getId(), existingPersonDTO);
     }
 }
