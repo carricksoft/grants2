@@ -14,6 +14,7 @@ import scot.carricksoftware.grants2.repositories.PersonRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Primary
@@ -25,12 +26,16 @@ public class PersonServiceJPAImpl implements PersonService {
 
     @Override
     public List<PersonDTO> listPeople() {
-        return List.of();
+        return personRepository.findAll()
+                .stream()
+                .map(personMapper::personToPersonDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<PersonDTO> getPersonById(UUID id) {
-        return Optional.empty();
+        return Optional.ofNullable(personMapper.personToPersonDto(personRepository.findById(id)
+                .orElse(null)));
     }
 
     @Override

@@ -21,7 +21,7 @@ public class BootstrapData implements CommandLineRunner {
     private final PersonRepository personRepository;
 
     @Override
-    public void run(@SuppressWarnings("NullableProblems") String... args) throws Exception {
+    public void run(@SuppressWarnings("NullableProblems") String... args) {
         loadPersonData();
     }
     
