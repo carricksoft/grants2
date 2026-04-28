@@ -42,7 +42,7 @@ public class PersonServiceJPAImpl implements PersonService {
 
     @Override
     public PersonDTO saveNewPerson(PersonDTO personDTO) {
-        return null;
+        return personMapper.personToPersonDto(personRepository.save(personMapper.personDtoToPerson(personDTO)));
     }
 
     @Override
