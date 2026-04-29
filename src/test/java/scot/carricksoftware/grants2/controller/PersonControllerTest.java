@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import org.springframework.test.web.servlet.MvcResult;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.services.PersonServiceImpl;
@@ -125,9 +126,26 @@ class PersonControllerTest {
     }
 
     @Test
+    void createNewPersonValidationTest() throws Exception {
+        PersonDTO personDTO = PersonDTO.builder().build();
+        given(personServiceMock.saveNewPerson(any(PersonDTO.class)))
+                .willReturn(personService.listPeople().get(1));
+
+        MvcResult mvcResult = mockMvc.perform(post(PersonController.PERSON_PATH)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(personDTO)))
+                .andExpect(status().isBadRequest()).andReturn();
+
+        System.out.println(mvcResult.getResponse().getContentAsString());
+
+    }
+
+
+    @Test
     void updatePersonTest() throws Exception {
         PersonDTO personDTO = personService.listPeople().getFirst();
-        given(personServiceMock.updatePersonById(any(),any())).willReturn(Optional.of(personDTO));
+        given(personServiceMock.updatePersonById(any(), any())).willReturn(Optional.of(personDTO));
         mockMvc.perform(put(PERSON_PATH_ID, testPersonDTO.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
