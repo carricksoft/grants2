@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import scot.carricksoftware.grants2.entities.Person;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
-import scot.carricksoftware.grants2.mappers.PersonMapper;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
 

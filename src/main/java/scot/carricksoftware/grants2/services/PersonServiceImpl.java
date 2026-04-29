@@ -88,7 +88,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void updateById(UUID id, PersonDTO personDTO) {
+    public Optional<PersonDTO> updatePersonById(UUID id, PersonDTO personDTO) {
         log.debug("PersonService::upDateById");
         PersonDTO existingPersonDTO = personMap.get(id);
         existingPersonDTO.setCertifiedYearOfBirth(personDTO.getCertifiedYearOfBirth());
@@ -100,17 +100,18 @@ public class PersonServiceImpl implements PersonService {
         existingPersonDTO.setUpdatedDate(LocalDateTime.now());
 
         personMap.put(existingPersonDTO.getId(), existingPersonDTO);
+        return Optional.empty();
 
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deletePersonById(UUID id) {
         log.debug("PersonService::deleteById");
         personMap.remove(id);
     }
 
     @Override
-    public void patchById(UUID id, PersonDTO personDTO) {
+    public void patchPersonById(UUID id, PersonDTO personDTO) {
         log.debug("PersonService::patchById");
         PersonDTO existingPersonDTO = personMap.get(id);
         if (StringUtils.hasText(personDTO.getCertifiedYearOfBirth())) {

@@ -17,9 +17,12 @@ public interface PersonService {
 
     PersonDTO saveNewPerson(PersonDTO personDTO);
 
-    void updateById(UUID id, PersonDTO personDTO);
+    Optional<PersonDTO> updatePersonById(UUID id, PersonDTO personDTO);
 
-    void deleteById(UUID id);
+    void deletePersonById(UUID id);
 
-    void patchById(UUID id, PersonDTO personDTO);
+    void patchPersonById(UUID id, PersonDTO personDTO);
 }
+
+
+

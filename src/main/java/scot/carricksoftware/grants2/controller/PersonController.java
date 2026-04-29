@@ -53,7 +53,7 @@ public class PersonController {
     @PatchMapping(PERSON_PATH_ID)
     public ResponseEntity patchById(@PathVariable UUID id, @RequestBody PersonDTO personDTO) {
         log.debug("PersonService::patchById");
-        personService.patchById(id, personDTO);
+        personService.patchPersonById(id, personDTO);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
@@ -61,7 +61,7 @@ public class PersonController {
     @PutMapping(PERSON_PATH_ID)
     public ResponseEntity upDateById(@PathVariable UUID id, @RequestBody PersonDTO personDTO) {
         log.debug("PersonService::updateById");
-        personService.updateById(id, personDTO);
+        personService.updatePersonById(id, personDTO);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
@@ -69,7 +69,7 @@ public class PersonController {
     @DeleteMapping(PERSON_PATH_ID)
     public ResponseEntity deleteById(@PathVariable UUID id){
         log.debug("PersonService::deleteById");
-        personService.deleteById(id);
+        personService.deletePersonById(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 

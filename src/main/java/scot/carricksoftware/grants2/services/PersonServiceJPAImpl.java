@@ -47,7 +47,7 @@ public class PersonServiceJPAImpl implements PersonService {
     }
 
     @Override
-    public void updateById(UUID id, PersonDTO personDTO) {
+    public Optional<PersonDTO> updatePersonById(UUID id, PersonDTO personDTO) {
         personRepository.findById(id).ifPresent(foundPerson -> {
             foundPerson.setFirstName(personDTO.getFirstName());
             foundPerson.setLastName(personDTO.getLastName());
@@ -57,16 +57,17 @@ public class PersonServiceJPAImpl implements PersonService {
             foundPerson.setCertifiedYearOfDeath(personDTO.getCertifiedYearOfDeath());
             personRepository.save(foundPerson);
         });
+        return Optional.empty();
 
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deletePersonById(UUID id) {
 
     }
 
     @Override
-    public void patchById(UUID id, PersonDTO personDTO) {
+    public void patchPersonById(UUID id, PersonDTO personDTO) {
 
     }
 }

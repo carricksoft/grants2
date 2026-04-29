@@ -133,7 +133,7 @@ class PersonControllerTest {
                         .content(objectMapper.writeValueAsString(testPersonDTO)))
                 .andExpect(status().isNoContent());
 
-        verify(personServiceMock).updateById(any(UUID.class), any(PersonDTO.class));
+        verify(personServiceMock).updatePersonById(any(UUID.class), any(PersonDTO.class));
     }
 
     @Test
@@ -143,7 +143,7 @@ class PersonControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
-        verify(personServiceMock).deleteById(uuidArgumentCaptor.capture());
+        verify(personServiceMock).deletePersonById(uuidArgumentCaptor.capture());
         assertThat(testPersonDTO.getId()).isEqualTo(uuidArgumentCaptor.getValue());
     }
 
@@ -158,7 +158,7 @@ class PersonControllerTest {
                         .content(objectMapper.writeValueAsString(personMap)))
                 .andExpect(status().isNoContent());
 
-        verify(personServiceMock).patchById(uuidArgumentCaptor.capture(), personArgumentCaptor.capture());
+        verify(personServiceMock).patchPersonById(uuidArgumentCaptor.capture(), personArgumentCaptor.capture());
 
         assertThat(testPersonDTO.getId()).isEqualTo(uuidArgumentCaptor.getValue());
         assertThat(personMap.get("firstName")).isEqualTo(personArgumentCaptor.getValue().getFirstName());
