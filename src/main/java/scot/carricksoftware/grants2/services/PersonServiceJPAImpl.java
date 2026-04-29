@@ -11,6 +11,7 @@ import scot.carricksoftware.grants2.mappers.PersonMapper;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -47,6 +48,15 @@ public class PersonServiceJPAImpl implements PersonService {
 
     @Override
     public void updateById(UUID id, PersonDTO personDTO) {
+        personRepository.findById(id).ifPresent(foundPerson -> {
+            foundPerson.setFirstName(personDTO.getFirstName());
+            foundPerson.setLastName(personDTO.getLastName());
+            foundPerson.setUpdateDate(LocalDateTime.now());
+            foundPerson.setCertifiedYearOfBirth(personDTO.getCertifiedYearOfBirth());
+            foundPerson.setRecordedYearOfBirth(personDTO.getRecordedYearOfBirth());
+            foundPerson.setCertifiedYearOfDeath(personDTO.getCertifiedYearOfDeath());
+            personRepository.save(foundPerson);
+        });
 
     }
 
