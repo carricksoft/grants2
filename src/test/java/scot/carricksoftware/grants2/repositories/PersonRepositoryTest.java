@@ -20,11 +20,15 @@ class PersonRepositoryTest {
     @Test
     void saveTest() {
         Person savedPerson = personRepository.save(Person.builder()
-                .lastName("My Name")
+                .firstName("Andrew")
+                .lastName("Grant")
                 .build());
+        personRepository.flush();
+
         assertThat(savedPerson).isNotNull();
         assertThat(savedPerson.getId()).isNotNull();
-        assertThat(savedPerson.getLastName()).isEqualTo("My Name");
+        assertThat(savedPerson.getFirstName()).isEqualTo("Andrew");
+        assertThat(savedPerson.getLastName()).isEqualTo("Grant");
     }
 
 }
