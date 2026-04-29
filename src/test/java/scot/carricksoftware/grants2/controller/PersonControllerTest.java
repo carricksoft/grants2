@@ -14,6 +14,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.services.PersonServiceImpl;
@@ -135,10 +136,11 @@ class PersonControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(personDTO)))
-                .andExpect(status().isBadRequest()).andReturn();
+                .andExpect(status().isBadRequest())
+                        .andExpect((ResultMatcher) jsonPath("$.length()", is(2 * 2)))
+                                .andReturn();
 
         System.out.println(mvcResult.getResponse().getContentAsString());
-
     }
 
 
