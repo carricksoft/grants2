@@ -61,7 +61,9 @@ public class PersonController {
     @PutMapping(PERSON_PATH_ID)
     public ResponseEntity upDateById(@PathVariable UUID id, @RequestBody PersonDTO personDTO) {
         log.debug("PersonService::updateById");
-        personService.updatePersonById(id, personDTO);
+        if( personService.updatePersonById(id, personDTO).isEmpty()){
+            throw new NotFoundException();
+        }
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 

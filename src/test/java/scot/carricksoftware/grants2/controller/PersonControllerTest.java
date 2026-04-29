@@ -65,7 +65,6 @@ class PersonControllerTest {
     @Captor
     ArgumentCaptor<PersonDTO> personArgumentCaptor;
 
-
     PersonService personService;
 
     PersonDTO testPersonDTO;
@@ -126,7 +125,9 @@ class PersonControllerTest {
     }
 
     @Test
-    void putPersonTest() throws Exception {
+    void updatePersonTest() throws Exception {
+        PersonDTO personDTO = personService.listPeople().getFirst();
+        given(personServiceMock.updatePersonById(any(),any())).willReturn(Optional.of(personDTO));
         mockMvc.perform(put(PERSON_PATH_ID, testPersonDTO.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)

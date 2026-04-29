@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,17 +49,20 @@ public class PersonServiceJPAImpl implements PersonService {
 
     @Override
     public Optional<PersonDTO> updatePersonById(UUID id, PersonDTO personDTO) {
-        personRepository.findById(id).ifPresent(foundPerson -> {
+        AtomicReference<Optional<PersonDTO>> atomicReference = new AtomicReference<>();
+
+        personRepository.findById(id).ifPresentOrElse(foundPerson -> {
             foundPerson.setFirstName(personDTO.getFirstName());
             foundPerson.setLastName(personDTO.getLastName());
-            foundPerson.setUpdateDate(LocalDateTime.now());
             foundPerson.setCertifiedYearOfBirth(personDTO.getCertifiedYearOfBirth());
             foundPerson.setRecordedYearOfBirth(personDTO.getRecordedYearOfBirth());
             foundPerson.setCertifiedYearOfDeath(personDTO.getCertifiedYearOfDeath());
-            personRepository.save(foundPerson);
-        });
-        return Optional.empty();
+            foundPerson.setUpdateDate(LocalDateTime.now());
+            atomicReference.set(Optional.of(personMapper
+                    .personToPersonDto(personRepository.save(foundPerson))));
+        }, () -> atomicReference.set(Optional.empty()));
 
+        return atomicReference.get();
     }
 
     @Override

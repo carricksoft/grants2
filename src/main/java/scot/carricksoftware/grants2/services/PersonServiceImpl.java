@@ -100,7 +100,7 @@ public class PersonServiceImpl implements PersonService {
         existingPersonDTO.setUpdatedDate(LocalDateTime.now());
 
         personMap.put(existingPersonDTO.getId(), existingPersonDTO);
-        return Optional.empty();
+        return Optional.of(existingPersonDTO);
 
     }
 
