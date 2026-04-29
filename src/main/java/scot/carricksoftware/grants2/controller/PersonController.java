@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,7 +86,7 @@ public class PersonController {
 
     @SuppressWarnings({"rawtypes", "unused"})
     @PostMapping(PERSON_PATH)
-    public ResponseEntity handlePost(@RequestBody PersonDTO personDTO) {
+    public ResponseEntity handlePost(@Validated @RequestBody PersonDTO personDTO) {
         log.debug("PersonService::handlePost");
         PersonDTO savedPersonDTO = personService.saveNewPerson(personDTO);
         HttpHeaders headers = new HttpHeaders();
