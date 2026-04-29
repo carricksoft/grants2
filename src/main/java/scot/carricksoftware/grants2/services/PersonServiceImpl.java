@@ -105,9 +105,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void deletePersonById(UUID id) {
+    public Boolean deletePersonById(UUID id) {
         log.debug("PersonService::deleteById");
         personMap.remove(id);
+        return true;
     }
 
     @Override

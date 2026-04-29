@@ -71,7 +71,9 @@ public class PersonController {
     @DeleteMapping(PERSON_PATH_ID)
     public ResponseEntity deleteById(@PathVariable UUID id){
         log.debug("PersonService::deleteById");
-        personService.deletePersonById(id);
+        if (!personService.deletePersonById(id)) {
+            throw new NotFoundException();
+        }
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 

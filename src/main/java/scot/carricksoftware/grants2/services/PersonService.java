@@ -19,7 +19,7 @@ public interface PersonService {
 
     Optional<PersonDTO> updatePersonById(UUID id, PersonDTO personDTO);
 
-    void deletePersonById(UUID id);
+    Boolean deletePersonById(UUID id);
 
     void patchPersonById(UUID id, PersonDTO personDTO);
 }

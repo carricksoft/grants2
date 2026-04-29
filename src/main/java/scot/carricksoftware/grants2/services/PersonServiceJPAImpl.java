@@ -66,8 +66,12 @@ public class PersonServiceJPAImpl implements PersonService {
     }
 
     @Override
-    public void deletePersonById(UUID id) {
-
+    public Boolean deletePersonById(UUID id) {
+        if (personRepository.existsById(id)) {
+            personRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     @Override

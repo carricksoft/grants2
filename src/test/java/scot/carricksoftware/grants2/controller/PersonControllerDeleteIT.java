@@ -13,7 +13,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import scot.carricksoftware.grants2.entities.Person;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
-import scot.carricksoftware.grants2.mappers.PersonMapper;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
 
@@ -24,41 +23,32 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @SpringBootTest
-class PersonControllerUpdateIT {
+class PersonControllerDeleteIT {
     @Autowired
     PersonController personController;
 
     @Autowired
     PersonRepository personRepository;
 
-    @Autowired
-    PersonMapper personMapper;
-
 
     @Test
     @Transactional
     @Rollback
-    void updateExistingPersonTest() {
+    void deletePersonByIDTest() {
         Person person = personRepository.findAll().getFirst();
-        PersonDTO personDTO = personMapper.personToPersonDto(person);
-        personDTO.setId(null);
-        personDTO.setVersion(null);
-        final String firstName = "Martha";
-        personDTO.setFirstName(firstName);
 
-        @SuppressWarnings("rawtypes") ResponseEntity responseEntity = personController.upDateById(person.getId(), personDTO);
+        @SuppressWarnings("rawtypes") ResponseEntity responseEntity = personController.deleteById(person.getId());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
-
-        Person updatedPerson = personRepository.findAll().getFirst();
-        assertThat(updatedPerson.getFirstName()).isEqualTo(firstName);
+        assertThat(personRepository.findById(person.getId())).isEmpty();
     }
 
     @Test
     @Transactional
     @Rollback
-    void updateExistingPersonNotFoundTest() {
+    void deletePersonNotFoundTest() {
         assertThrows(NotFoundException.class, () -> personController.upDateById(UUID.randomUUID(), PersonDTO.builder().build()));
     }
+
 
 
 

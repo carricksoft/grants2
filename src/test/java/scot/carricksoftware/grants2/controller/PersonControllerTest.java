@@ -140,6 +140,8 @@ class PersonControllerTest {
     @Test
     void deletePersonTest() throws Exception {
 
+        given(personServiceMock.deletePersonById(any())).willReturn(true);
+
         mockMvc.perform(delete(PERSON_PATH_ID, testPersonDTO.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
