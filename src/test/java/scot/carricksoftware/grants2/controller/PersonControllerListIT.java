@@ -37,8 +37,8 @@ class PersonControllerListIT {
     @Rollback
     void emptyListTest() {
         personRepository.deleteAll();
-        List<PersonDTO> dtos = personController.listPeople();
-        assertThat(dtos.size()).isEqualTo(0);
+        List<PersonDTO> dtoList = personController.listPeople();
+        assertThat(dtoList.size()).isEqualTo(0);
     }
 
 

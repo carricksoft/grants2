@@ -40,14 +40,17 @@ class PersonControllerValidationTest {
     @MockitoBean
     PersonService personServiceMock;
 
+    @SuppressWarnings("unused")
     @Captor
     ArgumentCaptor<UUID> uuidArgumentCaptor;
 
+    @SuppressWarnings("unused")
     @Captor
     ArgumentCaptor<PersonDTO> personArgumentCaptor;
 
     PersonService personService;
 
+    @SuppressWarnings("unused")
     PersonDTO testPersonDTO;
 
     @BeforeEach

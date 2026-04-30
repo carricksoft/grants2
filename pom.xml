@@ -76,6 +76,11 @@
             <artifactId>mariadb-java-client</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-ant</artifactId>
+            <version>7.3.2.Final</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

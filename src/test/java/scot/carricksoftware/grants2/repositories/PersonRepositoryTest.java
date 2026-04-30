@@ -35,6 +35,7 @@ class PersonRepositoryTest {
         assertThat(savedPerson.getLastName()).isEqualTo("Grant");
     }
 
+    @SuppressWarnings("unused")
     @Test
     void firstNameTooLongTest() {
         String testString = longString(FIELD_SIZE + 1);
@@ -47,6 +48,7 @@ class PersonRepositoryTest {
         });
     }
 
+    @SuppressWarnings("unused")
     @Test
     void lastNameTooLongTest() {
         String testString = longString(FIELD_SIZE + 1);

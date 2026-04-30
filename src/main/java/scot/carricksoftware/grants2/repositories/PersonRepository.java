@@ -9,5 +9,6 @@ import scot.carricksoftware.grants2.entities.Person;
 
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public interface PersonRepository extends JpaRepository<Person, UUID> {
 }
