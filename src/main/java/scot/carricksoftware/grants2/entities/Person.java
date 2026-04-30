@@ -17,7 +17,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -36,7 +38,8 @@ public class Person {
     @Id
     @GeneratedValue(generator="UUID")
     @UuidGenerator
-    @Column(length=36, columnDefinition="varchar", updatable=false, nullable=false)
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length=36, columnDefinition="varchar(36)", updatable=false, nullable=false)
     private UUID id;
 
     @Version
@@ -54,9 +57,18 @@ public class Person {
     @Column(length=128)
     private String lastName;
 
+    @Column(length=4, columnDefinition="varchar(4)")
+    @JdbcTypeCode(SqlTypes.CHAR)
     private String recordedYearOfBirth;
+
+    @Column(length=4, columnDefinition="varchar(4)")
+    @JdbcTypeCode(SqlTypes.CHAR)
     private String certifiedYearOfBirth;
+
+    @Column(length=4, columnDefinition="varchar(4)")
+    @JdbcTypeCode(SqlTypes.CHAR)
     private String certifiedYearOfDeath;
+
     private LocalDateTime createdDate;
     private LocalDateTime updateDate;
 }
