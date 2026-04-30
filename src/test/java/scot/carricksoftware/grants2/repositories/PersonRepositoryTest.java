@@ -59,7 +59,7 @@ class PersonRepositoryTest {
         });
     }
 
-    private String longString(int length) {
+    private String longString(@SuppressWarnings("SameParameterValue") int length) {
         StringBuilder output = new StringBuilder("1234567890");
         while (output.length() < length) {
             output.append(output);
