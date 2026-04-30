@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +30,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Person {
 
+
+    public static final int FIELD_SIZE = 128;
+
     @Id
     @GeneratedValue(generator="UUID")
     @UuidGenerator
@@ -40,10 +44,14 @@ public class Person {
 
     @NotNull
     @NotBlank
+    @Size(max=FIELD_SIZE)
+    @Column(length=128)
     private String firstName;
 
     @NotNull
     @NotBlank
+    @Size(max=FIELD_SIZE)
+    @Column(length=128)
     private String lastName;
 
     private String recordedYearOfBirth;
