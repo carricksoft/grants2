@@ -113,7 +113,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void postNewPersonTest() {
+    void postNewPersonTest() throws Exception {
         testPersonDTO.setId(null);
         testPersonDTO.setVersion(null);
         given(personServiceMock.saveNewPerson(any(PersonDTO.class))).willReturn(personService.listPeople().get(1));
