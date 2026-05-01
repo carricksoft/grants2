@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import scot.carricksoftware.grants2.entities.Person;
+import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
+import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -19,10 +21,12 @@ import java.util.Arrays;
 public class BootstrapData implements CommandLineRunner {
 
     private final PersonRepository personRepository;
+    private final CountryRepository countryRepository;
 
     @Override
     public void run(@SuppressWarnings("NullableProblems") String... args) {
         loadPersonData();
+        loadCountryData();
     }
     
     private void loadPersonData() {
@@ -55,6 +59,36 @@ public class BootstrapData implements CommandLineRunner {
                     .build();
 
             personRepository.saveAll(Arrays.asList(person1, person2, person3));
+        }
+
+    }
+
+    private void loadCountryData() {
+        if (countryRepository.count() == 0) {
+            Country country1 = Country.builder()
+                    .name("Country 1")
+                    .version(1)
+                    .createdDate(LocalDateTime.now())
+                    .updatedDate(LocalDateTime.now())
+                    .build();
+
+            Country country2 = Country.builder()
+                    .name("Country 2")
+                    .version(1)
+                    .createdDate(LocalDateTime.now())
+                    .updatedDate(LocalDateTime.now())
+                    .build();
+
+            Country country3 = Country.builder()
+                    .name("Country 3")
+                    .version(1)
+                    .createdDate(LocalDateTime.now())
+                    .updatedDate(LocalDateTime.now())
+                    .build();
+
+
+
+            countryRepository.saveAll(Arrays.asList(country1, country2, country3));
         }
 
     }

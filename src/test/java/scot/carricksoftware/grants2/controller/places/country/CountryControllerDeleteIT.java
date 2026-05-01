@@ -2,7 +2,7 @@
  * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
  */
 
-package scot.carricksoftware.grants2.controller.person;
+package scot.carricksoftware.grants2.controller.places.country;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +11,11 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import scot.carricksoftware.grants2.controller.PersonController;
-import scot.carricksoftware.grants2.entities.Person;
+import scot.carricksoftware.grants2.controller.places.CountryController;
+import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
-import scot.carricksoftware.grants2.model.PersonDTO;
-import scot.carricksoftware.grants2.repositories.PersonRepository;
+import scot.carricksoftware.grants2.model.places.CountryDTO;
+import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 
 import java.util.UUID;
 
@@ -24,30 +24,31 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @SpringBootTest
-class PersonControllerDeleteIT {
+class CountryControllerDeleteIT {
     @Autowired
-    PersonController personController;
+    CountryController countryController;
 
     @Autowired
-    PersonRepository personRepository;
-
+    CountryRepository countryRepository;
 
     @Test
     @Transactional
     @Rollback
-    void deletePersonByIDTest() {
-        Person person = personRepository.findAll().getFirst();
-
-        @SuppressWarnings("rawtypes") ResponseEntity responseEntity = personController.deleteById(person.getId());
+    void deleteCountryByIDTest() {
+        Country country = countryRepository.findAll().getFirst();
+        @SuppressWarnings("rawtypes") ResponseEntity responseEntity = countryController.deleteById(country.getId());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
-        assertThat(personRepository.findById(person.getId())).isEmpty();
+        assertThat(countryRepository.findById(country.getId())).isEmpty();
     }
 
     @Test
     @Transactional
     @Rollback
-    void deletePersonNotFoundTest() {
-        assertThrows(NotFoundException.class, () -> personController.upDateById(UUID.randomUUID(), PersonDTO.builder().build()));
+    void deleteCountryNotFoundTest() {
+        assertThrows(NotFoundException.class, () -> countryController.upDateById(UUID.randomUUID(), CountryDTO.builder().build()));
     }
+
+
+
 
 }
