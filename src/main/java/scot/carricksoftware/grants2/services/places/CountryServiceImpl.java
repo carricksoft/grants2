@@ -54,11 +54,11 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public List<CountryDTO> listCountry(){
+    public List<CountryDTO> listCountries(){
         log.debug("CountryService::countryPeople");
         return new ArrayList<>(countryMap.values());
     }
-
+    
     @Override
     public Optional<CountryDTO> getCountryById(UUID id) {
         log.debug("CountryService::getCountryById");
@@ -85,6 +85,19 @@ public class CountryServiceImpl implements CountryService {
         log.debug("CountryService::deleteById");
         countryMap.remove(id);
         return true;
+    }
+
+    @Override
+    public Optional<CountryDTO> updateCountryById(UUID id, CountryDTO countryDTO) {
+        log.debug("CountryService::upDateById");
+        CountryDTO existingCountryDTO = countryMap.get(id);
+        existingCountryDTO.setCreatedDate(countryDTO.getCreatedDate());
+        existingCountryDTO.setName(countryDTO.getName());
+        existingCountryDTO.setUpdatedDate(LocalDateTime.now());
+
+        countryMap.put(existingCountryDTO.getId(), existingCountryDTO);
+        return Optional.of(existingCountryDTO);
+
     }
 
 
