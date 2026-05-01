@@ -57,7 +57,7 @@ public class PersonServiceJPAImpl implements PersonService {
             foundPerson.setCertifiedYearOfBirth(personDTO.getCertifiedYearOfBirth());
             foundPerson.setRecordedYearOfBirth(personDTO.getRecordedYearOfBirth());
             foundPerson.setCertifiedYearOfDeath(personDTO.getCertifiedYearOfDeath());
-            foundPerson.setUpdateDate(LocalDateTime.now());
+            foundPerson.setUpdatedDate(LocalDateTime.now());
             atomicReference.set(Optional.of(personMapper
                     .personToPersonDto(personRepository.save(foundPerson))));
         }, () -> atomicReference.set(Optional.empty()));

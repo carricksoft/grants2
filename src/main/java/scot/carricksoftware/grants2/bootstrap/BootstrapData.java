@@ -32,7 +32,7 @@ public class BootstrapData implements CommandLineRunner {
                     .lastName("Person 1L")
                     .version(1)
                     .createdDate(LocalDateTime.now())
-                    .updateDate(LocalDateTime.now())
+                    .updatedDate(LocalDateTime.now())
                     .build();
 
             Person person2 = Person.builder()
@@ -42,7 +42,7 @@ public class BootstrapData implements CommandLineRunner {
                     .certifiedYearOfBirth("1953")
                     .certifiedYearOfDeath("2050")
                     .createdDate(LocalDateTime.now())
-                    .updateDate(LocalDateTime.now())
+                    .updatedDate(LocalDateTime.now())
                     .build();
 
             Person person3 = Person.builder()
@@ -51,7 +51,7 @@ public class BootstrapData implements CommandLineRunner {
                     .recordedYearOfBirth("1955")
                     .version(1)
                     .createdDate(LocalDateTime.now())
-                    .updateDate(LocalDateTime.now())
+                    .updatedDate(LocalDateTime.now())
                     .build();
 
             personRepository.saveAll(Arrays.asList(person1, person2, person3));

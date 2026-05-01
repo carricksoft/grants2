@@ -68,6 +68,9 @@ public class Person {
     @JdbcTypeCode(SqlTypes.CHAR)
     private String certifiedYearOfDeath;
 
+    @JdbcTypeCode(SqlTypes.TIMESTAMP)
     private LocalDateTime createdDate;
-    private LocalDateTime updateDate;
+
+    @JdbcTypeCode(SqlTypes.TIMESTAMP)
+    private LocalDateTime updatedDate;
 }
