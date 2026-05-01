@@ -2,7 +2,7 @@
  * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
  */
 
-package scot.carricksoftware.grants2.controller;
+package scot.carricksoftware.grants2.controller.person;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import scot.carricksoftware.grants2.controller.PersonController;
 import scot.carricksoftware.grants2.entities.Person;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.mappers.PersonMapper;

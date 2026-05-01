@@ -39,21 +39,21 @@ public class PersonController {
 
     @GetMapping(PERSON_PATH)
     public List<PersonDTO> listPeople(){
-        log.debug("PersonService::listPeople");
+        log.debug("PersonController::listPeople");
         return personService.listPeople();
     }
 
     @SuppressWarnings("rawtypes")
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity handleNotFoundException() {
-        log.debug("PersonService::handleNotFoundException");
+        log.debug("PersonController::handleNotFoundException");
         return ResponseEntity.notFound().build();
     }
 
     @SuppressWarnings("rawtypes")
     @PatchMapping(PERSON_PATH_ID)
     public ResponseEntity patchById(@PathVariable UUID id, @RequestBody PersonDTO personDTO) {
-        log.debug("PersonService::patchById");
+        log.debug("PersonController::patchById");
         personService.patchPersonById(id, personDTO);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -61,7 +61,7 @@ public class PersonController {
     @SuppressWarnings("rawtypes")
     @PutMapping(PERSON_PATH_ID)
     public ResponseEntity upDateById(@PathVariable UUID id, @RequestBody PersonDTO personDTO) {
-        log.debug("PersonService::updateById");
+        log.debug("PersonController::updateById");
         if( personService.updatePersonById(id, personDTO).isEmpty()){
             throw new NotFoundException();
         }
@@ -71,7 +71,7 @@ public class PersonController {
     @SuppressWarnings("rawtypes")
     @DeleteMapping(PERSON_PATH_ID)
     public ResponseEntity deleteById(@PathVariable UUID id){
-        log.debug("PersonService::deleteById");
+        log.debug("PersonController::deleteById");
         if (!personService.deletePersonById(id)) {
             throw new NotFoundException();
         }
@@ -80,14 +80,14 @@ public class PersonController {
 
     @GetMapping(PERSON_PATH_ID)
     public PersonDTO getPersonById(@PathVariable UUID id){
-        log.debug("PersonService::getPersonById");
+        log.debug("PersonController::getPersonById");
         return personService.getPersonById(id).orElseThrow(NotFoundException::new);
     }
 
     @SuppressWarnings({"rawtypes", "unused"})
     @PostMapping(PERSON_PATH)
     public ResponseEntity handlePost(@Validated @RequestBody PersonDTO personDTO) {
-        log.debug("PersonService::handlePost");
+        log.debug("PersonController::handlePost");
         PersonDTO savedPersonDTO = personService.saveNewPerson(personDTO);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location",PERSON_PATH + "/"  + savedPersonDTO.getId().toString());

@@ -2,13 +2,14 @@
  * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
  */
 
-package scot.carricksoftware.grants2.controller;
+package scot.carricksoftware.grants2.controller.person;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import scot.carricksoftware.grants2.controller.PersonController;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
 

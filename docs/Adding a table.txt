@@ -9,4 +9,6 @@ h) Add serviceImpl using Person as example
 j) Run tests, run inspect, commit
 k) Add service using Person as sample
 j) Run tests, run inspect, commit
-l)Add service using Person as sample
+l) Add serviceJPAInst using Person as sample
+m) Run tests, run inspect, commit
+n) Add Controller using Person as sample

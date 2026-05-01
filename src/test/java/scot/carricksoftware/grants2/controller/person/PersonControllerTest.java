@@ -1,4 +1,8 @@
-package scot.carricksoftware.grants2.controller;
+/*
+ * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
+ */
+
+package scot.carricksoftware.grants2.controller.person;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
+import scot.carricksoftware.grants2.controller.PersonController;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.services.PersonServiceImpl;
