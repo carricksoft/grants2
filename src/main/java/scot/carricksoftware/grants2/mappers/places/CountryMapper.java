@@ -11,6 +11,8 @@ import scot.carricksoftware.grants2.model.places.CountryDTO;
 @Mapper
 public interface CountryMapper {
 
+    @SuppressWarnings("unused")
     Country countryDtoToCountry(CountryDTO dto);
+    @SuppressWarnings("unused")
     CountryDTO countryToCountryDto(Country country);
 }

@@ -11,12 +11,16 @@ import java.util.UUID;
  */
 public interface CountryService {
 
+    @SuppressWarnings("unused")
     List<CountryDTO> listCountry();
 
+    @SuppressWarnings("unused")
     Optional<CountryDTO> getCountryById(UUID id);
 
+    @SuppressWarnings("unused")
     CountryDTO saveNewCountry(CountryDTO countryDTO);
 
+    @SuppressWarnings({"SameReturnValue", "unused"})
     Boolean deleteCountryById(UUID id);
 
 }

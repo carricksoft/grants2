@@ -7,3 +7,5 @@ f) Run tests, run inspect, commit
 g) Add service using Person as example but omit patch and update
 h) Add serviceImpl using Person as example
 j) Run tests, run inspect, commit
+k) Add service using Person as sample
+j) Run tests, run inspect, commit
