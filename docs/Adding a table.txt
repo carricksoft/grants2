@@ -15,6 +15,12 @@ n) Add Controller using Person as sample
 o) Run tests, run inspect, commit
 p) Add Data in BootstrapData using Person as sample
 q) Run tests, run inspect, commit
-s) dd Controller Tests using Person as sample
+s) add Controller Tests using Person as sample
+t) Ensure the mysql database is selected,
+the refresh it
+in the database window select the database
+right click it and select "add flyway migration"
+and save the result as an sql.
+Finally run the program. Use Beekeeper studio to check the database
 
 
