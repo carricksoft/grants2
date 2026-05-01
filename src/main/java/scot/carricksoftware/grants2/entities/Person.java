@@ -32,7 +32,6 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Person {
 
-
     public static final int FIELD_SIZE = 128;
 
     @Id
