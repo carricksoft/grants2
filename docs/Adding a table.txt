@@ -1,2 +1,4 @@
 a) Add DTO in model using PersonDTO as example
 b) Run tests, run inspect, commit
+c) Add class in model using Person as example
+d) Run tests, run inspect, commit
