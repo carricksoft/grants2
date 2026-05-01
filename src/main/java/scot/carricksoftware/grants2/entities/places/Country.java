@@ -24,7 +24,6 @@ import scot.carricksoftware.grants2.entities.BaseEntity;
 @NoArgsConstructor
 public class Country extends BaseEntity {
 
-
     @NotNull
     @NotBlank
     @Size(max=FIELD_SIZE)

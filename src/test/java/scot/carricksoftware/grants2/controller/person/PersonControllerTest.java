@@ -142,8 +142,8 @@ class PersonControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(personDTO)))
                 .andExpect(status().isBadRequest())
-                        .andExpect((ResultMatcher) jsonPath("$.length()", is(2 * 2)))
-                                .andReturn();
+                .andExpect((ResultMatcher) jsonPath("$.length()", is(2 * 2)))
+                .andReturn();
 
         System.out.println(mvcResult.getResponse().getContentAsString());
     }
@@ -195,3 +195,4 @@ class PersonControllerTest {
 
 
 }
+
