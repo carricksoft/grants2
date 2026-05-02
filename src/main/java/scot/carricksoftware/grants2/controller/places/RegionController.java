@@ -32,7 +32,7 @@ import java.util.UUID;
 public class RegionController {
     private final RegionService regionService;
 
-    public static final String REGION_PATH = "/region";
+    public static final String REGION_PATH = "/regions";
     public static final String REGION_PATH_ID = REGION_PATH + "/{id}";
 
     @GetMapping(REGION_PATH)

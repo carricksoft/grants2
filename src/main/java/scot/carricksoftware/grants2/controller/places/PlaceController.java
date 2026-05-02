@@ -32,7 +32,7 @@ import java.util.UUID;
 public class PlaceController {
     private final PlaceService placeService;
 
-    public static final String PLACE_PATH = "/place";
+    public static final String PLACE_PATH = "/places";
     public static final String PLACE_PATH_ID = PLACE_PATH + "/{id}";
 
     @GetMapping(PLACE_PATH)
