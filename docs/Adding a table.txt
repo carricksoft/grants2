@@ -9,7 +9,7 @@ h) Add serviceImpl using Person as example
 j) Run tests, run inspect, commit
 k) Add service using Person as sample
 j) Run tests, run inspect, commit
-l) Add serviceJPAInst using Person as sample
+l) Add JPA service implementation using Person as sample.
 m) Run tests, run inspect, commit
 n) Add Controller using Person as sample
 o) Run tests, run inspect, commit
@@ -20,7 +20,7 @@ t) Ensure the mysql database is selected,
 the refresh it
 in the database window select the database
 right click it and select "add flyway migration"
-and save the result as an sql.
+and save the result as sql.
 Finally run the program. Use Beekeeper studio to check the database
 
 
