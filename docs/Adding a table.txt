@@ -3,7 +3,9 @@ b) Run tests, run inspect, commit
 c) Add class in model using Person as example
 d) Run tests, run inspect, commit
 e) Add mapper using Person as example
-f) Run tests, run inspect, commit
+f) Run tests, run inspect, commi
+f.1) Add Repository using person as an example
+f.2) Run tests, run inspect, commi
 g) Add service using Person as example but omit patch and update
 h) Add serviceImpl using Person as example
 j) Run tests, run inspect, commit
