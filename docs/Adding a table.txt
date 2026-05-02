@@ -1,25 +1,19 @@
-a) Add DTO in model using PersonDTO as example
-b) Run tests, run inspect, commit
-c) Add class in model using Person as example
-d) Run tests, run inspect, commit
+a) Add DTO in model
+b) Add class in entity
+c) add sample in BootstrapData class
 e) Add mapper using Person as example
-f) Run tests, run inspect, commit
-f.1) Add Repository using person as an example
-f.2) Run tests, run inspect, commit
-g) Add service using Person as example but omit patch and update
-h) Add serviceImpl using Person as example
-l) Add JPA service implementation using Person as sample.
-m) Run tests, run inspect, commit
-n) Add Controller using Person as sample
-o) Run tests, run inspect, commit
-p) Add Data in BootstrapData using Person as sample
-q) Run tests, run inspect, commit
-s) add Controller Tests using Person as sample
-t) Ensure the mysql database is selected,
-the refresh it
+f) Add Repository using person as an example
+g) Add service (omit patch)
+h) Add serviceImpl
+l) Add JPA service
+p) Add Rest Controller
+
+Ensure the mysql database is selected,
+then refresh it
 in the database window select the database
 right click it and select "add flyway migration"
 and save the result as sql.
+
 Finally run the program. Use Beekeeper studio to check the database
 
 

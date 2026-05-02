@@ -10,8 +10,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import scot.carricksoftware.grants2.entities.Person;
 import scot.carricksoftware.grants2.entities.places.Country;
+import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
 import scot.carricksoftware.grants2.repositories.places.CountryRepository;
+import scot.carricksoftware.grants2.repositories.places.RegionRepository;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -22,11 +24,13 @@ public class BootstrapData implements CommandLineRunner {
 
     private final PersonRepository personRepository;
     private final CountryRepository countryRepository;
+    private final RegionRepository regionRepository;
 
     @Override
     public void run(@SuppressWarnings("NullableProblems") String... args) {
         loadPersonData();
         loadCountryData();
+        loadRegionData();
     }
     
     private void loadPersonData() {
@@ -93,5 +97,33 @@ public class BootstrapData implements CommandLineRunner {
 
     }
 
+    private void loadRegionData() {
+        if (regionRepository.count() == 0) {
+            Region region1 = Region.builder()
+                    .name("Region 1")
+                    .version(1)
+                    .createdDate(LocalDateTime.now())
+                    .updatedDate(LocalDateTime.now())
+                    .build();
 
-}
+            Region region2 = Region.builder()
+                    .name("Region 2")
+                    .version(1)
+                    .createdDate(LocalDateTime.now())
+                    .updatedDate(LocalDateTime.now())
+                    .build();
+
+            Region region3 = Region.builder()
+                    .name("Region 3")
+                    .version(1)
+                    .createdDate(LocalDateTime.now())
+                    .updatedDate(LocalDateTime.now())
+                    .build();
+
+
+            regionRepository.saveAll(Arrays.asList(region1, region2, region3));
+        }
+    }
+
+
+    }
