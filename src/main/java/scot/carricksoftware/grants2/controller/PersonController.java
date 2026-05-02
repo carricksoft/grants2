@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.services.PersonService;
 import scot.carricksoftware.grants2.model.PersonDTO;
@@ -38,9 +39,9 @@ public class PersonController {
     public static final String PERSON_PATH_ID = PERSON_PATH + "/{id}";
 
     @GetMapping(PERSON_PATH)
-    public List<PersonDTO> listPeople(){
+    public List<PersonDTO> listPeople(@RequestParam(required = false) String firstName){
         log.debug("PersonController::listPeople");
-        return personService.listPeople();
+        return personService.listPeople(firstName);
     }
 
     @SuppressWarnings("rawtypes")

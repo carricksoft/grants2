@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 public interface PersonService {
 
-    List<PersonDTO> listPeople();
+    List<PersonDTO> listPeople(String firstName);
 
     Optional<PersonDTO> getPersonById(UUID id);
 

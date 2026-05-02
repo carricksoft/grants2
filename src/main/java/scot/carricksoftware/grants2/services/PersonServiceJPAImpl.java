@@ -7,6 +7,8 @@ package scot.carricksoftware.grants2.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import scot.carricksoftware.grants2.entities.Person;
 import scot.carricksoftware.grants2.mappers.PersonMapper;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
@@ -27,11 +29,23 @@ public class PersonServiceJPAImpl implements PersonService {
     private final PersonMapper personMapper;
 
     @Override
-    public List<PersonDTO> listPeople() {
-        return personRepository.findAll()
+    public List<PersonDTO> listPeople(String firstName) {
+        List<Person> peopleList;
+
+        if(StringUtils.hasText(firstName)){
+         peopleList = listPeopleByFirstName(firstName);
+        } else {
+            peopleList = personRepository.findAll();
+        }
+
+        return peopleList
                 .stream()
                 .map(personMapper::personToPersonDto)
                 .collect(Collectors.toList());
+    }
+
+    private List<Person> listPeopleByFirstName(String firstName) {
+        return personRepository.findAllByFirstNameIsLikeIgnoreCase("%"+firstName+"%");
     }
 
     @Override

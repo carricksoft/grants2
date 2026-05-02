@@ -29,7 +29,7 @@ class PersonControllerListIT {
 
     @Test
     void listPeopleTest() {
-        List<PersonDTO> dtoList = personController.listPeople();
+        List<PersonDTO> dtoList = personController.listPeople(null);
         assertThat(dtoList.size()).isEqualTo(3);
     }
 
@@ -38,7 +38,7 @@ class PersonControllerListIT {
     @Rollback
     void emptyListTest() {
         personRepository.deleteAll();
-        List<PersonDTO> dtoList = personController.listPeople();
+        List<PersonDTO> dtoList = personController.listPeople(null);
         assertThat(dtoList.size()).isEqualTo(0);
     }
 

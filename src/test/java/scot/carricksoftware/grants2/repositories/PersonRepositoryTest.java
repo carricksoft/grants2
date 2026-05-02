@@ -8,7 +8,11 @@ import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.context.annotation.Import;
+import scot.carricksoftware.grants2.bootstrap.BootstrapPerson;
 import scot.carricksoftware.grants2.entities.Person;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,6 +20,7 @@ import static scot.carricksoftware.grants2.entities.Person.FIELD_SIZE;
 
 
 @DataJpaTest
+@Import(BootstrapPerson.class)
 class PersonRepositoryTest {
 
     @Autowired
@@ -68,5 +73,12 @@ class PersonRepositoryTest {
         }
         return output.substring(0, length);
     }
+
+    @Test
+    void getPeopleByFirstNameTest() {
+        List<Person> list = personRepository.findAllByFirstNameIsLikeIgnoreCase("%person 1f%");
+        assertThat(list.size()).isEqualTo(1);
+    }
+
 }
 
