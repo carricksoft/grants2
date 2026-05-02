@@ -34,6 +34,8 @@ public class PersonServiceJPAImpl implements PersonService {
 
         if (StringUtils.hasText(firstName) && lastName == null) {
             peopleList = listPeopleByFirstName(firstName);
+        } else if (StringUtils.hasText(firstName) && StringUtils.hasText(lastName)) {
+            peopleList = listPeopleByFirstAndLastName(firstName, lastName);
         } else if (StringUtils.hasText(lastName) && firstName == null) {
             peopleList = listPeopleByLastName(lastName);}
         else {
@@ -44,6 +46,10 @@ public class PersonServiceJPAImpl implements PersonService {
                 .stream()
                 .map(personMapper::personToPersonDto)
                 .collect(Collectors.toList());
+    }
+
+    private List<Person> listPeopleByFirstAndLastName(String firstName, String lastName) {
+        return personRepository.findAllByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase("%" + firstName + "%","%"+lastName+"%");
     }
 
     private List<Person> listPeopleByFirstName(String firstName) {

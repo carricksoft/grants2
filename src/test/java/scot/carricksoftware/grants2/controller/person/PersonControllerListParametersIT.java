@@ -48,4 +48,21 @@ class PersonControllerListParametersIT {
                 .andExpect(jsonPath("$.size()", is(1)));
     }
 
+    @Test
+    void testListByFirstAndLastName() throws Exception {
+        mockMvc.perform(get(PersonController.PERSON_PATH)
+                        .queryParam("firstName", "Person 3F")
+                        .queryParam("lastName", "Person 3L"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()", is(1)));
+    }
+
+    @Test
+    void TestListByImpossibleParameters() throws Exception {
+        mockMvc.perform(get(PersonController.PERSON_PATH)
+                        .queryParam("firstName", "Person 1F")
+                        .queryParam("lastName", "Person 2L"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()", is(0)));
+    }
 }

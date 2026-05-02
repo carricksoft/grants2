@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
@@ -36,9 +37,9 @@ public class CountryController {
     public static final String COUNTRY_PATH_ID = COUNTRY_PATH + "/{id}";
 
     @GetMapping(COUNTRY_PATH)
-    public List<CountryDTO> listCountries(){
+    public List<CountryDTO> listCountries(@RequestParam(required = false) String name){
         log.debug("CountryCountroller::listCountries");
-        return countryService.listCountries();
+        return countryService.listCountries(name);
     }
 
     @SuppressWarnings("rawtypes")

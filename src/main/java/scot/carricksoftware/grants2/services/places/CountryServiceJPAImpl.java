@@ -7,6 +7,8 @@ package scot.carricksoftware.grants2.services.places;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.mappers.places.CountryMapper;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
 import scot.carricksoftware.grants2.repositories.places.CountryRepository;
@@ -28,11 +30,23 @@ public class CountryServiceJPAImpl implements CountryService {
     private final CountryMapper countryMapper;
 
     @Override
-    public List<CountryDTO> listCountries() {
-        return countryRepository.findAll()
+    public List<CountryDTO> listCountries(String name) {
+        List<Country> countryList;
+
+        if (StringUtils.hasText(name)) {
+            countryList = listCountriesByName(name);
+        } else {
+            countryList = countryRepository.findAll();
+        }
+
+        return countryList
                 .stream()
                 .map(countryMapper::countryToCountryDto)
                 .collect(Collectors.toList());
+    }
+
+    private List<Country> listCountriesByName(String name) {
+        return countryRepository.findAllByNameIsLikeIgnoreCase("%" + name+ "%");
     }
 
     @Override
