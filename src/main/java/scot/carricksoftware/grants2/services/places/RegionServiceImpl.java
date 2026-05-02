@@ -12,9 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @Slf4j
 @Service
 public class RegionServiceImpl implements RegionService {

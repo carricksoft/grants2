@@ -4,28 +4,29 @@
 
 package scot.carricksoftware.grants2.services.places;
 
-import scot.carricksoftware.grants2.model.places.CountryDTO;
+import scot.carricksoftware.grants2.model.places.PlaceDTO;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface CountryService {
+
+public interface PlaceService {
 
     @SuppressWarnings("unused")
-    List<CountryDTO> listCountries();
+    List<PlaceDTO> listPlaces();
 
     @SuppressWarnings("unused")
-    Optional<CountryDTO> getCountryById(UUID id);
+    Optional<PlaceDTO> getPlaceById(UUID id);
 
     @SuppressWarnings("unused")
-    CountryDTO saveNewCountry(CountryDTO countryDTO);
+    PlaceDTO saveNewPlace(PlaceDTO placeDTO);
 
     @SuppressWarnings({"SameReturnValue", "unused"})
-    Boolean deleteCountryById(UUID id);
+    Boolean deletePlaceById(UUID id);
 
     @SuppressWarnings("unused")
-    Optional<CountryDTO> updateCountryById(UUID id, CountryDTO countryDTO);
+    Optional<PlaceDTO> updatePlaceById(UUID id, PlaceDTO placeDTO);
 
 }
 

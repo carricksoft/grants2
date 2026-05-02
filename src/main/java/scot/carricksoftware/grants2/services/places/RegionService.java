@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
+ */
+
 package scot.carricksoftware.grants2.services.places;
 
 import scot.carricksoftware.grants2.model.places.RegionDTO;
@@ -6,9 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 public interface RegionService {
 
     @SuppressWarnings("unused")
