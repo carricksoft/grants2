@@ -29,12 +29,14 @@ public class PersonServiceJPAImpl implements PersonService {
     private final PersonMapper personMapper;
 
     @Override
-    public List<PersonDTO> listPeople(String firstName) {
+    public List<PersonDTO> listPeople(String firstName, String lastName) {
         List<Person> peopleList;
 
-        if(StringUtils.hasText(firstName)){
-         peopleList = listPeopleByFirstName(firstName);
-        } else {
+        if (StringUtils.hasText(firstName) && lastName == null) {
+            peopleList = listPeopleByFirstName(firstName);
+        } else if (StringUtils.hasText(lastName) && firstName == null) {
+            peopleList = listPeopleByLastName(lastName);}
+        else {
             peopleList = personRepository.findAll();
         }
 
@@ -45,15 +47,19 @@ public class PersonServiceJPAImpl implements PersonService {
     }
 
     private List<Person> listPeopleByFirstName(String firstName) {
-        return personRepository.findAllByFirstNameIsLikeIgnoreCase("%"+firstName+"%");
+        return personRepository.findAllByFirstNameIsLikeIgnoreCase("%" + firstName + "%");
+    }
+
+    private List<Person> listPeopleByLastName(String lastName) {
+        return personRepository.findAllByLastNameIsLikeIgnoreCase("%" + lastName + "%");
     }
 
     @Override
     public Optional<PersonDTO> getPersonById(UUID id) {
         return Optional.ofNullable(personMapper
                 .personToPersonDto(personRepository
-                .findById(id)
-                .orElse(null)));
+                        .findById(id)
+                        .orElse(null)));
     }
 
     @Override

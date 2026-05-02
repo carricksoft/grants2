@@ -57,7 +57,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonDTO> listPeople(String firstName){
+    public List<PersonDTO> listPeople(String firstName, String lastName){
         log.debug("PersonService::listPeople");
         return new ArrayList<>(personMap.values());
     }

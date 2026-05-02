@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.hamcrest.core.Is.is;
 import org.springframework.web.context.WebApplicationContext;
 import scot.carricksoftware.grants2.controller.PersonController;
-import scot.carricksoftware.grants2.repositories.PersonRepository;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,15 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 class PersonControllerListParametersIT {
-    @Autowired
-    PersonController personController;
-
-    @Autowired
-    PersonRepository personRepository;
 
     @Autowired
     WebApplicationContext wac;
-
 
     MockMvc mockMvc;
 
@@ -46,5 +39,13 @@ class PersonControllerListParametersIT {
               .andExpect(status().isOk())
               .andExpect(jsonPath("$.size()", is(1)));
   }
+
+    @Test
+    void testListByLastName() throws Exception {
+        mockMvc.perform(get(PersonController.PERSON_PATH)
+                        .queryParam("lastName", "Person 2L"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()", is(1)));
+    }
 
 }

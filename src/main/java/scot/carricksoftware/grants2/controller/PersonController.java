@@ -39,9 +39,10 @@ public class PersonController {
     public static final String PERSON_PATH_ID = PERSON_PATH + "/{id}";
 
     @GetMapping(PERSON_PATH)
-    public List<PersonDTO> listPeople(@RequestParam(required = false) String firstName){
+    public List<PersonDTO> listPeople(@RequestParam(required = false) String firstName,
+                                      @RequestParam(required = false) String lastName){
         log.debug("PersonController::listPeople");
-        return personService.listPeople(firstName);
+        return personService.listPeople(firstName, lastName);
     }
 
     @SuppressWarnings("rawtypes")

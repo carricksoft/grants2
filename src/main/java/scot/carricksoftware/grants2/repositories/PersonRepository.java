@@ -13,4 +13,5 @@ import java.util.UUID;
 @SuppressWarnings("unused")
 public interface PersonRepository extends JpaRepository<Person, UUID> {
     List<Person> findAllByFirstNameIsLikeIgnoreCase(String firstName);
+    List<Person> findAllByLastNameIsLikeIgnoreCase(String lastName);
 }

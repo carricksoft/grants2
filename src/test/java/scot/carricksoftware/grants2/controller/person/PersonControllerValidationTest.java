@@ -61,7 +61,7 @@ class PersonControllerValidationTest {
     @BeforeEach
     void setUp() {
         personService = new PersonServiceImpl();
-        testPersonDTO = personService.listPeople(null).getFirst();
+        testPersonDTO = personService.listPeople(null, null).getFirst();
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
         personArgumentCaptor = ArgumentCaptor.forClass(PersonDTO.class);
 
@@ -74,7 +74,7 @@ class PersonControllerValidationTest {
                 .build();
 
         given(personServiceMock.saveNewPerson(any(PersonDTO.class)))
-                .willReturn(personService.listPeople(null).get(1));
+                .willReturn(personService.listPeople(null,null).get(1));
 
         mockMvc.perform(post(PERSON_PATH)
                 .accept(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ class PersonControllerValidationTest {
                 .build();
 
         given(personServiceMock.saveNewPerson(any(PersonDTO.class)))
-                .willReturn(personService.listPeople(null).get(1));
+                .willReturn(personService.listPeople(null,null).get(1));
 
         mockMvc.perform(post(PERSON_PATH)
                         .accept(MediaType.APPLICATION_JSON)

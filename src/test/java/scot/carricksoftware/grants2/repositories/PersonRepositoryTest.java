@@ -80,5 +80,11 @@ class PersonRepositoryTest {
         assertThat(list.size()).isEqualTo(1);
     }
 
+    @Test
+    void getPeopleByLastNameTest() {
+        List<Person> list = personRepository.findAllByLastNameIsLikeIgnoreCase("%person 1L%");
+        assertThat(list.size()).isEqualTo(1);
+    }
+
 }
 
