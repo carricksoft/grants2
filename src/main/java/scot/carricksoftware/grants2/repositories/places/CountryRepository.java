@@ -12,5 +12,5 @@ import java.util.UUID;
 
 @SuppressWarnings("unused")
 public interface CountryRepository extends JpaRepository<Country, UUID> {
-    List<Country> findAllByNameIsLikeIgnoreCase(String Country);
+    List<Country> findAllByNameIsLikeIgnoreCase(String country);
 }

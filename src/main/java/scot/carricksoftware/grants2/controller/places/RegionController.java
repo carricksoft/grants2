@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
@@ -36,9 +37,9 @@ public class RegionController {
     public static final String REGION_PATH_ID = REGION_PATH + "/{id}";
 
     @GetMapping(REGION_PATH)
-    public List<RegionDTO> listRegions(){
+    public List<RegionDTO> listRegions(@RequestParam(required = false) String name){
         log.debug("RegionController::listRegions");
-        return regionService.listRegions();
+        return regionService.listRegions(name);
     }
 
     @SuppressWarnings("rawtypes")

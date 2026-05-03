@@ -7,6 +7,8 @@ package scot.carricksoftware.grants2.services.places;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.mappers.places.RegionMapper;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 import scot.carricksoftware.grants2.repositories.places.RegionRepository;
@@ -27,11 +29,23 @@ public class RegionServiceJPAImpl implements RegionService {
     private final RegionMapper regionMapper;
 
     @Override
-    public List<RegionDTO> listRegions() {
-        return regionRepository.findAll()
+    public List<RegionDTO> listRegions(String name) {
+        List<Region> regionList;
+
+        if (StringUtils.hasText(name)) {
+            regionList = listRegionsByName(name);
+        } else {
+            regionList = regionRepository.findAll();
+        }
+
+        return regionList
                 .stream()
                 .map(regionMapper::regionToRegionDto)
                 .collect(Collectors.toList());
+    }
+
+    private List<Region> listRegionsByName(String name) {
+        return regionRepository.findAllByNameIsLikeIgnoreCase("%" + name+ "%");
     }
 
     @Override

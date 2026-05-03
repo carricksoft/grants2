@@ -61,7 +61,7 @@ class RegionControllerValidationTest {
     @BeforeEach
     void setUp() {
         regionService = new RegionServiceImpl();
-        testRegionDTO = regionService.listRegions().getFirst();
+        testRegionDTO = regionService.listRegions(null).getFirst();
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
         regionArgumentCaptor = ArgumentCaptor.forClass(RegionDTO.class);
 
@@ -74,7 +74,7 @@ class RegionControllerValidationTest {
                 .build();
 
         given(regionServiceMock.saveNewRegion(any(RegionDTO.class)))
-                .willReturn(regionService.listRegions().get(1));
+                .willReturn(regionService.listRegions(null).get(1));
 
         mockMvc.perform(post(REGION_PATH)
                 .accept(MediaType.APPLICATION_JSON)

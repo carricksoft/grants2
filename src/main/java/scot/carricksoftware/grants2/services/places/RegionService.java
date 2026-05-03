@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface RegionService {
 
     @SuppressWarnings("unused")
-    List<RegionDTO> listRegions();
+    List<RegionDTO> listRegions(String name);
 
     @SuppressWarnings("unused")
     Optional<RegionDTO> getRegionById(UUID id);

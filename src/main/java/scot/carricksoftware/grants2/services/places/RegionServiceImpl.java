@@ -52,7 +52,7 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public List<RegionDTO> listRegions(){
+    public List<RegionDTO> listRegions(String name){
         log.debug("RegionService::regionCountries");
         return new ArrayList<>(regionMap.values());
     }

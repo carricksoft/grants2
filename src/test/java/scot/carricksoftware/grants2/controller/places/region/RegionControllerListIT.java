@@ -29,7 +29,7 @@ class RegionControllerListIT {
 
     @Test
     void listPeopleTest() {
-        List<RegionDTO> dtoList = regionController.listRegions();
+        List<RegionDTO> dtoList = regionController.listRegions(null);
         assertThat(dtoList.size()).isEqualTo(3);
     }
 
@@ -38,7 +38,7 @@ class RegionControllerListIT {
     @Rollback
     void emptyListTest() {
         regionRepository.deleteAll();
-        List<RegionDTO> dtoList = regionController.listRegions();
+        List<RegionDTO> dtoList = regionController.listRegions(null);
         assertThat(dtoList.size()).isEqualTo(0);
     }
 
