@@ -7,6 +7,8 @@ package scot.carricksoftware.grants2.services.places;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import scot.carricksoftware.grants2.entities.places.Place;
 import scot.carricksoftware.grants2.mappers.places.PlaceMapper;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.repositories.places.PlaceRepository;
@@ -27,11 +29,23 @@ public class PlaceServiceJPAImpl implements PlaceService {
     private final PlaceMapper placeMapper;
 
     @Override
-    public List<PlaceDTO> listPlaces() {
-        return placeRepository.findAll()
+    public List<PlaceDTO> listPlaces(String name) {
+        List<Place> placeList;
+
+        if (StringUtils.hasText(name)) {
+            placeList = listPlacesByName(name);
+        } else {
+            placeList = placeRepository.findAll();
+        }
+
+        return placeList
                 .stream()
                 .map(placeMapper::placeToPlaceDto)
                 .collect(Collectors.toList());
+    }
+
+    private List<Place> listPlacesByName(String name) {
+        return placeRepository.findAllByNameIsLikeIgnoreCase("%" + name+ "%");
     }
 
     @Override

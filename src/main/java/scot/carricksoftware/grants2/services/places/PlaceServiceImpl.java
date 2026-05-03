@@ -56,7 +56,7 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public List<PlaceDTO> listPlaces(){
+    public List<PlaceDTO> listPlaces(String place){
         log.debug("PlaceService::placePeople");
         return new ArrayList<>(placeMap.values());
     }

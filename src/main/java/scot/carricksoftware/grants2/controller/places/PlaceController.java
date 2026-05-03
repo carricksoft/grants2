@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
@@ -36,9 +37,9 @@ public class PlaceController {
     public static final String PLACE_PATH_ID = PLACE_PATH + "/{id}";
 
     @GetMapping(PLACE_PATH)
-    public List<PlaceDTO> listPlaces(){
+    public List<PlaceDTO> listPlaces(@RequestParam(required = false) String name){
         log.debug("PlaceController::listPlaces");
-        return placeService.listPlaces();
+        return placeService.listPlaces(name);
     }
 
     @SuppressWarnings("rawtypes")

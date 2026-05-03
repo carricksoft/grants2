@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface PlaceService {
 
     @SuppressWarnings("unused")
-    List<PlaceDTO> listPlaces();
+    List<PlaceDTO> listPlaces(String place);
 
     @SuppressWarnings("unused")
     Optional<PlaceDTO> getPlaceById(UUID id);

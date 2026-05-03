@@ -28,8 +28,8 @@ class PlaceControllerListIT {
 
 
     @Test
-    void listPeopleTest() {
-        List<PlaceDTO> dtoList = placeController.listPlaces();
+    void listPlacesTest() {
+        List<PlaceDTO> dtoList = placeController.listPlaces(null);
         assertThat(dtoList.size()).isEqualTo(3);
     }
 
@@ -38,7 +38,7 @@ class PlaceControllerListIT {
     @Rollback
     void emptyListTest() {
         placeRepository.deleteAll();
-        List<PlaceDTO> dtoList = placeController.listPlaces();
+        List<PlaceDTO> dtoList = placeController.listPlaces(null);
         assertThat(dtoList.size()).isEqualTo(0);
     }
 
