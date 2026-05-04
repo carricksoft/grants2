@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface CountryService {
 
     @SuppressWarnings("unused")
-    List<CountryDTO> listCountries(String name);
+    List<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize);
 
     @SuppressWarnings("unused")
     Optional<CountryDTO> getCountryById(UUID id);

@@ -29,7 +29,7 @@ class CountryControllerListIT {
 
     @Test
     void listCountryTest() {
-        List<CountryDTO> dtoList = countryController.listCountries(null);
+        List<CountryDTO> dtoList = countryController.listCountries(null, 1, 25);
         assertThat(dtoList.size()).isGreaterThan(100);
     }
 
@@ -38,7 +38,7 @@ class CountryControllerListIT {
     @Rollback
     void emptyListTest() {
         countryRepository.deleteAll();
-        List<CountryDTO> dtoList = countryController.listCountries(null);
+        List<CountryDTO> dtoList = countryController.listCountries(null, 1, 25);
         assertThat(dtoList.size()).isEqualTo(0);
     }
 

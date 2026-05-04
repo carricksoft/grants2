@@ -37,9 +37,11 @@ public class CountryController {
     public static final String COUNTRY_PATH_ID = COUNTRY_PATH + "/{id}";
 
     @GetMapping(COUNTRY_PATH)
-    public List<CountryDTO> listCountries(@RequestParam(required = false) String name){
+    public List<CountryDTO> listCountries(@RequestParam(required = false) String name,
+                                          Integer pageNumber,
+                                          Integer pageSize){
         log.debug("CountryCountroller::listCountries");
-        return countryService.listCountries(name);
+        return countryService.listCountries(name, 1, 25);
     }
 
     @SuppressWarnings("rawtypes")

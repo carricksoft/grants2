@@ -55,7 +55,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public List<CountryDTO> listCountries(String name){
+    public List<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize){
         log.debug("CountryService::countryPeople");
         return new ArrayList<>(countryMap.values());
     }

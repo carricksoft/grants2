@@ -6,6 +6,7 @@ package scot.carricksoftware.grants2.services.places;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.entities.places.Country;
@@ -26,11 +27,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CountryServiceJPAImpl implements CountryService {
 
+    private final static int DEFAULT_PAGE = 0;
+    private final static int DEFAULT_PAGE_SIZE = 25;
     private final CountryRepository countryRepository;
     private final CountryMapper countryMapper;
 
     @Override
-    public List<CountryDTO> listCountries(String name) {
+    public List<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize) {
+
+        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
         List<Country> countryList;
 
         if (StringUtils.hasText(name)) {
@@ -45,16 +50,38 @@ public class CountryServiceJPAImpl implements CountryService {
                 .collect(Collectors.toList());
     }
 
+    private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
+        int queryPageNumber;
+        int queryPageSize;
+
+        if (pageNumber != null && pageNumber > 0) {
+            queryPageNumber = pageNumber - 1;
+        } else {
+            queryPageNumber = DEFAULT_PAGE;
+        }
+
+        if (pageSize != null) {
+            queryPageSize = DEFAULT_PAGE_SIZE;
+        } else {
+            if (pageSize > 100) {
+                queryPageSize = DEFAULT_PAGE_SIZE;
+            } else {
+                queryPageSize = pageSize;
+            }
+        }
+        return PageRequest.of(queryPageNumber, queryPageSize);
+    }
+
     private List<Country> listCountriesByName(String name) {
-        return countryRepository.findAllByNameIsLikeIgnoreCase("%" + name+ "%");
+        return countryRepository.findAllByNameIsLikeIgnoreCase("%" + name + "%");
     }
 
     @Override
     public Optional<CountryDTO> getCountryById(UUID id) {
         return Optional.ofNullable(countryMapper
                 .countryToCountryDto(countryRepository
-                .findById(id)
-                .orElse(null)));
+                        .findById(id)
+                        .orElse(null)));
     }
 
     @Override

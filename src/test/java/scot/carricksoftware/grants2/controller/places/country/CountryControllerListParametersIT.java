@@ -46,13 +46,12 @@ class CountryControllerListParametersIT {
 
     @Test
     void listPage2Test() throws Exception {
-        int size = (int)countryRepository.count();
         mockMvc.perform(get(CountryController.COUNTRY_PATH)
                         .queryParam("pageSize", "50")
                         .queryParam("pageNumber", "2"))
 
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", is(size)));
+                .andExpect(jsonPath("$.size()", is(50)));
     }
 
 
