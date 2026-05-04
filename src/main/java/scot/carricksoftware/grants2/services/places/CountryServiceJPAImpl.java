@@ -63,7 +63,7 @@ public class CountryServiceJPAImpl implements CountryService {
         if (pageSize != null) {
             queryPageSize = DEFAULT_PAGE_SIZE;
         } else {
-            if (pageSize > 100) {
+            if (pageSize > 1000) {
                 queryPageSize = DEFAULT_PAGE_SIZE;
             } else {
                 queryPageSize = pageSize;
