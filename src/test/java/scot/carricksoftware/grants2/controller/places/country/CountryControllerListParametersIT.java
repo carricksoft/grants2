@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import scot.carricksoftware.grants2.controller.places.CountryController;
+import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,6 +25,9 @@ class CountryControllerListParametersIT {
 
     @Autowired
     WebApplicationContext wac;
+
+    @Autowired
+    CountryRepository countryRepository;
 
     MockMvc mockMvc;
 
@@ -39,6 +43,19 @@ class CountryControllerListParametersIT {
               .andExpect(status().isOk())
               .andExpect(jsonPath("$.size()", is(1)));
   }
+
+    @Test
+    void listPage2Test() throws Exception {
+        int size = (int)countryRepository.count();
+        mockMvc.perform(get(CountryController.COUNTRY_PATH)
+                        .queryParam("pageSize", "50")
+                        .queryParam("pageNumber", "2"))
+
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()", is(size)));
+    }
+
+
 
 
 }

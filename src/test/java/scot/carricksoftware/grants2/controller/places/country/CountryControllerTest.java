@@ -86,7 +86,7 @@ class CountryControllerTest {
     }
 
     @Test
-    void listPeopleTest() throws Exception {
+    void listCountriesTest() throws Exception {
         given(countryServiceMock.listCountries(null)).willReturn(countryService.listCountries(null));
 
         mockMvc.perform(get(COUNTRY_PATH)
