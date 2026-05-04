@@ -15,8 +15,13 @@ import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 import scot.carricksoftware.grants2.repositories.places.PlaceRepository;
 import scot.carricksoftware.grants2.repositories.places.RegionRepository;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -31,6 +36,34 @@ public class BootstrapPlaces implements CommandLineRunner {
         loadCountryData();
         loadRegionData();
         loadPlaceData();
+        if (countryRepository.count() <10 ) {
+            loadCountryCSV();
+        }
+    }
+
+    private void loadCountryCSV() {
+        final String CsvFile = "csvdata/countries.csv";
+        File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource(CsvFile)).getPath());
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
+            String line = reader.readLine();
+            while (line != null) {
+                line = reader.readLine();
+                if (line != null) {
+                    line = line.replace("\"","");
+                    Country country = Country.builder()
+                            .name(line.split(",")[1])
+                            .version(1)
+                            .createdDate(LocalDateTime.now())
+                            .updatedDate(LocalDateTime.now())
+                            .build();
+                    countryRepository.save(country);
+                    countryRepository.flush();
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

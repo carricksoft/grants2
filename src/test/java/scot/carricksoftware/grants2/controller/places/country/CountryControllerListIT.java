@@ -28,9 +28,9 @@ class CountryControllerListIT {
 
 
     @Test
-    void listPeopleTest() {
+    void listCountryTest() {
         List<CountryDTO> dtoList = countryController.listCountries(null);
-        assertThat(dtoList.size()).isEqualTo(3);
+        assertThat(dtoList.size()).isGreaterThan(100);
     }
 
     @Test
