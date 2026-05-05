@@ -1,4 +1,8 @@
-package scot.carricksoftware.grants2.services;
+/*
+ * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
+ */
+
+package scot.carricksoftware.grants2.services.person;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -58,7 +62,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Page<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize){
         log.debug("PersonService::listPeople");
-        return new PageImpl<>(new ArrayList<>(personMap.values()))
+        return new PageImpl<>(new ArrayList<>(personMap.values()));
     }
 
     @Override

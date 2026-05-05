@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
-import scot.carricksoftware.grants2.services.PersonService;
+import scot.carricksoftware.grants2.services.person.PersonService;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;

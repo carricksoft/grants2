@@ -2,12 +2,13 @@
  * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
  */
 
-package scot.carricksoftware.grants2.services;
+package scot.carricksoftware.grants2.services.person;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.entities.Person;
@@ -16,11 +17,9 @@ import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 @Service
 @Primary
@@ -36,22 +35,19 @@ public class PersonServiceJPAImpl implements PersonService {
     public Page<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize) {
 
         PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
-        List<Person> peopleList;
+        Page<Person> peoplePage;
 
         if (StringUtils.hasText(firstName) && lastName == null) {
-            peopleList = listPeopleByFirstName(firstName);
+            peoplePage = listPeopleByFirstName(firstName, pageRequest);
         } else if (StringUtils.hasText(firstName) && StringUtils.hasText(lastName)) {
-            peopleList = listPeopleByFirstAndLastName(firstName, lastName);
+            peoplePage = listPeopleByFirstAndLastName(firstName, lastName, pageRequest);
         } else if (StringUtils.hasText(lastName) && firstName == null) {
-            peopleList = listPeopleByLastName(lastName);}
+            peoplePage = listPeopleByLastName(lastName, pageRequest);}
         else {
-            peopleList = personRepository.findAll();
+            peoplePage = personRepository.findAll(pageRequest);
         }
 
-        return peopleList
-                .stream()
-                .map(personMapper::personToPersonDto)
-                .collect(Collectors.toList());
+        return peoplePage.map(personMapper::personToPersonDto);
     }
 
     private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
@@ -78,16 +74,17 @@ public class PersonServiceJPAImpl implements PersonService {
     }
 
 
-    private List<Person> listPeopleByFirstAndLastName(String firstName, String lastName) {
-        return personRepository.findAllByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase("%" + firstName + "%","%"+lastName+"%", null);
+    private Page<Person> listPeopleByFirstAndLastName(String firstName, String lastName, Pageable pageable) {
+        return personRepository
+                .findAllByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase("%" + firstName + "%","%"+lastName+"%",pageable);
     }
 
-    private List<Person> listPeopleByFirstName(String firstName) {
-        return personRepository.findAllByFirstNameIsLikeIgnoreCase("%" + firstName + "%", null);
+    private Page<Person> listPeopleByFirstName(String firstName, Pageable pageable) {
+        return personRepository.findAllByFirstNameIsLikeIgnoreCase("%" + firstName + "%", pageable);
     }
 
-    private List<Person> listPeopleByLastName(String lastName) {
-        return personRepository.findAllByLastNameIsLikeIgnoreCase("%" + lastName + "%", null);
+    private Page<Person> listPeopleByLastName(String lastName, Pageable pageable) {
+        return personRepository.findAllByLastNameIsLikeIgnoreCase("%" + lastName + "%", pageable );
     }
 
     @Override

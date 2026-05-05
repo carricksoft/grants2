@@ -9,10 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
 import scot.carricksoftware.grants2.bootstrap.BootstrapPerson;
 import scot.carricksoftware.grants2.entities.Person;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -76,14 +75,14 @@ class PersonRepositoryTest {
 
     @Test
     void getPeopleByFirstNameTest() {
-        List<Person> list = personRepository.findAllByFirstNameIsLikeIgnoreCase("%person 1f%", null);
-        assertThat(list.size()).isEqualTo(1);
+        Page<Person> list = personRepository.findAllByFirstNameIsLikeIgnoreCase("%person 1f%", null);
+        assertThat(list.getContent().size()).isEqualTo(1);
     }
 
     @Test
     void getPeopleByLastNameTest() {
-        List<Person> list = personRepository.findAllByLastNameIsLikeIgnoreCase("%person 1L%", null);
-        assertThat(list.size()).isEqualTo(1);
+        Page<Person> list = personRepository.findAllByLastNameIsLikeIgnoreCase("%person 1L%", null);
+        assertThat(list.getContent().size()).isEqualTo(1);
     }
 
 }

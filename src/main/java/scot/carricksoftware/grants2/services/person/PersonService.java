@@ -1,4 +1,8 @@
-package scot.carricksoftware.grants2.services;
+/*
+ * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
+ */
+
+package scot.carricksoftware.grants2.services.person;
 
 import org.springframework.data.domain.Page;
 import scot.carricksoftware.grants2.model.PersonDTO;

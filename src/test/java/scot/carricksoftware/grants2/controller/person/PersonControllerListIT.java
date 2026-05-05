@@ -7,13 +7,12 @@ package scot.carricksoftware.grants2.controller.person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import scot.carricksoftware.grants2.controller.PersonController;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -29,8 +28,9 @@ class PersonControllerListIT {
 
     @Test
     void listPeopleTest() {
-        List<PersonDTO> dtoList = personController.listPeople(null, null, 1, 25);
-        assertThat(dtoList.size()).isEqualTo(3);
+        Page<PersonDTO> dtoList = personController
+                .listPeople(null, null, 1, 25);
+        assertThat(dtoList.getContent().size()).isEqualTo(3);
     }
 
     @Test
@@ -38,8 +38,9 @@ class PersonControllerListIT {
     @Rollback
     void emptyListTest() {
         personRepository.deleteAll();
-        List<PersonDTO> dtoList = personController.listPeople(null, null, 1, 25);
-        assertThat(dtoList.size()).isEqualTo(0);
+        Page<PersonDTO> dtoList = personController
+                .listPeople(null, null, 1, 25);
+        assertThat(dtoList.getContent().size()).isEqualTo(0);
     }
 
 

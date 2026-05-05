@@ -5,10 +5,10 @@
 package scot.carricksoftware.grants2.repositories;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import scot.carricksoftware.grants2.entities.Person;
 
-import java.awt.print.Pageable;
 import java.util.UUID;
 
 @SuppressWarnings("unused")

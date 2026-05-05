@@ -37,7 +37,7 @@ class PersonControllerListParametersIT {
       mockMvc.perform(get(PersonController.PERSON_PATH)
                       .queryParam("firstName", "Person 1F"))
               .andExpect(status().isOk())
-              .andExpect(jsonPath("$.size()", is(1)));
+              .andExpect(jsonPath("$.content.size()", is(1)));
   }
 
     @Test
@@ -45,7 +45,7 @@ class PersonControllerListParametersIT {
         mockMvc.perform(get(PersonController.PERSON_PATH)
                         .queryParam("lastName", "Person 2L"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", is(1)));
+                .andExpect(jsonPath("$.content.size()", is(1)));
     }
 
     @Test
@@ -54,7 +54,7 @@ class PersonControllerListParametersIT {
                         .queryParam("firstName", "Person 3F")
                         .queryParam("lastName", "Person 3L"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", is(1)));
+                .andExpect(jsonPath("$.content.size()", is(1)));
     }
 
     @Test
@@ -65,7 +65,7 @@ class PersonControllerListParametersIT {
                         .queryParam("pageNumber","2")
                         .queryParam("pageSize", "1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", is(1)));
+                .andExpect(jsonPath("$.content.size()", is(1)));
     }
 
     @Test
@@ -74,6 +74,6 @@ class PersonControllerListParametersIT {
                         .queryParam("firstName", "Person 1F")
                         .queryParam("lastName", "Person 2L"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", is(0)));
+                .andExpect(jsonPath("$.content.size()", is(0)));
     }
 }

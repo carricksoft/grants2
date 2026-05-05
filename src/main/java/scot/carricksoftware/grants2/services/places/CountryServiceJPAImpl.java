@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -72,9 +73,9 @@ public class CountryServiceJPAImpl implements CountryService {
         return PageRequest.of(queryPageNumber, queryPageSize, sort);
     }
 
-    private Page<Country> listCountriesByName(String name, PageRequest pageRequest) {
+    private Page<Country> listCountriesByName(String name, Pageable pageable) {
 
-        return countryRepository.findAllByNameIsLikeIgnoreCase("%" + name + "%", pageRequest);
+        return countryRepository.findAllByNameIsLikeIgnoreCase("%" + name + "%", pageable);
     }
 
     @Override

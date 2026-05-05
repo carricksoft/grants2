@@ -18,8 +18,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import scot.carricksoftware.grants2.controller.PersonController;
 import scot.carricksoftware.grants2.model.PersonDTO;
-import scot.carricksoftware.grants2.services.PersonService;
-import scot.carricksoftware.grants2.services.PersonServiceImpl;
+import scot.carricksoftware.grants2.services.person.PersonService;
+import scot.carricksoftware.grants2.services.person.PersonServiceImpl;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
@@ -61,7 +61,7 @@ class PersonControllerValidationTest {
     @BeforeEach
     void setUp() {
         personService = new PersonServiceImpl();
-        testPersonDTO = personService.listPeople(null, null, 1, 25).getFirst();
+        testPersonDTO = personService.listPeople(null, null, 1, 25).getContent().getFirst();
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
         personArgumentCaptor = ArgumentCaptor.forClass(PersonDTO.class);
 
@@ -74,7 +74,7 @@ class PersonControllerValidationTest {
                 .build();
 
         given(personServiceMock.saveNewPerson(any(PersonDTO.class)))
-                .willReturn(personService.listPeople(null,null, 1, 25).get(1));
+                .willReturn(personService.listPeople(null,null, 1, 25).getContent().get(1));
 
         mockMvc.perform(post(PERSON_PATH)
                 .accept(MediaType.APPLICATION_JSON)
@@ -90,7 +90,8 @@ class PersonControllerValidationTest {
                 .build();
 
         given(personServiceMock.saveNewPerson(any(PersonDTO.class)))
-                .willReturn(personService.listPeople(null,null, 1, 25).get(1));
+                .willReturn(personService.listPeople(null,null, 1, 25)
+                        .getContent().get(1));
 
         mockMvc.perform(post(PERSON_PATH)
                         .accept(MediaType.APPLICATION_JSON)
