@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.entities.places.Country;
@@ -66,7 +67,9 @@ public class CountryServiceJPAImpl implements CountryService {
                 queryPageSize = pageSize;
             }
         }
-        return PageRequest.of(queryPageNumber, queryPageSize);
+
+        Sort sort = Sort.by(Sort.Order.asc("name"));
+        return PageRequest.of(queryPageNumber, queryPageSize, sort);
     }
 
     private Page<Country> listCountriesByName(String name, PageRequest pageRequest) {
