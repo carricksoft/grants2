@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.*;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
 @Slf4j
 @Service
 public class PersonServiceImpl implements PersonService {

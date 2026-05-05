@@ -76,13 +76,13 @@ class PersonRepositoryTest {
 
     @Test
     void getPeopleByFirstNameTest() {
-        List<Person> list = personRepository.findAllByFirstNameIsLikeIgnoreCase("%person 1f%");
+        List<Person> list = personRepository.findAllByFirstNameIsLikeIgnoreCase("%person 1f%", null);
         assertThat(list.size()).isEqualTo(1);
     }
 
     @Test
     void getPeopleByLastNameTest() {
-        List<Person> list = personRepository.findAllByLastNameIsLikeIgnoreCase("%person 1L%");
+        List<Person> list = personRepository.findAllByLastNameIsLikeIgnoreCase("%person 1L%", null);
         assertThat(list.size()).isEqualTo(1);
     }
 

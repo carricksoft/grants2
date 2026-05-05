@@ -4,15 +4,16 @@
 
 package scot.carricksoftware.grants2.repositories;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import scot.carricksoftware.grants2.entities.Person;
 
-import java.util.List;
+import java.awt.print.Pageable;
 import java.util.UUID;
 
 @SuppressWarnings("unused")
 public interface PersonRepository extends JpaRepository<Person, UUID> {
-    List<Person> findAllByFirstNameIsLikeIgnoreCase(String firstName);
-    List<Person> findAllByLastNameIsLikeIgnoreCase(String lastName);
-    List<Person> findAllByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase(String firstName, String lastName);
+    Page<Person> findAllByFirstNameIsLikeIgnoreCase(String firstName, Pageable pageable);
+    Page<Person> findAllByLastNameIsLikeIgnoreCase(String lastName, Pageable pageable);
+    Page<Person> findAllByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase(String firstName, String lastName, Pageable pageable);
 }

@@ -79,15 +79,15 @@ public class PersonServiceJPAImpl implements PersonService {
 
 
     private List<Person> listPeopleByFirstAndLastName(String firstName, String lastName) {
-        return personRepository.findAllByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase("%" + firstName + "%","%"+lastName+"%");
+        return personRepository.findAllByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase("%" + firstName + "%","%"+lastName+"%", null);
     }
 
     private List<Person> listPeopleByFirstName(String firstName) {
-        return personRepository.findAllByFirstNameIsLikeIgnoreCase("%" + firstName + "%");
+        return personRepository.findAllByFirstNameIsLikeIgnoreCase("%" + firstName + "%", null);
     }
 
     private List<Person> listPeopleByLastName(String lastName) {
-        return personRepository.findAllByLastNameIsLikeIgnoreCase("%" + lastName + "%");
+        return personRepository.findAllByLastNameIsLikeIgnoreCase("%" + lastName + "%", null);
     }
 
     @Override
