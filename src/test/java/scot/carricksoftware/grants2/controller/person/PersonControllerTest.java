@@ -99,7 +99,7 @@ class PersonControllerTest {
 
     @Test
     void listPeopleTest() throws Exception {
-        given(personServiceMock.listPeople(null, null, 1, 25)).willReturn(personService.listPeople(null, null, 1, 25));
+        given(personServiceMock.listPeople(any(), any(), any(), any())).willReturn(personService.listPeople(null, null, 1, 25));
 
         mockMvc.perform(get(PERSON_PATH)
                         .accept(MediaType.APPLICATION_JSON))
