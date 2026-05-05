@@ -33,7 +33,7 @@ class PersonControllerListParametersIT {
     }
 
   @Test
-    void testListByFirstName() throws Exception {
+    void listByFirstNameTest() throws Exception {
       mockMvc.perform(get(PersonController.PERSON_PATH)
                       .queryParam("firstName", "Person 1F"))
               .andExpect(status().isOk())
@@ -41,7 +41,7 @@ class PersonControllerListParametersIT {
   }
 
     @Test
-    void testListByLastName() throws Exception {
+    void listByLastNameTest() throws Exception {
         mockMvc.perform(get(PersonController.PERSON_PATH)
                         .queryParam("lastName", "Person 2L"))
                 .andExpect(status().isOk())
@@ -49,7 +49,7 @@ class PersonControllerListParametersIT {
     }
 
     @Test
-    void testListByFirstAndLastName() throws Exception {
+    void listByFirstAndLastNameTest() throws Exception {
         mockMvc.perform(get(PersonController.PERSON_PATH)
                         .queryParam("firstName", "Person 3F")
                         .queryParam("lastName", "Person 3L"))
@@ -58,7 +58,16 @@ class PersonControllerListParametersIT {
     }
 
     @Test
-    void TestListByImpossibleParameters() throws Exception {
+    void listByFirstAndLastNamePage2Test() throws Exception {
+        mockMvc.perform(get(PersonController.PERSON_PATH)
+                        .queryParam("firstName", "Person 3F")
+                        .queryParam("lastName", "Person 3L"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()", is(1)));
+    }
+
+    @Test
+    void listByImpossibleParametersTest() throws Exception {
         mockMvc.perform(get(PersonController.PERSON_PATH)
                         .queryParam("firstName", "Person 1F")
                         .queryParam("lastName", "Person 2L"))
