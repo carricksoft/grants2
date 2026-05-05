@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.entities.Person;
@@ -70,9 +71,11 @@ public class PersonServiceJPAImpl implements PersonService {
             }
         }
 
-        return PageRequest.of(queryPageNumber, queryPageSize);
-    }
+        Sort sort = Sort.by(Sort.Order.asc("lastName"))
+                .and(Sort.by(Sort.Order.asc("firstName")));
 
+        return PageRequest.of(queryPageNumber, queryPageSize, sort);
+    }
 
     private Page<Person> listPeopleByFirstAndLastName(String firstName, String lastName, Pageable pageable) {
         return personRepository
