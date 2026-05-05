@@ -36,6 +36,8 @@ public class PersonServiceJPAImpl implements PersonService {
 
     @Override
     public List<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize) {
+
+        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
         List<Person> peopleList;
 
         if (StringUtils.hasText(firstName) && lastName == null) {
