@@ -13,7 +13,6 @@ import scot.carricksoftware.grants2.model.places.CountryDTO;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,7 +58,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Page<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize){
         log.debug("CountryService::countryPeople");
-        Page<CountryDTO> z = new PageImpl<>(new ArrayList<>(countryMap.values()));
         return  new PageImpl<>(new ArrayList<>(countryMap.values()));
     }
     

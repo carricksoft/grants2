@@ -17,11 +17,9 @@ import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 @Service
 @Primary
@@ -45,7 +43,6 @@ public class CountryServiceJPAImpl implements CountryService {
             countryPage = countryRepository.findAll(pageRequest);
         }
 
-        var z = countryPage;
         return countryPage.map(countryMapper::countryToCountryDto);
 
     }
@@ -69,12 +66,11 @@ public class CountryServiceJPAImpl implements CountryService {
                 queryPageSize = pageSize;
             }
         }
-        var z = PageRequest.of(queryPageNumber, queryPageSize);
         return PageRequest.of(queryPageNumber, queryPageSize);
     }
 
     private Page<Country> listCountriesByName(String name, PageRequest pageRequest) {
-        Page<Country> z = countryRepository.findAllByNameIsLikeIgnoreCase("%" + name + "%", pageRequest);
+
         return countryRepository.findAllByNameIsLikeIgnoreCase("%" + name + "%", pageRequest);
     }
 

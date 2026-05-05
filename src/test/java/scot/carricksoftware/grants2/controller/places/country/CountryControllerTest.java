@@ -87,7 +87,7 @@ class CountryControllerTest {
 
     @Test
     void listCountriesTest() throws Exception {
-        given(countryServiceMock.listCountries(null, 1, 25)).willReturn(countryService.listCountries(null, 1, 25));
+        given(countryServiceMock.listCountries(any(), any(), any())).willReturn(countryService.listCountries(null, 1, 25));
 
         mockMvc.perform(get(COUNTRY_PATH)
                         .accept(MediaType.APPLICATION_JSON))

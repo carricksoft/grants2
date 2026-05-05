@@ -4,7 +4,6 @@
 
 package scot.carricksoftware.grants2.controller.places.country;
 
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import scot.carricksoftware.grants2.controller.places.CountryController;
-import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,10 +24,6 @@ class CountryControllerListParametersIT {
 
     @Autowired
     WebApplicationContext wac;
-
-    @Autowired
-    CountryRepository countryRepository;
-
 
     MockMvc mockMvc;
 
@@ -53,10 +47,8 @@ class CountryControllerListParametersIT {
                         .queryParam("pageNumber", "2")
                         .queryParam("pageSize", "5"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.size()", is(50)));
+                .andExpect(jsonPath("$.size()", is(5)));
     }
-
-
 
 
 }

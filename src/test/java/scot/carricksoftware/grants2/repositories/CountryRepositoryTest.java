@@ -14,8 +14,6 @@ import scot.carricksoftware.grants2.bootstrap.BootstrapPlaces;
 import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 
-import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static scot.carricksoftware.grants2.entities.Person.FIELD_SIZE;

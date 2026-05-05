@@ -7,7 +7,6 @@ package scot.carricksoftware.grants2.services.places;
 import org.springframework.data.domain.Page;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
