@@ -41,7 +41,7 @@ public class CountryController {
                                           Integer pageNumber,
                                           Integer pageSize){
         log.debug("CountryCountroller::listCountries");
-        return countryService.listCountries(name, 1, 25);
+        return countryService.listCountries(name, pageNumber, pageSize).getContent();
     }
 
     @SuppressWarnings("rawtypes")

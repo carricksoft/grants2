@@ -69,7 +69,7 @@ class CountryControllerTest {
     @BeforeEach
     void setUp() {
         countryService = new CountryServiceImpl();
-        testCountryDTO = countryService.listCountries(null, 1, 25).getFirst();
+        testCountryDTO = countryService.listCountries(null, 1, 25).getContent().getFirst();
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
     }
 
@@ -93,7 +93,7 @@ class CountryControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.length()", is(countryService.listCountries(null, 1, 25).size())));
+                .andExpect(jsonPath("$.length()", is(countryService.listCountries(null, 1, 25).getContent().size())));
     }
 
     @Test
@@ -109,7 +109,7 @@ class CountryControllerTest {
     void postNewCountryTest() throws Exception {
         testCountryDTO.setId(null);
         testCountryDTO.setVersion(null);
-        given(countryServiceMock.saveNewCountry(any(CountryDTO.class))).willReturn(countryService.listCountries(null, 1, 25).get(1));
+        given(countryServiceMock.saveNewCountry(any(CountryDTO.class))).willReturn(countryService.listCountries(null, 1, 25).getContent().get(1));
 
         mockMvc.perform(post(COUNTRY_PATH)
                         .accept(MediaType.APPLICATION_JSON)
@@ -123,7 +123,7 @@ class CountryControllerTest {
     void createNewCountryValidationTest() throws Exception {
         CountryDTO countryDTO = CountryDTO.builder().build();
         given(countryServiceMock.saveNewCountry(any(CountryDTO.class)))
-                .willReturn(countryService.listCountries(null, 1, 25).get(1));
+                .willReturn(countryService.listCountries(null, 1, 25).getContent().get(1));
 
         MvcResult mvcResult = mockMvc.perform(post(CountryController.COUNTRY_PATH)
                         .accept(MediaType.APPLICATION_JSON)
@@ -139,7 +139,7 @@ class CountryControllerTest {
 
     @Test
     void updateCountryTest() throws Exception {
-        CountryDTO countryDTO = countryService.listCountries(null, 1, 25).getFirst();
+        CountryDTO countryDTO = countryService.listCountries(null, 1, 25).getContent().getFirst();
         given(countryServiceMock.updateCountryById(any(), any())).willReturn(Optional.of(countryDTO));
         mockMvc.perform(put(COUNTRY_PATH_ID, testCountryDTO.getId())
                         .accept(MediaType.APPLICATION_JSON)

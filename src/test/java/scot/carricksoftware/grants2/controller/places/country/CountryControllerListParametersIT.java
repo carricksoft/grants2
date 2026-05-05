@@ -4,6 +4,7 @@
 
 package scot.carricksoftware.grants2.controller.places.country;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ class CountryControllerListParametersIT {
     @Autowired
     CountryRepository countryRepository;
 
+
     MockMvc mockMvc;
 
     @BeforeEach
@@ -47,11 +49,11 @@ class CountryControllerListParametersIT {
     @Test
     void listPage2Test() throws Exception {
         mockMvc.perform(get(CountryController.COUNTRY_PATH)
-                        .queryParam("pageSize", "50")
-                        .queryParam("pageNumber", "2"))
-
+                        .queryParam("name", "%A%")
+                        .queryParam("pageNumber", "2")
+                        .queryParam("pageSize", "5"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", is(50)));
+                .andExpect(jsonPath("$.content.size()", is(50)));
     }
 
 

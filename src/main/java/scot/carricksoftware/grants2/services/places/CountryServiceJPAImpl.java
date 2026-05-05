@@ -6,6 +6,7 @@ package scot.carricksoftware.grants2.services.places;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -33,21 +34,20 @@ public class CountryServiceJPAImpl implements CountryService {
     private final CountryMapper countryMapper;
 
     @Override
-    public List<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize) {
+    public Page<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize) {
 
         PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
-        List<Country> countryList;
+        Page<Country> countryPage;
 
         if (StringUtils.hasText(name)) {
-            countryList = listCountriesByName(name);
+            countryPage = listCountriesByName(name, pageRequest);
         } else {
-            countryList = countryRepository.findAll();
+            countryPage = countryRepository.findAll(pageRequest);
         }
 
-        return countryList
-                .stream()
-                .map(countryMapper::countryToCountryDto)
-                .collect(Collectors.toList());
+        var z = countryPage;
+        return countryPage.map(countryMapper::countryToCountryDto);
+
     }
 
     private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
@@ -60,7 +60,7 @@ public class CountryServiceJPAImpl implements CountryService {
             queryPageNumber = DEFAULT_PAGE;
         }
 
-        if (pageSize != null) {
+        if (pageSize == null) {
             queryPageSize = DEFAULT_PAGE_SIZE;
         } else {
             if (pageSize > 1000) {
@@ -69,11 +69,13 @@ public class CountryServiceJPAImpl implements CountryService {
                 queryPageSize = pageSize;
             }
         }
+        var z = PageRequest.of(queryPageNumber, queryPageSize);
         return PageRequest.of(queryPageNumber, queryPageSize);
     }
 
-    private List<Country> listCountriesByName(String name) {
-        return countryRepository.findAllByNameIsLikeIgnoreCase("%" + name + "%");
+    private Page<Country> listCountriesByName(String name, PageRequest pageRequest) {
+        Page<Country> z = countryRepository.findAllByNameIsLikeIgnoreCase("%" + name + "%", pageRequest);
+        return countryRepository.findAllByNameIsLikeIgnoreCase("%" + name + "%", pageRequest);
     }
 
     @Override

@@ -4,6 +4,7 @@
 
 package scot.carricksoftware.grants2.services.places;
 
+import org.springframework.data.domain.Page;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.UUID;
 public interface CountryService {
 
     @SuppressWarnings("unused")
-    List<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize);
+    Page<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize);
 
     @SuppressWarnings("unused")
     Optional<CountryDTO> getCountryById(UUID id);

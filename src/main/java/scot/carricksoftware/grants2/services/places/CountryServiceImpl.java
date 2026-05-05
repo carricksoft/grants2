@@ -5,6 +5,8 @@
 package scot.carricksoftware.grants2.services.places;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
 
@@ -55,9 +57,10 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public List<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize){
+    public Page<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize){
         log.debug("CountryService::countryPeople");
-        return new ArrayList<>(countryMap.values());
+        Page<CountryDTO> z = new PageImpl<>(new ArrayList<>(countryMap.values()));
+        return  new PageImpl<>(new ArrayList<>(countryMap.values()));
     }
     
     @Override

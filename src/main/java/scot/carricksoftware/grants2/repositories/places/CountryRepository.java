@@ -4,13 +4,15 @@
 
 package scot.carricksoftware.grants2.repositories.places;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import scot.carricksoftware.grants2.entities.places.Country;
 
-import java.util.List;
 import java.util.UUID;
 
 @SuppressWarnings("unused")
 public interface CountryRepository extends JpaRepository<Country, UUID> {
-    List<Country> findAllByNameIsLikeIgnoreCase(String country);
+    Page<Country> findAllByNameIsLikeIgnoreCase(String country, Pageable pageable);
+    Page<Country> findAll(Pageable pageable);
 }

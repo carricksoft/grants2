@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
 import scot.carricksoftware.grants2.bootstrap.BootstrapPlaces;
 import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.repositories.places.CountryRepository;
@@ -61,8 +62,8 @@ class CountryRepositoryTest {
 
     @Test
     void getCountryByNameTest() {
-        List<Country> list = countryRepository.findAllByNameIsLikeIgnoreCase("%country 1%");
-        assertThat(list.size()).isEqualTo(1);
+        Page<Country> list = countryRepository.findAllByNameIsLikeIgnoreCase("%country 1%", null);
+        assertThat(list.getContent().size()).isEqualTo(1);
     }
 
 
