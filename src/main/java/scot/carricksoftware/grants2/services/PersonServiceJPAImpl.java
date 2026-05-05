@@ -6,9 +6,13 @@ package scot.carricksoftware.grants2.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.entities.Person;
+import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.mappers.PersonMapper;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
@@ -25,6 +29,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PersonServiceJPAImpl implements PersonService {
 
+    private final static int DEFAULT_PAGE = 0;
+    private final static int DEFAULT_PAGE_SIZE = 25;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
@@ -47,6 +53,30 @@ public class PersonServiceJPAImpl implements PersonService {
                 .map(personMapper::personToPersonDto)
                 .collect(Collectors.toList());
     }
+
+    private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
+        int queryPageNumber;
+        int queryPageSize;
+
+        if (pageNumber != null && pageNumber > 0) {
+            queryPageNumber = pageNumber - 1;
+        } else {
+            queryPageNumber = DEFAULT_PAGE;
+        }
+
+        if (pageSize == null) {
+            queryPageSize = DEFAULT_PAGE_SIZE;
+        } else {
+            if (pageSize > 1000) {
+                queryPageSize = DEFAULT_PAGE_SIZE;
+            } else {
+                queryPageSize = pageSize;
+            }
+        }
+
+        return PageRequest.of(queryPageNumber, queryPageSize);
+    }
+
 
     private List<Person> listPeopleByFirstAndLastName(String firstName, String lastName) {
         return personRepository.findAllByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase("%" + firstName + "%","%"+lastName+"%");
