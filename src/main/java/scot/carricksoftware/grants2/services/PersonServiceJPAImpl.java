@@ -8,11 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.entities.Person;
-import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.mappers.PersonMapper;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import scot.carricksoftware.grants2.repositories.PersonRepository;
@@ -35,7 +33,7 @@ public class PersonServiceJPAImpl implements PersonService {
     private final PersonMapper personMapper;
 
     @Override
-    public List<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize) {
+    public Page<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize) {
 
         PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
         List<Person> peopleList;

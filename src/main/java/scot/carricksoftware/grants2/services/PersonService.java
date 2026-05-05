@@ -1,8 +1,8 @@
 package scot.carricksoftware.grants2.services;
 
+import org.springframework.data.domain.Page;
 import scot.carricksoftware.grants2.model.PersonDTO;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 public interface PersonService {
 
-    List<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize);
+    Page<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize);
 
     Optional<PersonDTO> getPersonById(UUID id);
 

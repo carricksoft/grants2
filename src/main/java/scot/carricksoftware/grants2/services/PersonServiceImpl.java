@@ -1,5 +1,7 @@
 package scot.carricksoftware.grants2.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.model.PersonDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -57,9 +59,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize){
+    public Page<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize){
         log.debug("PersonService::listPeople");
-        return new ArrayList<>(personMap.values());
+        return new PageImpl<>(new ArrayList<>(personMap.values()))
     }
 
     @Override

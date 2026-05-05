@@ -5,6 +5,7 @@
 package scot.carricksoftware.grants2.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,6 @@ import scot.carricksoftware.grants2.model.PersonDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.UUID;
 
 
@@ -39,9 +39,10 @@ public class PersonController {
     public static final String PERSON_PATH_ID = PERSON_PATH + "/{id}";
 
     @GetMapping(PERSON_PATH)
-    public List<PersonDTO> listPeople(@RequestParam(required = false) String firstName,
+    public Page<PersonDTO> listPeople(@RequestParam(required = false) String firstName,
                                       @RequestParam(required = false) String lastName,
-                                      Integer pageNumber, Integer pageSize){
+                                      Integer pageNumber,
+                                      Integer pageSize){
         log.debug("PersonController::listPeople");
         return personService.listPeople(firstName, lastName, pageNumber, pageSize);
     }
