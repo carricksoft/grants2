@@ -40,9 +40,10 @@ public class PersonController {
 
     @GetMapping(PERSON_PATH)
     public List<PersonDTO> listPeople(@RequestParam(required = false) String firstName,
-                                      @RequestParam(required = false) String lastName){
+                                      @RequestParam(required = false) String lastName,
+                                      Integer pageNumber, Integer pageSize){
         log.debug("PersonController::listPeople");
-        return personService.listPeople(firstName, lastName);
+        return personService.listPeople(firstName, lastName, pageNumber, pageSize);
     }
 
     @SuppressWarnings("rawtypes")

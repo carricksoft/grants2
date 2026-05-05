@@ -60,8 +60,10 @@ class PersonControllerListParametersIT {
     @Test
     void listByFirstAndLastNamePage2Test() throws Exception {
         mockMvc.perform(get(PersonController.PERSON_PATH)
-                        .queryParam("firstName", "Person 3F")
-                        .queryParam("lastName", "Person 3L"))
+                        .queryParam("firstName", "P")
+                        .queryParam("lastName", "P")
+                        .queryParam("pageNumber","2")
+                        .queryParam("pageSize", "1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()", is(1)));
     }

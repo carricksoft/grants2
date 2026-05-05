@@ -29,7 +29,7 @@ public class PersonServiceJPAImpl implements PersonService {
     private final PersonMapper personMapper;
 
     @Override
-    public List<PersonDTO> listPeople(String firstName, String lastName) {
+    public List<PersonDTO> listPeople(String firstName, String lastName, Integer pageNumber, Integer pageSize) {
         List<Person> peopleList;
 
         if (StringUtils.hasText(firstName) && lastName == null) {

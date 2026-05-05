@@ -79,7 +79,7 @@ class PersonControllerTest {
     @BeforeEach
     void setUp() {
         personService = new PersonServiceImpl();
-        testPersonDTO = personService.listPeople(null, null).getFirst();
+        testPersonDTO = personService.listPeople(null, null, 1, 25).getFirst();
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
         personArgumentCaptor = ArgumentCaptor.forClass(PersonDTO.class);
 
@@ -99,13 +99,13 @@ class PersonControllerTest {
 
     @Test
     void listPeopleTest() throws Exception {
-        given(personServiceMock.listPeople(null, null)).willReturn(personService.listPeople(null, null));
+        given(personServiceMock.listPeople(null, null, 1, 25)).willReturn(personService.listPeople(null, null, 1, 25));
 
         mockMvc.perform(get(PERSON_PATH)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.length()", is(personService.listPeople(null, null).size())));
+                .andExpect(jsonPath("$.length()", is(personService.listPeople(null, null, 1, 25).size())));
     }
 
     @Test
@@ -122,7 +122,7 @@ class PersonControllerTest {
         testPersonDTO.setId(null);
         testPersonDTO.setVersion(null);
         given(personServiceMock.saveNewPerson(any(PersonDTO.class)))
-                .willReturn(personService.listPeople(null, null).get(1));
+                .willReturn(personService.listPeople(null, null, 1, 25).get(1));
 
         mockMvc.perform(post(PERSON_PATH)
                         .accept(MediaType.APPLICATION_JSON)
@@ -136,7 +136,7 @@ class PersonControllerTest {
     void createNewPersonValidationTest() throws Exception {
         PersonDTO personDTO = PersonDTO.builder().build();
         given(personServiceMock.saveNewPerson(any(PersonDTO.class)))
-                .willReturn(personService.listPeople(null,null).get(1));
+                .willReturn(personService.listPeople(null,null, 1, 25).get(1));
 
         MvcResult mvcResult = mockMvc.perform(post(PersonController.PERSON_PATH)
                         .accept(MediaType.APPLICATION_JSON)
@@ -152,7 +152,7 @@ class PersonControllerTest {
 
     @Test
     void updatePersonTest() throws Exception {
-        PersonDTO personDTO = personService.listPeople(null, null).getFirst();
+        PersonDTO personDTO = personService.listPeople(null, null, 1, 25).getFirst();
         given(personServiceMock.updatePersonById(any(), any())).willReturn(Optional.of(personDTO));
         mockMvc.perform(put(PERSON_PATH_ID, testPersonDTO.getId())
                         .accept(MediaType.APPLICATION_JSON)
