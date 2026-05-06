@@ -6,6 +6,7 @@ package scot.carricksoftware.grants2.controller.places;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,6 @@ import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 import scot.carricksoftware.grants2.services.places.region.RegionService;
 
-import java.util.List;
 import java.util.UUID;
 
 
@@ -31,15 +31,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @RestController
 public class RegionController {
+
     private final RegionService regionService;
 
     public static final String REGION_PATH = "/regions";
     public static final String REGION_PATH_ID = REGION_PATH + "/{id}";
 
     @GetMapping(REGION_PATH)
-    public List<RegionDTO> listRegions(@RequestParam(required = false) String name){
+    public Page<RegionDTO> listRegions(@RequestParam(required = false) String name,
+                                       Integer pageNumber,
+                                       Integer pageSize){
         log.debug("RegionController::listRegions");
-        return regionService.listRegions(name);
+        return regionService.listRegions(name, pageNumber, pageSize);
     }
 
     @SuppressWarnings("rawtypes")

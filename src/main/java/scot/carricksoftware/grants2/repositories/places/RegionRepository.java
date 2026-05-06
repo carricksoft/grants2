@@ -4,13 +4,17 @@
 
 package scot.carricksoftware.grants2.repositories.places;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import scot.carricksoftware.grants2.entities.places.Region;
 
-import java.util.List;
 import java.util.UUID;
 
 @SuppressWarnings("unused")
 public interface RegionRepository extends JpaRepository<Region, UUID> {
-    List<Region> findAllByNameIsLikeIgnoreCase(String region);
+    Page<Region> findAllByNameIsLikeIgnoreCase(String region , Pageable pageable);
+
+    @SuppressWarnings("NullableProblems")
+    Page<Region> findAll(Pageable pageable);
 }

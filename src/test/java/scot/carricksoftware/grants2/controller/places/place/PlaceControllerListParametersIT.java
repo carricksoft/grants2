@@ -40,5 +40,4 @@ class PlaceControllerListParametersIT {
               .andExpect(jsonPath("$.content.size()", is(1)));
   }
 
-
 }

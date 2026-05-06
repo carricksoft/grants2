@@ -68,7 +68,7 @@ class RegionControllerTest {
     @BeforeEach
     void setUp() {
         regionService = new RegionServiceImpl();
-        testRegionDTO = regionService.listRegions(null).getFirst();
+        testRegionDTO = regionService.listRegions(null,1,25).getContent().getFirst();
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
     }
 
@@ -85,14 +85,17 @@ class RegionControllerTest {
     }
 
     @Test
-    void listPeopleTest() throws Exception {
-        given(regionServiceMock.listRegions(null)).willReturn(regionService.listRegions(null));
+    void listRegionTest() throws Exception {
+        given(regionServiceMock.listRegions(any(), any(), any()))
+                .willReturn(regionService.listRegions(null,1,25));
 
         mockMvc.perform(get(REGION_PATH)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.length()", is(regionService.listRegions(null).size())));
+                .andExpect(jsonPath("$.content.length()",
+                        is(regionService.listRegions(null,1,25)
+                                .getContent().size())));
     }
 
     @Test
@@ -109,7 +112,8 @@ class RegionControllerTest {
         testRegionDTO.setId(null);
         testRegionDTO.setVersion(null);
         given(regionServiceMock.saveNewRegion(any(RegionDTO.class)))
-                .willReturn(regionService.listRegions(null).get(1));
+                .willReturn(regionService.listRegions(null,1,25)
+                .getContent().get(1));
 
         mockMvc.perform(post(REGION_PATH)
                         .accept(MediaType.APPLICATION_JSON)
@@ -123,7 +127,7 @@ class RegionControllerTest {
     void createNewRegionValidationTest() throws Exception {
         RegionDTO regionDTO = RegionDTO.builder().build();
         given(regionServiceMock.saveNewRegion(any(RegionDTO.class)))
-                .willReturn(regionService.listRegions(null).get(1));
+                .willReturn(regionService.listRegions(null,1,25).getContent().get(1));
 
         MvcResult mvcResult = mockMvc.perform(post(RegionController.REGION_PATH)
                         .accept(MediaType.APPLICATION_JSON)
@@ -139,7 +143,8 @@ class RegionControllerTest {
 
     @Test
     void updateRegionTest() throws Exception {
-        RegionDTO regionDTO = regionService.listRegions(null).getFirst();
+        RegionDTO regionDTO = regionService.listRegions(null,1,25)
+                .getContent().getFirst();
         given(regionServiceMock.updateRegionById(any(), any())).willReturn(Optional.of(regionDTO));
         mockMvc.perform(put(REGION_PATH_ID, testRegionDTO.getId())
                         .accept(MediaType.APPLICATION_JSON)

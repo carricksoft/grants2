@@ -4,9 +4,9 @@
 
 package scot.carricksoftware.grants2.services.places.region;
 
+import org.springframework.data.domain.Page;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface RegionService {
 
     @SuppressWarnings("unused")
-    List<RegionDTO> listRegions(String name);
+    Page<RegionDTO> listRegions(String name,Integer pageNumber, Integer pageSize);
 
     @SuppressWarnings("unused")
     Optional<RegionDTO> getRegionById(UUID id);

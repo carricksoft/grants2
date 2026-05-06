@@ -6,6 +6,10 @@ package scot.carricksoftware.grants2.services.places.region;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.entities.places.Region;
@@ -14,38 +18,60 @@ import scot.carricksoftware.grants2.model.places.RegionDTO;
 import scot.carricksoftware.grants2.repositories.places.RegionRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 @Service
 @Primary
 @RequiredArgsConstructor
 public class RegionServiceJPAImpl implements RegionService {
 
+    private final static int DEFAULT_PAGE = 0;
+    private final static int DEFAULT_PAGE_SIZE = 25;
     private final RegionRepository regionRepository;
     private final RegionMapper regionMapper;
 
     @Override
-    public List<RegionDTO> listRegions(String name) {
-        List<Region> regionList;
+    public Page<RegionDTO> listRegions(String name, Integer pageNumber, Integer pageSize) {
+        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+        Page<Region> regionPage;
+
 
         if (StringUtils.hasText(name)) {
-            regionList = listRegionsByName(name);
+            regionPage = listRegionsByName(name, pageRequest);
         } else {
-            regionList = regionRepository.findAll();
+            regionPage = regionRepository.findAll(pageRequest);
         }
 
-        return regionList
-                .stream()
-                .map(regionMapper::regionToRegionDto)
-                .collect(Collectors.toList());
+        return regionPage.map(regionMapper::regionToRegionDto);
     }
 
-    private List<Region> listRegionsByName(String name) {
-        return regionRepository.findAllByNameIsLikeIgnoreCase("%" + name+ "%");
+    private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
+        int queryPageNumber;
+        int queryPageSize;
+
+        if (pageNumber != null && pageNumber > 0) {
+            queryPageNumber = pageNumber - 1;
+        } else {
+            queryPageNumber = DEFAULT_PAGE;
+        }
+
+        if (pageSize == null) {
+            queryPageSize = DEFAULT_PAGE_SIZE;
+        } else {
+            if (pageSize > 1000) {
+                queryPageSize = DEFAULT_PAGE_SIZE;
+            } else {
+                queryPageSize = pageSize;
+            }
+        }
+        Sort sort = Sort.by(Sort.Order.asc("name"));
+        return PageRequest.of(queryPageNumber, queryPageSize, sort);
+    }
+
+    private Page<Region> listRegionsByName(String name, Pageable pageable) {
+        return regionRepository.findAllByNameIsLikeIgnoreCase("%" + name+ "%", pageable);
     }
 
     @Override

@@ -5,13 +5,14 @@
 package scot.carricksoftware.grants2.services.places.region;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -56,9 +57,9 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public List<RegionDTO> listRegions(String name){
+    public Page<RegionDTO> listRegions(String name,Integer pageNumber, Integer pageSize){
         log.debug("RegionService::regionCountries");
-        return new ArrayList<>(regionMap.values());
+        return new PageImpl<>(new ArrayList<>(regionMap.values()));
     }
     
     @Override

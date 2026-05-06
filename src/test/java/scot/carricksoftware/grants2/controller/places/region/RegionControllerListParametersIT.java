@@ -37,8 +37,7 @@ class RegionControllerListParametersIT {
       mockMvc.perform(get(RegionController.REGION_PATH)
                       .queryParam("name", "Region 1"))
               .andExpect(status().isOk())
-              .andExpect(jsonPath("$.size()", is(1)));
+              .andExpect(jsonPath("$.content.size()", is(1)));
   }
-
 
 }
