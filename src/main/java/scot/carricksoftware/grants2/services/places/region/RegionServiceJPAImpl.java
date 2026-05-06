@@ -16,6 +16,7 @@ import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.mappers.places.RegionMapper;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 import scot.carricksoftware.grants2.repositories.places.RegionRepository;
+import scot.carricksoftware.grants2.services.places.country.BuildPageRequest;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -27,16 +28,15 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequiredArgsConstructor
 public class RegionServiceJPAImpl implements RegionService {
 
-    private final static int DEFAULT_PAGE = 0;
-    private final static int DEFAULT_PAGE_SIZE = 25;
     private final RegionRepository regionRepository;
     private final RegionMapper regionMapper;
+    private final BuildPageRequest buildPageRequest;
 
     @Override
     public Page<RegionDTO> listRegions(String name, Integer pageNumber, Integer pageSize) {
-        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+        Sort sort = Sort.by(Sort.Order.asc("name"));
+        PageRequest pageRequest = buildPageRequest.buildPageRequest(pageNumber, pageSize,sort);
         Page<Region> regionPage;
-
 
         if (StringUtils.hasText(name)) {
             regionPage = listRegionsByName(name, pageRequest);
@@ -45,29 +45,6 @@ public class RegionServiceJPAImpl implements RegionService {
         }
 
         return regionPage.map(regionMapper::regionToRegionDto);
-    }
-
-    private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
-        int queryPageNumber;
-        int queryPageSize;
-
-        if (pageNumber != null && pageNumber > 0) {
-            queryPageNumber = pageNumber - 1;
-        } else {
-            queryPageNumber = DEFAULT_PAGE;
-        }
-
-        if (pageSize == null) {
-            queryPageSize = DEFAULT_PAGE_SIZE;
-        } else {
-            if (pageSize > 1000) {
-                queryPageSize = DEFAULT_PAGE_SIZE;
-            } else {
-                queryPageSize = pageSize;
-            }
-        }
-        Sort sort = Sort.by(Sort.Order.asc("name"));
-        return PageRequest.of(queryPageNumber, queryPageSize, sort);
     }
 
     private Page<Region> listRegionsByName(String name, Pageable pageable) {

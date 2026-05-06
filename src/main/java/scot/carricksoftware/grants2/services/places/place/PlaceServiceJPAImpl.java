@@ -16,6 +16,7 @@ import scot.carricksoftware.grants2.entities.places.Place;
 import scot.carricksoftware.grants2.mappers.places.PlaceMapper;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.repositories.places.PlaceRepository;
+import scot.carricksoftware.grants2.services.places.country.BuildPageRequest;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -27,17 +28,16 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequiredArgsConstructor
 public class PlaceServiceJPAImpl implements PlaceService {
 
-    private final static int DEFAULT_PAGE = 0;
-    private final static int DEFAULT_PAGE_SIZE = 25;
+    private final BuildPageRequest buildPageRequest;
     private final PlaceRepository placeRepository;
     private final PlaceMapper placeMapper;
 
     @Override
     public Page<PlaceDTO> listPlaces(String name, Integer pageNumber, Integer pageSize) {
 
-        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+        Sort sort = Sort.by(Sort.Order.asc("name"));
+        PageRequest pageRequest = buildPageRequest.buildPageRequest(pageNumber, pageSize, sort);
         Page<Place> placePage;
-
 
         if (StringUtils.hasText(name)) {
             placePage = listPlacesByName(name, pageRequest);
@@ -46,30 +46,6 @@ public class PlaceServiceJPAImpl implements PlaceService {
         }
 
         return placePage.map(placeMapper::placeToPlaceDto);
-    }
-
-    private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
-        int queryPageNumber;
-        int queryPageSize;
-
-        if (pageNumber != null && pageNumber > 0) {
-            queryPageNumber = pageNumber - 1;
-        } else {
-            queryPageNumber = DEFAULT_PAGE;
-        }
-
-        if (pageSize == null) {
-            queryPageSize = DEFAULT_PAGE_SIZE;
-        } else {
-            if (pageSize > 1000) {
-                queryPageSize = DEFAULT_PAGE_SIZE;
-            } else {
-                queryPageSize = pageSize;
-            }
-        }
-
-        Sort sort = Sort.by(Sort.Order.asc("name"));
-        return PageRequest.of(queryPageNumber, queryPageSize, sort);
     }
 
     private Page<Place> listPlacesByName(String name, Pageable pageable) {

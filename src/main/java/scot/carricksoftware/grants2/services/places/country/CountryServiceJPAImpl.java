@@ -28,15 +28,15 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequiredArgsConstructor
 public class CountryServiceJPAImpl implements CountryService {
 
-    private final static int DEFAULT_PAGE = 0;
-    private final static int DEFAULT_PAGE_SIZE = 25;
     private final CountryRepository countryRepository;
     private final CountryMapper countryMapper;
+    private final BuildPageRequest buildPageRequest;
 
     @Override
     public Page<CountryDTO> listCountries(String name, Integer pageNumber, Integer pageSize) {
 
-        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+        Sort sort = Sort.by(Sort.Order.asc("name"));
+        PageRequest pageRequest = buildPageRequest.buildPageRequest(pageNumber, pageSize, sort);
         Page<Country> countryPage;
 
         if (StringUtils.hasText(name)) {
@@ -46,31 +46,6 @@ public class CountryServiceJPAImpl implements CountryService {
         }
 
         return countryPage.map(countryMapper::countryToCountryDto);
-
-    }
-
-    private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
-        int queryPageNumber;
-        int queryPageSize;
-
-        if (pageNumber != null && pageNumber > 0) {
-            queryPageNumber = pageNumber - 1;
-        } else {
-            queryPageNumber = DEFAULT_PAGE;
-        }
-
-        if (pageSize == null) {
-            queryPageSize = DEFAULT_PAGE_SIZE;
-        } else {
-            if (pageSize > 1000) {
-                queryPageSize = DEFAULT_PAGE_SIZE;
-            } else {
-                queryPageSize = pageSize;
-            }
-        }
-
-        Sort sort = Sort.by(Sort.Order.asc("name"));
-        return PageRequest.of(queryPageNumber, queryPageSize, sort);
     }
 
     private Page<Country> listCountriesByName(String name, Pageable pageable) {
