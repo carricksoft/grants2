@@ -61,7 +61,8 @@ class PlaceControllerValidationTest {
     @BeforeEach
     void setUp() {
         placeService = new PlaceServiceImpl();
-        testPlaceDTO = placeService.listPlaces(null).getFirst();
+        testPlaceDTO = placeService.listPlaces(null,1,25)
+                .getContent().getFirst();
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
         placeArgumentCaptor = ArgumentCaptor.forClass(PlaceDTO.class);
 
@@ -74,7 +75,8 @@ class PlaceControllerValidationTest {
                 .build();
 
         given(placeServiceMock.saveNewPlace(any(PlaceDTO.class)))
-                .willReturn(placeService.listPlaces(null).get(1));
+                .willReturn(placeService.listPlaces(null,1,25)
+                        .getContent().get(1));
 
         mockMvc.perform(post(PLACE_PATH)
                 .accept(MediaType.APPLICATION_JSON)

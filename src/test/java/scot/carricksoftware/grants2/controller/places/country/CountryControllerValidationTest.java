@@ -61,7 +61,8 @@ class CountryControllerValidationTest {
     @BeforeEach
     void setUp() {
         countryService = new CountryServiceImpl();
-        testCountryDTO = countryService.listCountries(null, 1, 25).getContent().getFirst();
+        testCountryDTO = countryService.listCountries(null, 1, 25)
+                .getContent().getFirst();
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
         countryArgumentCaptor = ArgumentCaptor.forClass(CountryDTO.class);
 
@@ -74,7 +75,8 @@ class CountryControllerValidationTest {
                 .build();
 
         given(countryServiceMock.saveNewCountry(any(CountryDTO.class)))
-                .willReturn(countryService.listCountries(null, 1, 25).getContent().get(1));
+                .willReturn(countryService.listCountries(null, 1, 25)
+                        .getContent().get(1));
 
         mockMvc.perform(post(COUNTRY_PATH)
                 .accept(MediaType.APPLICATION_JSON)

@@ -4,9 +4,9 @@
 
 package scot.carricksoftware.grants2.services.places.place;
 
+import org.springframework.data.domain.Page;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface PlaceService {
 
     @SuppressWarnings("unused")
-    List<PlaceDTO> listPlaces(String place);
+    Page<PlaceDTO> listPlaces(String place, Integer pageNumber, Integer pageSize);
 
     @SuppressWarnings("unused")
     Optional<PlaceDTO> getPlaceById(UUID id);

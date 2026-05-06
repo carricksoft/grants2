@@ -69,7 +69,7 @@ class PlaceControllerTest {
     @BeforeEach
     void setUp() {
         placeService = new PlaceServiceImpl();
-        testPlaceDTO = placeService.listPlaces(null).getFirst();
+        testPlaceDTO = placeService.listPlaces(null,1,25).getContent().getFirst();
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
     }
 
@@ -87,13 +87,16 @@ class PlaceControllerTest {
 
     @Test
     void listPeopleTest() throws Exception {
-        given(placeServiceMock.listPlaces(null)).willReturn(placeService.listPlaces(null));
+        given(placeServiceMock.listPlaces(any(),any(),any()))
+                .willReturn(placeService.listPlaces(null,1,25));
 
         mockMvc.perform(get(PLACE_PATH)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.length()", is(placeService.listPlaces(null).size())));
+                .andExpect(jsonPath("$.content.length()",
+                        is(placeService.listPlaces(null,1,25)
+                                .getContent().size())));
     }
 
     @Test
@@ -109,7 +112,9 @@ class PlaceControllerTest {
     void postNewPlaceTest() throws Exception {
         testPlaceDTO.setId(null);
         testPlaceDTO.setVersion(null);
-        given(placeServiceMock.saveNewPlace(any(PlaceDTO.class))).willReturn(placeService.listPlaces(null).get(1));
+        given(placeServiceMock.saveNewPlace(any(PlaceDTO.class)))
+                .willReturn(placeService.listPlaces(null,1,25)
+                        .getContent().get(1));
 
         mockMvc.perform(post(PLACE_PATH)
                         .accept(MediaType.APPLICATION_JSON)
@@ -123,7 +128,8 @@ class PlaceControllerTest {
     void createNewPlaceValidationTest() throws Exception {
         PlaceDTO placeDTO = PlaceDTO.builder().build();
         given(placeServiceMock.saveNewPlace(any(PlaceDTO.class)))
-                .willReturn(placeService.listPlaces(null).get(1));
+                .willReturn(placeService.listPlaces(null,1,25)
+                        .getContent().get(1));
 
         MvcResult mvcResult = mockMvc.perform(post(PlaceController.PLACE_PATH)
                         .accept(MediaType.APPLICATION_JSON)
@@ -139,7 +145,8 @@ class PlaceControllerTest {
 
     @Test
     void updatePlaceTest() throws Exception {
-        PlaceDTO placeDTO = placeService.listPlaces(null).getFirst();
+        PlaceDTO placeDTO = placeService.listPlaces(null,1,25)
+                .getContent().getFirst();
         given(placeServiceMock.updatePlaceById(any(), any())).willReturn(Optional.of(placeDTO));
         mockMvc.perform(put(PLACE_PATH_ID, testPlaceDTO.getId())
                         .accept(MediaType.APPLICATION_JSON)

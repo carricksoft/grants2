@@ -9,11 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
 import scot.carricksoftware.grants2.bootstrap.BootstrapPlaces;
 import scot.carricksoftware.grants2.entities.places.Place;
 import scot.carricksoftware.grants2.repositories.places.PlaceRepository;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -61,8 +60,8 @@ class PlaceRepositoryTest {
 
     @Test
     void getPlaceByNameTest() {
-        List<Place> list = placeRepository.findAllByNameIsLikeIgnoreCase("%place 1%");
-        assertThat(list.size()).isEqualTo(1);
+        Page<Place> list = placeRepository.findAllByNameIsLikeIgnoreCase("%place 1%",null);
+        assertThat(list.getContent().size()).isEqualTo(1);
     }
 
 

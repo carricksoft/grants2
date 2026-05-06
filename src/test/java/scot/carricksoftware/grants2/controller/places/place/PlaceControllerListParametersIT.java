@@ -37,7 +37,7 @@ class PlaceControllerListParametersIT {
       mockMvc.perform(get(PlaceController.PLACE_PATH)
                       .queryParam("name", "Place 1"))
               .andExpect(status().isOk())
-              .andExpect(jsonPath("$.size()", is(1)));
+              .andExpect(jsonPath("$.content.size()", is(1)));
   }
 
 

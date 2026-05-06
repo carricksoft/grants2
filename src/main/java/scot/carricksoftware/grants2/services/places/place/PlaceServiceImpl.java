@@ -5,13 +5,14 @@
 package scot.carricksoftware.grants2.services.places.place;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -56,9 +57,9 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public List<PlaceDTO> listPlaces(String place){
+    public Page<PlaceDTO> listPlaces(String place,Integer pageNumber, Integer pageSize){
         log.debug("PlaceService::placePeople");
-        return new ArrayList<>(placeMap.values());
+        return new PageImpl<>(new ArrayList<>(placeMap.values()));
     }
     
     @Override

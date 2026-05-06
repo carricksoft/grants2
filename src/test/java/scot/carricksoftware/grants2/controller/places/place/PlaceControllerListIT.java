@@ -7,13 +7,12 @@ package scot.carricksoftware.grants2.controller.places.place;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import scot.carricksoftware.grants2.controller.places.PlaceController;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.repositories.places.PlaceRepository;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -29,8 +28,8 @@ class PlaceControllerListIT {
 
     @Test
     void listPlacesTest() {
-        List<PlaceDTO> dtoList = placeController.listPlaces(null);
-        assertThat(dtoList.size()).isEqualTo(3);
+        Page<PlaceDTO> dtoList = placeController.listPlaces(null,1,25);
+        assertThat(dtoList.getContent().size()).isEqualTo(3);
     }
 
     @Test
@@ -38,8 +37,8 @@ class PlaceControllerListIT {
     @Rollback
     void emptyListTest() {
         placeRepository.deleteAll();
-        List<PlaceDTO> dtoList = placeController.listPlaces(null);
-        assertThat(dtoList.size()).isEqualTo(0);
+        Page<PlaceDTO> dtoList = placeController.listPlaces(null,1,25);
+        assertThat(dtoList.getContent().size()).isEqualTo(0);
     }
 
 

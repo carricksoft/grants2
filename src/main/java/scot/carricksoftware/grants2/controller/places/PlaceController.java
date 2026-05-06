@@ -6,6 +6,7 @@ package scot.carricksoftware.grants2.controller.places;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,6 @@ import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.services.places.place.PlaceService;
 
-import java.util.List;
 import java.util.UUID;
 
 
@@ -37,9 +37,11 @@ public class PlaceController {
     public static final String PLACE_PATH_ID = PLACE_PATH + "/{id}";
 
     @GetMapping(PLACE_PATH)
-    public List<PlaceDTO> listPlaces(@RequestParam(required = false) String name){
+    public Page<PlaceDTO> listPlaces(@RequestParam(required = false) String name,
+                                     Integer pageNumber,
+                                     Integer pageSize){
         log.debug("PlaceController::listPlaces");
-        return placeService.listPlaces(name);
+        return placeService.listPlaces(name, pageNumber, pageSize);
     }
 
     @SuppressWarnings("rawtypes")

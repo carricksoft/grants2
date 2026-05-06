@@ -6,6 +6,10 @@ package scot.carricksoftware.grants2.services.places.place;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import scot.carricksoftware.grants2.entities.places.Place;
@@ -14,38 +18,62 @@ import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.repositories.places.PlaceRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 @Service
 @Primary
 @RequiredArgsConstructor
 public class PlaceServiceJPAImpl implements PlaceService {
 
+    private final static int DEFAULT_PAGE = 0;
+    private final static int DEFAULT_PAGE_SIZE = 25;
     private final PlaceRepository placeRepository;
     private final PlaceMapper placeMapper;
 
     @Override
-    public List<PlaceDTO> listPlaces(String name) {
-        List<Place> placeList;
+    public Page<PlaceDTO> listPlaces(String name, Integer pageNumber, Integer pageSize) {
+
+        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+        Page<Place> placePage;
+
 
         if (StringUtils.hasText(name)) {
-            placeList = listPlacesByName(name);
+            placePage = listPlacesByName(name, pageRequest);
         } else {
-            placeList = placeRepository.findAll();
+            placePage = placeRepository.findAll(pageRequest);
         }
 
-        return placeList
-                .stream()
-                .map(placeMapper::placeToPlaceDto)
-                .collect(Collectors.toList());
+        return placePage.map(placeMapper::placeToPlaceDto);
     }
 
-    private List<Place> listPlacesByName(String name) {
-        return placeRepository.findAllByNameIsLikeIgnoreCase("%" + name+ "%");
+    private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
+        int queryPageNumber;
+        int queryPageSize;
+
+        if (pageNumber != null && pageNumber > 0) {
+            queryPageNumber = pageNumber - 1;
+        } else {
+            queryPageNumber = DEFAULT_PAGE;
+        }
+
+        if (pageSize == null) {
+            queryPageSize = DEFAULT_PAGE_SIZE;
+        } else {
+            if (pageSize > 1000) {
+                queryPageSize = DEFAULT_PAGE_SIZE;
+            } else {
+                queryPageSize = pageSize;
+            }
+        }
+
+        Sort sort = Sort.by(Sort.Order.asc("name"));
+        return PageRequest.of(queryPageNumber, queryPageSize, sort);
+    }
+
+    private Page<Place> listPlacesByName(String name, Pageable pageable) {
+        return placeRepository.findAllByNameIsLikeIgnoreCase("%" + name+ "%",pageable);
     }
 
     @Override
