@@ -37,7 +37,7 @@ class CountryControllerListParametersIT {
       mockMvc.perform(get(CountryController.COUNTRY_PATH)
                       .queryParam("name", "Country 1"))
               .andExpect(status().isOk())
-              .andExpect(jsonPath("$.size()", is(1)));
+              .andExpect(jsonPath("$.content.size()", is(1)));
   }
 
     @Test
@@ -47,7 +47,7 @@ class CountryControllerListParametersIT {
                         .queryParam("pageNumber", "2")
                         .queryParam("pageSize", "5"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", is(5)));
+                .andExpect(jsonPath("$.content.size()", is(5)));
     }
 
 

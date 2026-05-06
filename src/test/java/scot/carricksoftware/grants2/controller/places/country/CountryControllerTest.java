@@ -20,8 +20,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import scot.carricksoftware.grants2.controller.places.CountryController;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
-import scot.carricksoftware.grants2.services.places.CountryService;
-import scot.carricksoftware.grants2.services.places.CountryServiceImpl;
+import scot.carricksoftware.grants2.services.places.country.CountryService;
+import scot.carricksoftware.grants2.services.places.country.CountryServiceImpl;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.Optional;
@@ -87,13 +87,16 @@ class CountryControllerTest {
 
     @Test
     void listCountriesTest() throws Exception {
-        given(countryServiceMock.listCountries(any(), any(), any())).willReturn(countryService.listCountries(null, 1, 25));
+        given(countryServiceMock.listCountries(any(), any(), any()))
+                .willReturn(countryService.listCountries(null, 1, 25));
 
         mockMvc.perform(get(COUNTRY_PATH)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.length()", is(countryService.listCountries(null, 1, 25).getContent().size())));
+                .andExpect(jsonPath("$.content.length()",
+                        is(countryService.listCountries(null, 1, 25)
+                                .getContent().size())));
     }
 
     @Test

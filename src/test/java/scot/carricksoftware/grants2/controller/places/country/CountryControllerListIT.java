@@ -7,13 +7,12 @@ package scot.carricksoftware.grants2.controller.places.country;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import scot.carricksoftware.grants2.controller.places.CountryController;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
 import scot.carricksoftware.grants2.repositories.places.CountryRepository;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -29,8 +28,8 @@ class CountryControllerListIT {
 
     @Test
     void listCountryTest() {
-        List<CountryDTO> dtoList = countryController.listCountries(null, 1, 25);
-        assertThat(dtoList.size()).isEqualTo(25);
+        Page<CountryDTO> dtoList = countryController.listCountries(null, 1, 25);
+        assertThat(dtoList.getContent().size()).isEqualTo(25);
     }
 
     @Test
@@ -38,8 +37,8 @@ class CountryControllerListIT {
     @Rollback
     void emptyListTest() {
         countryRepository.deleteAll();
-        List<CountryDTO> dtoList = countryController.listCountries(null, 1, 25);
-        assertThat(dtoList.size()).isEqualTo(0);
+        Page<CountryDTO> dtoList = countryController.listCountries(null, 1, 25);
+        assertThat(dtoList.getContent().size()).isEqualTo(0);
     }
 
 

@@ -6,6 +6,7 @@ package scot.carricksoftware.grants2.controller.places;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
-import scot.carricksoftware.grants2.services.places.CountryService;
+import scot.carricksoftware.grants2.services.places.country.CountryService;
 
-import java.util.List;
 import java.util.UUID;
 
 
@@ -37,11 +37,11 @@ public class CountryController {
     public static final String COUNTRY_PATH_ID = COUNTRY_PATH + "/{id}";
 
     @GetMapping(COUNTRY_PATH)
-    public List<CountryDTO> listCountries(@RequestParam(required = false) String name,
+    public Page<CountryDTO> listCountries(@RequestParam(required = false) String name,
                                           Integer pageNumber,
                                           Integer pageSize){
         log.debug("CountryCountroller::listCountries");
-        return countryService.listCountries(name, pageNumber, pageSize).getContent();
+        return countryService.listCountries(name, pageNumber, pageSize);
     }
 
     @SuppressWarnings("rawtypes")
