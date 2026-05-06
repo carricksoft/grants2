@@ -6,6 +6,7 @@ package scot.carricksoftware.grants2.entities.places;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,6 +16,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import scot.carricksoftware.grants2.entities.BaseEntity;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,5 +32,8 @@ public class Country extends BaseEntity {
     @Size(max=FIELD_SIZE)
     @Column(length=128)
     private String name;
+
+    @OneToMany(mappedBy="country")
+    private Set<Region> regions;
 
 }
