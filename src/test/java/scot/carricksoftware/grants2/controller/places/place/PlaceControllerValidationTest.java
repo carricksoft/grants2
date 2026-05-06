@@ -18,8 +18,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import scot.carricksoftware.grants2.controller.places.PlaceController;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
-import scot.carricksoftware.grants2.services.places.PlaceService;
-import scot.carricksoftware.grants2.services.places.PlaceServiceImpl;
+import scot.carricksoftware.grants2.services.places.place.PlaceService;
+import scot.carricksoftware.grants2.services.places.place.PlaceServiceImpl;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.UUID;

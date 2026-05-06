@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
-import scot.carricksoftware.grants2.services.places.PlaceService;
+import scot.carricksoftware.grants2.services.places.place.PlaceService;
 
 import java.util.List;
 import java.util.UUID;

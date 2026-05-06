@@ -18,8 +18,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import scot.carricksoftware.grants2.controller.places.RegionController;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
-import scot.carricksoftware.grants2.services.places.RegionService;
-import scot.carricksoftware.grants2.services.places.RegionServiceImpl;
+import scot.carricksoftware.grants2.services.places.region.RegionService;
+import scot.carricksoftware.grants2.services.places.region.RegionServiceImpl;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.UUID;

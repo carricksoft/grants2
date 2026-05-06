@@ -20,8 +20,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import scot.carricksoftware.grants2.controller.places.RegionController;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
-import scot.carricksoftware.grants2.services.places.RegionService;
-import scot.carricksoftware.grants2.services.places.RegionServiceImpl;
+import scot.carricksoftware.grants2.services.places.region.RegionService;
+import scot.carricksoftware.grants2.services.places.region.RegionServiceImpl;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.Optional;

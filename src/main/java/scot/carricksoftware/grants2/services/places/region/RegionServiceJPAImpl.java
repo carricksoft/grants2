@@ -2,7 +2,7 @@
  * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
  */
 
-package scot.carricksoftware.grants2.services.places;
+package scot.carricksoftware.grants2.services.places.region;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;

@@ -2,7 +2,7 @@
  * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
  */
 
-package scot.carricksoftware.grants2.services.places;
+package scot.carricksoftware.grants2.services.places.place;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
