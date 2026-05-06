@@ -14,7 +14,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
@@ -41,9 +43,12 @@ public class BaseEntity {
     @Version
     private Integer version;
 
+    @CreationTimestamp
+    @Column(updatable = false)
     @JdbcTypeCode(SqlTypes.TIMESTAMP)
     private LocalDateTime createdDate;
 
+    @UpdateTimestamp
     @JdbcTypeCode(SqlTypes.TIMESTAMP)
     private LocalDateTime updatedDate;
 }

@@ -17,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
 import scot.carricksoftware.grants2.controller.places.PlaceController;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.services.places.place.PlaceService;
@@ -136,7 +135,7 @@ class PlaceControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(placeDTO)))
                 .andExpect(status().isBadRequest())
-                        .andExpect((ResultMatcher) jsonPath("$.length()", is(2)))
+                        .andExpect(jsonPath("$.length()", is(2)))
                                 .andReturn();
 
         System.out.println(mvcResult.getResponse().getContentAsString());

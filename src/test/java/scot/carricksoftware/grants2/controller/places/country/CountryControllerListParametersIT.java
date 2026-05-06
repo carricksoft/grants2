@@ -40,6 +40,7 @@ class CountryControllerListParametersIT {
               .andExpect(jsonPath("$.content.size()", is(1)));
   }
 
+    @SuppressWarnings("RedundantThrows")
     @Test
     void listPage2Test() throws Exception {
         mockMvc.perform(get(CountryController.COUNTRY_PATH)
