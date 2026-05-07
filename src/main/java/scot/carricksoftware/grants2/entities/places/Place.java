@@ -6,6 +6,7 @@ package scot.carricksoftware.grants2.entities.places;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -29,5 +30,8 @@ public class Place extends BaseEntity {
     @Size(max=FIELD_SIZE)
     @Column(length=128)
     private String name;
+
+    @ManyToOne
+    private Region region;
 
 }
