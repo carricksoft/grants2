@@ -15,6 +15,8 @@ import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 import scot.carricksoftware.grants2.repositories.places.RegionRepository;
 
+import java.util.UUID;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
@@ -56,33 +58,26 @@ class CountryRegionRepositoryTest {
     @Transactional
     @Rollback
     void CascadeChildDeleteTest() {
+        UUID uuid = testRegion.getId();
         System.out.println("country repository size = " + countryRepository.count());
         System.out.println("region repository size = " + regionRepository.count());
         System.out.println("========================================================");
         testRegion.setCountry(testCountry);
         regionRepository.flush();
         countryRepository.flush();
-        System.out.println("test region country = " + testRegion.getCountry().getName());
-        System.out.println("test country regions = " + testCountry.getRegions().toArray().length);
+        System.out.println("test-region country = " + testRegion.getCountry().getName());
+        System.out.println("test-country regions = " + testCountry.getRegions().toArray().length);
+        System.out.println("Region 1 Exists " + regionRepository.existsRegionById(uuid));
         System.out.println("========================================================");
         regionRepository.delete(testRegion);
         regionRepository.flush();
         countryRepository.flush();
+        System.out.println("Region 1 Exists " + regionRepository.existsRegionById(uuid));
         System.out.println("country repository size = " + countryRepository.count());
         System.out.println("region repository size = " + regionRepository.count());
-
-//        regionRepository.flush();
-//        System.out.println("country repository size = " + countryRepository.count());
-//        System.out.println("region repository size = " + regionRepository.count());
-//        System.out.println("test region country = " + testRegion.getCountry().getName());
-////        System.out.println("test country regions = " + testCountry.getRegions().toArray().length);
-
-//        System.out.println(testRegion.getCountry().getName());
-//        System.out.println("new country repository size = " + countryRepository.count());
-//        System.out.println(" new region repository size = " + regionRepository.count());
-
+        System.out.println("test-region country = " + testRegion.getCountry().getName());
+        System.out.println("test-country regions = " + testCountry.getRegions().toArray().length);
     }
-
 
 
 }

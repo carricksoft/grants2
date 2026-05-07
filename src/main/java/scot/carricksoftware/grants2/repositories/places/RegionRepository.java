@@ -18,4 +18,6 @@ public interface RegionRepository extends JpaRepository<Region, UUID> {
     @SuppressWarnings("NullableProblems")
     Page<Region> findAll(Pageable pageable);
 
+    boolean existsRegionById(UUID id);
+
 }
