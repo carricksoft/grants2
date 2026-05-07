@@ -58,18 +58,24 @@ class CountryRegionRepositoryTest {
     void CascadeChildDeleteTest() {
         System.out.println("country repository size = " + countryRepository.count());
         System.out.println("region repository size = " + regionRepository.count());
+        System.out.println("========================================================");
         testRegion.setCountry(testCountry);
         regionRepository.flush();
         countryRepository.flush();
         System.out.println("test region country = " + testRegion.getCountry().getName());
         System.out.println("test country regions = " + testCountry.getRegions().toArray().length);
-  //      regionRepository.delete(testRegion);
-
+        System.out.println("========================================================");
+        regionRepository.delete(testRegion);
         regionRepository.flush();
+        countryRepository.flush();
         System.out.println("country repository size = " + countryRepository.count());
         System.out.println("region repository size = " + regionRepository.count());
-        System.out.println("test region country = " + testRegion.getCountry().getName());
-        System.out.println("test country regions = " + testCountry.getRegions().toArray().length);
+
+//        regionRepository.flush();
+//        System.out.println("country repository size = " + countryRepository.count());
+//        System.out.println("region repository size = " + regionRepository.count());
+//        System.out.println("test region country = " + testRegion.getCountry().getName());
+////        System.out.println("test country regions = " + testCountry.getRegions().toArray().length);
 
 //        System.out.println(testRegion.getCountry().getName());
 //        System.out.println("new country repository size = " + countryRepository.count());
