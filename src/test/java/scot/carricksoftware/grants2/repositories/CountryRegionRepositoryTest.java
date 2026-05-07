@@ -53,6 +53,42 @@ class CountryRegionRepositoryTest {
         assertThat(testCountry.getRegions().contains(testRegion2)).isTrue();
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    void CascadeChildDeleteTest() {
+        System.out.println("country repository size = " + countryRepository.count());
+        System.out.println("region repository size = " + regionRepository.count());
+        testRegion.setCountry(testCountry);
+        regionRepository.flush();
+        System.out.println("test region country = " + testRegion.getCountry().getName());
+        System.out.println("test country regions = " + testCountry.getRegions().toArray().length);
+        regionRepository.deleteById(testRegion.getId());
+
+        regionRepository.flush();
+        System.out.println("country repository size = " + countryRepository.count());
+        System.out.println("region repository size = " + regionRepository.count());
+        System.out.println("test region country = " + testRegion.getCountry().getName());
+        System.out.println("test country regions = " + testCountry.getRegions().toArray().length);
+
+//        System.out.println(testRegion.getCountry().getName());
+//        System.out.println("new country repository size = " + countryRepository.count());
+//        System.out.println(" new region repository size = " + regionRepository.count());
+
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void deleteTest() {
+        System.out.println("country repository size = " + countryRepository.count());
+        System.out.println("region repository size = " + regionRepository.count());
+        regionRepository.deleteById(testRegion.getId());
+        regionRepository.flush();
+        System.out.println("country repository size = " + countryRepository.count());
+        System.out.println("region repository size = " + regionRepository.count());
+    }
+
 
 
 
