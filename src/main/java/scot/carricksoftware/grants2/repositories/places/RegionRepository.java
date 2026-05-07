@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @SuppressWarnings("unused")
 public interface RegionRepository extends JpaRepository<Region, UUID> {
-    Page<Region> findAllByNameIsLikeIgnoreCase(String region , Pageable pageable);
+    Page<Region> findAllByNameIsLikeIgnoreCase(String region, Pageable pageable);
 
     @SuppressWarnings("NullableProblems")
     Page<Region> findAll(Pageable pageable);

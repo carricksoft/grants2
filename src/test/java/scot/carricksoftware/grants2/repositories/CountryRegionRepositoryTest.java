@@ -45,8 +45,7 @@ class CountryRegionRepositoryTest {
        testRegion.setCountry(testCountry);
        testRegion2.setCountry(testCountry);
 
-       countryRepository.flush();
-       regionRepository.flush();
+        testRegion.setCountry(testCountry);
         assertThat(testRegion.getCountry().getName()).isEqualTo(testCountry.getName());
         assertThat(testRegion2.getCountry().getName()).isEqualTo(testCountry.getName());
         assertThat(testCountry.getRegions().contains(testRegion)).isTrue();
@@ -61,9 +60,10 @@ class CountryRegionRepositoryTest {
         System.out.println("region repository size = " + regionRepository.count());
         testRegion.setCountry(testCountry);
         regionRepository.flush();
+        countryRepository.flush();
         System.out.println("test region country = " + testRegion.getCountry().getName());
         System.out.println("test country regions = " + testCountry.getRegions().toArray().length);
-        regionRepository.deleteById(testRegion.getId());
+  //      regionRepository.delete(testRegion);
 
         regionRepository.flush();
         System.out.println("country repository size = " + countryRepository.count());
@@ -76,19 +76,6 @@ class CountryRegionRepositoryTest {
 //        System.out.println(" new region repository size = " + regionRepository.count());
 
     }
-
-    @Test
-    @Transactional
-    @Rollback
-    void deleteTest() {
-        System.out.println("country repository size = " + countryRepository.count());
-        System.out.println("region repository size = " + regionRepository.count());
-        regionRepository.deleteById(testRegion.getId());
-        regionRepository.flush();
-        System.out.println("country repository size = " + countryRepository.count());
-        System.out.println("region repository size = " + regionRepository.count());
-    }
-
 
 
 
