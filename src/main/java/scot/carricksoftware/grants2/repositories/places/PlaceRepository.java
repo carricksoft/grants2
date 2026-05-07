@@ -16,5 +16,6 @@ public interface PlaceRepository extends JpaRepository<Place, UUID> {
     Page<Place> findAllByNameIsLikeIgnoreCase(String place, Pageable pageable);
     @SuppressWarnings("NullableProblems")
     Page<Place> findAll(Pageable pageable);
+    boolean existsPlaceById(UUID id);
 }
 

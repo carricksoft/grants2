@@ -4,6 +4,7 @@
 
 package scot.carricksoftware.grants2.entities.places;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -37,6 +38,6 @@ public class Region extends BaseEntity {
     @ManyToOne
     private Country country;
 
-    @OneToMany(mappedBy="region")
+    @OneToMany(mappedBy="region", cascade= CascadeType.ALL)
     private Set<Place> places;
 }

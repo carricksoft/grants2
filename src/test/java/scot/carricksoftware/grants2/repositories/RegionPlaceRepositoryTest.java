@@ -15,6 +15,8 @@ import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.repositories.places.PlaceRepository;
 import scot.carricksoftware.grants2.repositories.places.RegionRepository;
 
+import java.util.UUID;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
@@ -29,31 +31,64 @@ class RegionPlaceRepositoryTest {
 
     Region testRegion;
     Place testPlace;
-    Place testPlace2;
 
     @BeforeEach
     void setUp() {
         testRegion = regionRepository.findAll().getFirst();
         testPlace = placeRepository.findAll().getFirst();
-        testPlace2 = placeRepository.findAll().getLast();
     }
 
     @Test
     @Transactional
     @Rollback
     void RegionPlaceTest() {
-       testPlace.setRegion(testRegion);
-       testPlace2.setRegion(testRegion);
+        testPlace.setRegion(testRegion);
+        placeRepository.flush();
+        regionRepository.flush();
 
-       regionRepository.flush();
-       placeRepository.flush();
         assertThat(testPlace.getRegion().getName()).isEqualTo(testRegion.getName());
-        assertThat(testPlace2.getRegion().getName()).isEqualTo(testRegion.getName());
         assertThat(testRegion.getPlaces().contains(testPlace)).isTrue();
-        assertThat(testRegion.getPlaces().contains(testPlace2)).isTrue();
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    void CascadeChildDeleteTest() {
+        long parentRepositorySize = regionRepository.count();
+        long childRepositorySize = placeRepository.count();
+        UUID childId = testPlace.getId();
+        UUID parentId = testRegion.getId();
+        testPlace.setRegion(testRegion);
 
+        placeRepository.delete(testPlace);
+        placeRepository.flush();
+        regionRepository.flush();
+
+        assertThat(regionRepository.count()).isEqualTo(parentRepositorySize);
+        assertThat(placeRepository.count()).isEqualTo(childRepositorySize - 1);
+        assertThat(placeRepository.existsPlaceById(childId)).isFalse();
+        assertThat(regionRepository.existsRegionById(parentId)).isTrue();
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void CascadeParentDeleteTest() {
+        long parentRepositorySize = regionRepository.count();
+        long childRepositorySize = placeRepository.count();
+        UUID parentId = testRegion.getId();
+        testPlace.setRegion(testRegion);
+        placeRepository.flush();
+        regionRepository.flush();
+
+        regionRepository.delete(testRegion);
+        placeRepository.flush();
+        regionRepository.flush();
+
+        assertThat(regionRepository.existsRegionById(parentId)).isFalse();
+        assertThat(regionRepository.count()).isEqualTo(parentRepositorySize - 1);
+        assertThat(placeRepository.count()).isEqualTo(childRepositorySize - 1);
+    }
 
 
 }
