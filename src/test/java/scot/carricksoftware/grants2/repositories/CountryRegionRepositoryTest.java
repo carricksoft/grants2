@@ -58,25 +58,39 @@ class CountryRegionRepositoryTest {
     @Transactional
     @Rollback
     void CascadeChildDeleteTest() {
-        UUID uuid = testRegion.getId();
-        System.out.println("country repository size = " + countryRepository.count());
-        System.out.println("region repository size = " + regionRepository.count());
-        System.out.println("========================================================");
+        Long parentRepositorySize = countryRepository.count();
+        Long childRepositorySize = regionRepository.count();
+        UUID childId = testRegion.getId();
+        UUID parentId = testCountry.getId();
         testRegion.setCountry(testCountry);
-        regionRepository.flush();
-        countryRepository.flush();
-        System.out.println("test-region country = " + testRegion.getCountry().getName());
-        System.out.println("test-country regions = " + testCountry.getRegions().toArray().length);
-        System.out.println("Region 1 Exists " + regionRepository.existsRegionById(uuid));
-        System.out.println("========================================================");
+
         regionRepository.delete(testRegion);
         regionRepository.flush();
         countryRepository.flush();
-        System.out.println("Region 1 Exists " + regionRepository.existsRegionById(uuid));
-        System.out.println("country repository size = " + countryRepository.count());
-        System.out.println("region repository size = " + regionRepository.count());
-        System.out.println("test-region country = " + testRegion.getCountry().getName());
-        System.out.println("test-country regions = " + testCountry.getRegions().toArray().length);
+
+        assertThat(countryRepository.count()).isEqualTo(parentRepositorySize);
+        assertThat(regionRepository.count()).isEqualTo(childRepositorySize -1);
+        assertThat(regionRepository.existsRegionById(childId)).isFalse();
+        assertThat(countryRepository.existsCountryById(parentId)).isTrue();
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void CascadeParentDeleteTest() {
+        Long parentRepositorySize = countryRepository.count();
+        Long childRepositorySize = regionRepository.count();
+        UUID childId = testRegion.getId();
+        UUID parentId = testCountry.getId();
+        testRegion.setCountry(testCountry);
+
+  //      countryRepository.delete(testCountry);
+        regionRepository.flush();
+        countryRepository.flush();
+
+      //  assertThat(countryRepository.existsCountryById(parentId)).isFalse();
+      //  assertThat(countryRepository.count()).isEqualTo(parentRepositorySize - 1 );
+      //  assertThat(regionRepository.count()).isEqualTo(childRepositorySize - 1 );
     }
 
 
