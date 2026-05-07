@@ -29,11 +29,13 @@ class CountryRegionRepositoryTest {
 
     Country testCountry;
     Region testRegion;
+    Region testRegion2;
 
     @BeforeEach
     void setUp() {
         testCountry = countryRepository.findAll().getFirst();
         testRegion = regionRepository.findAll().getFirst();
+        testRegion2 = regionRepository.findAll().getLast();
     }
 
     @Test
@@ -41,11 +43,14 @@ class CountryRegionRepositoryTest {
     @Rollback
     void CountryRegionTest() {
        testRegion.setCountry(testCountry);
+       testRegion2.setCountry(testCountry);
 
        countryRepository.flush();
        regionRepository.flush();
-       assertThat(testRegion.getCountry().getName()).isEqualTo(testCountry.getName());
-       assertThat(testCountry.getRegions().contains(testRegion)).isTrue();
+        assertThat(testRegion.getCountry().getName()).isEqualTo(testCountry.getName());
+        assertThat(testRegion2.getCountry().getName()).isEqualTo(testCountry.getName());
+        assertThat(testCountry.getRegions().contains(testRegion)).isTrue();
+        assertThat(testCountry.getRegions().contains(testRegion2)).isTrue();
     }
 
 

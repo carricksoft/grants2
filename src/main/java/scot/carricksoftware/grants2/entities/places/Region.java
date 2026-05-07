@@ -34,4 +34,5 @@ public class Region extends BaseEntity {
     @ManyToOne
     private Country country;
 
+
 }
