@@ -14,7 +14,7 @@
     <name>spring-7-rest-mvc</name>
     <description>Spring 7 Rest MVC</description>
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
     </properties>
     <dependencies>
