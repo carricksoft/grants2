@@ -27,6 +27,7 @@ class RegionControllerListIT {
 
 
     @Test
+    @Transactional
     void listPeopleTest() {
         Page<RegionDTO> dtoList = regionController.listRegions(null,1,25);
         assertThat(dtoList.getContent().size()).isEqualTo(3);

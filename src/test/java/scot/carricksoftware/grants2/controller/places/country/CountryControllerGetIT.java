@@ -7,6 +7,8 @@ package scot.carricksoftware.grants2.controller.places.country;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 import scot.carricksoftware.grants2.controller.places.CountryController;
 import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
@@ -29,8 +31,9 @@ class CountryControllerGetIT {
 
 
     @Test
+    @Transactional
     void getCountryByIdTest() {
-        Country country = countryRepository.findAll().getFirst();
+        Country country = countryRepository.findAll().get(0);
         CountryDTO dto = countryController.getCountryById(country.getId());
 
         assertThat(dto).isNotNull();

@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.model.BaseEntityDTO;
 
 
@@ -26,6 +27,8 @@ public class PlaceDTO extends BaseEntityDTO {
     @NotNull
     @JsonProperty("name")
     private String name;
+
+    private Region region;
 
 
 }

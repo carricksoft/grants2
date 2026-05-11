@@ -12,7 +12,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.model.BaseEntityDTO;
+
+import java.util.Set;
 
 
 @SuperBuilder
@@ -26,6 +29,8 @@ public class CountryDTO extends BaseEntityDTO {
     @NotNull
     @JsonProperty("name")
     private String name;
+
+    private Set<Region> regions;
 
 
 }

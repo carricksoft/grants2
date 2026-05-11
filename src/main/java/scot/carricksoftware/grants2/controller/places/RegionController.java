@@ -65,7 +65,7 @@ public class RegionController {
     @SuppressWarnings("rawtypes")
     @DeleteMapping(REGION_PATH_ID)
     public ResponseEntity deleteById(@PathVariable UUID id){
-        log.debug("RegionOntroller::deleteById");
+        log.debug("RegionController::deleteById");
         if (!regionService.deleteRegionById(id)) {
             throw new NotFoundException();
         }

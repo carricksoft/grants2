@@ -36,7 +36,7 @@ class RegionControllerDeleteIT {
     @Transactional
     @Rollback
     void deleteRegionByIDTest() {
-        Region region = regionRepository.findAll().getFirst();
+        Region region = regionRepository.findAll().get(0);
         @SuppressWarnings("rawtypes") ResponseEntity responseEntity = regionController.deleteById(region.getId());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
         assertThat(regionRepository.findById(region.getId())).isEmpty();

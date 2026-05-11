@@ -68,7 +68,8 @@ class RegionControllerTest {
     @BeforeEach
     void setUp() {
         regionService = new RegionServiceImpl();
-        testRegionDTO = regionService.listRegions(null,1,25).getContent().getFirst();
+        testRegionDTO = regionService.listRegions(null,1,25)
+                        .getContent().get(0);
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
     }
 
@@ -144,7 +145,7 @@ class RegionControllerTest {
     @Test
     void updateRegionTest() throws Exception {
         RegionDTO regionDTO = regionService.listRegions(null,1,25)
-                .getContent().getFirst();
+                .getContent().get(0);
         given(regionServiceMock.updateRegionById(any(), any())).willReturn(Optional.of(regionDTO));
         mockMvc.perform(put(REGION_PATH_ID, testRegionDTO.getId())
                         .accept(MediaType.APPLICATION_JSON)

@@ -40,7 +40,7 @@ class RegionControllerUpdateIT {
     @Transactional
     @Rollback
     void updateExistingRegionTest() {
-        Region region = regionRepository.findAll().getFirst();
+        Region region = regionRepository.findAll().get(0);
         RegionDTO regionDTO = regionMapper.regionToRegionDto(region);
         regionDTO.setId(null);
         regionDTO.setVersion(null);
@@ -50,7 +50,7 @@ class RegionControllerUpdateIT {
         @SuppressWarnings("rawtypes") ResponseEntity responseEntity = regionController.upDateById(region.getId(), regionDTO);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
 
-        Region updatedRegion = regionRepository.findAll().getFirst();
+        Region updatedRegion = regionRepository.findAll().get(0);
         assertThat(updatedRegion.getName()).isEqualTo(name);
     }
 

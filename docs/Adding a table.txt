@@ -13,7 +13,7 @@ Ensure the mysql database is selected,
 then refresh it
 in the database window select the database
 right click it and select "create flyway migration"
-and save the result as sql.
+and save the result as SQL.
 
 Finally run the program. Use Beekeeper studio to check the database
 

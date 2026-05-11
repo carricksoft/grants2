@@ -62,7 +62,7 @@ class RegionControllerValidationTest {
     void setUp() {
         regionService = new RegionServiceImpl();
         testRegionDTO = regionService.listRegions(null,1,25)
-                .getContent().getFirst();
+                .getContent().get(0);
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
         regionArgumentCaptor = ArgumentCaptor.forClass(RegionDTO.class);
 

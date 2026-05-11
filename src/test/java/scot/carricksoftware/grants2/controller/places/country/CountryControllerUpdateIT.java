@@ -40,7 +40,7 @@ class CountryControllerUpdateIT {
     @Transactional
     @Rollback
     void updateExistingCountryTest() {
-        Country country = countryRepository.findAll().getFirst();
+        Country country = countryRepository.findAll().get(0);
         CountryDTO countryDTO = countryMapper.countryToCountryDto(country);
         countryDTO.setId(null);
         countryDTO.setVersion(null);
@@ -50,7 +50,7 @@ class CountryControllerUpdateIT {
         @SuppressWarnings("rawtypes") ResponseEntity responseEntity = countryController.upDateById(country.getId(), countryDTO);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
 
-        Country updatedCountry = countryRepository.findAll().getFirst();
+        Country updatedCountry = countryRepository.findAll().get(0);
         assertThat(updatedCountry.getName()).isEqualTo(name);
     }
 

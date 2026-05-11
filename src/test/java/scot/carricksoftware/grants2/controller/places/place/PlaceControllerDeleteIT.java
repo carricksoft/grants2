@@ -35,7 +35,7 @@ class PlaceControllerDeleteIT {
     @Transactional
     @Rollback
     void deletePlaceByIDTest() {
-        Place place = placeRepository.findAll().getFirst();
+        Place place = placeRepository.findAll().get(0);
         @SuppressWarnings("rawtypes") ResponseEntity responseEntity = placeController.deleteById(place.getId());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
         assertThat(placeRepository.findById(place.getId())).isEmpty();

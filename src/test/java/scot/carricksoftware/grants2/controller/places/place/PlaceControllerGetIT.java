@@ -30,7 +30,7 @@ class PlaceControllerGetIT {
 
     @Test
     void getPlaceByIdTest() {
-        Place place = placeRepository.findAll().getFirst();
+        Place place = placeRepository.findAll().get(0);
         PlaceDTO dto = placeController.getPlaceById(place.getId());
 
         assertThat(dto).isNotNull();

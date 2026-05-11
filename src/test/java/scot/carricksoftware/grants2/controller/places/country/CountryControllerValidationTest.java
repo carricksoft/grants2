@@ -62,7 +62,7 @@ class CountryControllerValidationTest {
     void setUp() {
         countryService = new CountryServiceImpl();
         testCountryDTO = countryService.listCountries(null, 1, 25)
-                .getContent().getFirst();
+                .getContent().get(0);
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
         countryArgumentCaptor = ArgumentCaptor.forClass(CountryDTO.class);
 

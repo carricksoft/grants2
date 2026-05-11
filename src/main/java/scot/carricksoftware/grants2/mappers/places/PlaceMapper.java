@@ -10,8 +10,7 @@ import scot.carricksoftware.grants2.model.places.PlaceDTO;
 
 @Mapper
 public interface PlaceMapper {
-    @SuppressWarnings("unused")
+
     Place placeDtoToPlace(PlaceDTO dto);
-    @SuppressWarnings("unused")
     PlaceDTO placeToPlaceDto(Place place);
 }

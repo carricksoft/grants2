@@ -7,6 +7,8 @@ package scot.carricksoftware.grants2.controller.places.region;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 import scot.carricksoftware.grants2.controller.places.RegionController;
 import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
@@ -29,8 +31,9 @@ class RegionControllerGetIT {
 
 
     @Test
+    @Transactional
     void getRegionByIdTest() {
-        Region region = regionRepository.findAll().getFirst();
+        Region region = regionRepository.findAll().get(0);
         RegionDTO dto = regionController.getRegionById(region.getId());
 
         assertThat(dto).isNotNull();

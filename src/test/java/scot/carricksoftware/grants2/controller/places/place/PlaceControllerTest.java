@@ -68,7 +68,8 @@ class PlaceControllerTest {
     @BeforeEach
     void setUp() {
         placeService = new PlaceServiceImpl();
-        testPlaceDTO = placeService.listPlaces(null,1,25).getContent().getFirst();
+        testPlaceDTO = placeService.listPlaces(null,1,25)
+                .getContent().get(0);
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
     }
 
@@ -145,7 +146,7 @@ class PlaceControllerTest {
     @Test
     void updatePlaceTest() throws Exception {
         PlaceDTO placeDTO = placeService.listPlaces(null,1,25)
-                .getContent().getFirst();
+                .getContent().get(0);
         given(placeServiceMock.updatePlaceById(any(), any())).willReturn(Optional.of(placeDTO));
         mockMvc.perform(put(PLACE_PATH_ID, testPlaceDTO.getId())
                         .accept(MediaType.APPLICATION_JSON)

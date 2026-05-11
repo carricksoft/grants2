@@ -40,7 +40,7 @@ class PlaceControllerUpdateIT {
     @Transactional
     @Rollback
     void updateExistingPlaceTest() {
-        Place place = placeRepository.findAll().getFirst();
+        Place place = placeRepository.findAll().get(0);
         PlaceDTO placeDTO = placeMapper.placeToPlaceDto(place);
         placeDTO.setId(null);
         placeDTO.setVersion(null);
@@ -50,7 +50,7 @@ class PlaceControllerUpdateIT {
         @SuppressWarnings("rawtypes") ResponseEntity responseEntity = placeController.upDateById(place.getId(), placeDTO);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
 
-        Place updatedPlace = placeRepository.findAll().getFirst();
+        Place updatedPlace = placeRepository.findAll().get(0);
         assertThat(updatedPlace.getName()).isEqualTo(name);
     }
 

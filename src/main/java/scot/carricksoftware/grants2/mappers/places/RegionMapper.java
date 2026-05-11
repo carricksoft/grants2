@@ -11,8 +11,6 @@ import scot.carricksoftware.grants2.model.places.RegionDTO;
 @Mapper
 public interface RegionMapper {
 
-    @SuppressWarnings("unused")
     Region regionDtoToRegion(RegionDTO dto);
-    @SuppressWarnings("unused")
     RegionDTO regionToRegionDto(Region region);
 }

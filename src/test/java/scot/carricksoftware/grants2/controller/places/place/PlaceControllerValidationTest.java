@@ -62,7 +62,7 @@ class PlaceControllerValidationTest {
     void setUp() {
         placeService = new PlaceServiceImpl();
         testPlaceDTO = placeService.listPlaces(null,1,25)
-                .getContent().getFirst();
+                .getContent().get(0);
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
         placeArgumentCaptor = ArgumentCaptor.forClass(PlaceDTO.class);
 

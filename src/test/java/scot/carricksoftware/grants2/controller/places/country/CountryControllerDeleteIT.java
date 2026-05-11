@@ -35,7 +35,7 @@ class CountryControllerDeleteIT {
     @Transactional
     @Rollback
     void deleteCountryByIDTest() {
-        Country country = countryRepository.findAll().getFirst();
+        Country country = countryRepository.findAll().get(0);
         @SuppressWarnings("rawtypes") ResponseEntity responseEntity = countryController.deleteById(country.getId());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
         assertThat(countryRepository.findById(country.getId())).isEmpty();

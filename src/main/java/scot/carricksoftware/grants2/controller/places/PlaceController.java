@@ -64,7 +64,7 @@ public class PlaceController {
     @SuppressWarnings("rawtypes")
     @DeleteMapping(PLACE_PATH_ID)
     public ResponseEntity deleteById(@PathVariable UUID id){
-        log.debug("PlaceOntroller::deleteById");
+        log.debug("PlaceController::deleteById");
         if (!placeService.deletePlaceById(id)) {
             throw new NotFoundException();
         }

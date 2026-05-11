@@ -69,7 +69,8 @@ class CountryControllerTest {
     @BeforeEach
     void setUp() {
         countryService = new CountryServiceImpl();
-        testCountryDTO = countryService.listCountries(null, 1, 25).getContent().getFirst();
+        testCountryDTO = countryService.listCountries(null, 1, 25)
+                .getContent().get(0);
         uuidArgumentCaptor = ArgumentCaptor.forClass(UUID.class);
     }
 
@@ -146,7 +147,7 @@ class CountryControllerTest {
     @Test
     void updateCountryTest() throws Exception {
         CountryDTO countryDTO = countryService.listCountries(null, 1, 25)
-                .getContent().getFirst();
+                .getContent().get(0);
         given(countryServiceMock.updateCountryById(any(), any())).willReturn(Optional.of(countryDTO));
         mockMvc.perform(put(COUNTRY_PATH_ID, testCountryDTO.getId())
                         .accept(MediaType.APPLICATION_JSON)

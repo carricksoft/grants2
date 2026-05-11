@@ -34,8 +34,8 @@ class RegionPlaceRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        testRegion = regionRepository.findAll().getFirst();
-        testPlace = placeRepository.findAll().getFirst();
+        testRegion = regionRepository.findAll().get(0);
+        testPlace = placeRepository.findAll().get(0);
     }
 
     @Test
