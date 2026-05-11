@@ -1,15 +1,10 @@
-drop table if exists person;
+CREATE TABLE country
+(
+    id           VARCHAR(36)  NOT NULL,
+    version      INT          NULL,
+    created_date datetime     NULL,
+    updated_date datetime     NULL,
+    name         VARCHAR(128) NOT NULL,
+    CONSTRAINT pk_country PRIMARY KEY (id)
+);
 
-
-    create table person (
-        certified_year_of_birth varchar(4),
-        certified_year_of_death varchar(4),
-        recorded_year_of_birth varchar(4),
-        version integer,
-        created_date timestamp(6),
-        updated_date timestamp(6),
-        id varchar(36) not null,
-        first_name varchar(128) not null,
-        last_name varchar(128) not null,
-        primary key (id)
-    ) engine=InnoDB;

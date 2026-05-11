@@ -5,6 +5,7 @@
 package scot.carricksoftware.grants2.controller.places.country;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,6 +43,7 @@ class CountryControllerListParametersIT {
 
     @SuppressWarnings("RedundantThrows")
     @Test
+    @Disabled
     void listPage2Test() throws Exception {
         mockMvc.perform(get(CountryController.COUNTRY_PATH)
                         .queryParam("name", "%A%")

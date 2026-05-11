@@ -14,7 +14,7 @@
     <name>spring-7-rest-mvc</name>
     <description>Spring 7 Rest MVC</description>
     <properties>
-        <java.version>23</java.version>
+        <java.version>21</java.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
     </properties>
     <dependencies>
@@ -122,8 +122,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.15.0</version>
                 <configuration>
-                    <source>23</source>
-                    <target>23</target>
+                    <source>25</source>
+                    <target>25</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
@@ -157,6 +157,17 @@
                         <version>1.2.2</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+            <!-- Source: https://mvnrepository.com/artifact/org.flywaydb/flyway-maven-plugin -->
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>12.6.0</version>
+                <configuration>
+                    <url>jdbc:mariadb://localhost:3306/restdb</url>
+                    <user>restadmin</user>
+                    <password>password</password>
+                </configuration>
             </plugin>
         </plugins>
     </build>

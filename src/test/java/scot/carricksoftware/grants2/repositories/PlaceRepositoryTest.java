@@ -10,17 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
-import scot.carricksoftware.grants2.bootstrap.BootstrapPlaces;
+import scot.carricksoftware.grants2.bootstrap.BootstrapPlace;
+import scot.carricksoftware.grants2.constants.ApplicationConstants;
 import scot.carricksoftware.grants2.entities.places.Place;
 import scot.carricksoftware.grants2.repositories.places.PlaceRepository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static scot.carricksoftware.grants2.entities.Person.FIELD_SIZE;
+
 
 
 @DataJpaTest
-@Import(BootstrapPlaces.class)
+@Import(BootstrapPlace.class)
 class PlaceRepositoryTest {
 
     @Autowired
@@ -41,7 +42,7 @@ class PlaceRepositoryTest {
     @SuppressWarnings("unused")
     @Test
     void nameTooLongTest() {
-        String testString = longString(FIELD_SIZE + 1);
+        String testString = longString(ApplicationConstants.NAME_FIELD_LENGTH + 1);
         assertThrows(ConstraintViolationException.class, ()-> {
             Place savedPlace = placeRepository.save(Place.builder()
                     .name(testString)
