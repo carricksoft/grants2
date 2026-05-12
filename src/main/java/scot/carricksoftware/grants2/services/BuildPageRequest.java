@@ -2,7 +2,7 @@
  * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
  */
 
-package scot.carricksoftware.grants2.services.places.country;
+package scot.carricksoftware.grants2.services;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

@@ -16,7 +16,7 @@ import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.mappers.places.RegionMapper;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 import scot.carricksoftware.grants2.repositories.places.RegionRepository;
-import scot.carricksoftware.grants2.services.places.country.BuildPageRequest;
+import scot.carricksoftware.grants2.services.BuildPageRequest;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
