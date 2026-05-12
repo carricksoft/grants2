@@ -65,4 +65,9 @@ class RegionServiceImplTest {
         assertThat(updatedDTO.getCreatedDate()).isEqualTo(updateDTO.getCreatedDate());
         assertThat(updatedDTO.getUpdatedDate()).isNotEqualTo(updateDTO.getUpdatedDate());
     }
+
+    @Override
+    public String toString() {
+        return "RegionServiceImplTest{}";
+    }
 }

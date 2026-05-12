@@ -55,7 +55,7 @@ class BuildPageRequestTest {
     @Test
     void nullPageSizeTest() {
         assertThat(buildPageRequest.buildPageRequest(10, null, sort).getPageSize())
-                .isEqualTo(DEFAULT_PAGE_SIZE);
+                .isEqualTo(DEFAULT_PAGE_SIZE.getValue());
     }
 
     @Test
