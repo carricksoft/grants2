@@ -8,11 +8,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import static scot.carricksoftware.grants2.constants.ApplicationIntegers.DEFAULT_PAGE;
+import static scot.carricksoftware.grants2.constants.ApplicationIntegers.DEFAULT_PAGE_SIZE;
+
 @SuppressWarnings("unused")
 @Component
 public class BuildPageRequest {
-    final static int DEFAULT_PAGE = 0;
-    final static int DEFAULT_PAGE_SIZE = 25;
+
 
     @SuppressWarnings("unused")
     public PageRequest buildPageRequest(Integer pageNumber, Integer pageSize, Sort sort) {
@@ -22,14 +24,14 @@ public class BuildPageRequest {
         if (null != pageNumber  && 0 <= pageNumber ) {
             queryPageNumber = pageNumber - 1;
         } else {
-            queryPageNumber = DEFAULT_PAGE;
+            queryPageNumber = DEFAULT_PAGE.getValue();
         }
 
         if (pageSize == null) {
-            queryPageSize = DEFAULT_PAGE_SIZE;
+            queryPageSize = DEFAULT_PAGE_SIZE.getValue();
         } else {
             if (pageSize > 1000) {
-                queryPageSize = DEFAULT_PAGE_SIZE;
+                queryPageSize = DEFAULT_PAGE_SIZE.getValue();
             } else {
                 queryPageSize = pageSize;
             }
