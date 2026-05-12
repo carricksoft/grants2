@@ -27,10 +27,10 @@ public class BuildPageRequest {
             queryPageNumber = DEFAULT_PAGE.getValue();
         }
 
-        if (pageSize == null) {
+        if (null == pageSize) {
             queryPageSize = DEFAULT_PAGE_SIZE.getValue();
         } else {
-            if (pageSize > 1000) {
+            if (1000 < pageSize) {
                 queryPageSize = DEFAULT_PAGE_SIZE.getValue();
             } else {
                 queryPageSize = pageSize;
