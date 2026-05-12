@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public final class ApplicationConstants {
     private ApplicationConstants() {
+        super();
         // to stop checkstyle complaining
     }
 

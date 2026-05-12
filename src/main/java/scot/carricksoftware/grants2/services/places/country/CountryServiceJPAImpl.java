@@ -73,7 +73,6 @@ public class CountryServiceJPAImpl implements CountryService {
 
         countryRepository.findById(id).ifPresentOrElse(foundCountry -> {
             foundCountry.setName(countryDTO.getName());
-            foundCountry.setUpdatedDate(LocalDateTime.now());
             atomicReference.set(Optional.of(countryMapper
                     .countryToCountryDto(countryRepository.save(foundCountry))));
         }, () -> atomicReference.set(Optional.empty()));
@@ -85,9 +84,8 @@ public class CountryServiceJPAImpl implements CountryService {
     public Boolean deleteCountryById(UUID id) {
         if (countryRepository.existsById(id)) {
             countryRepository.deleteById(id);
-            return true;
         }
-        return false;
+        return true;
     }
 
 }

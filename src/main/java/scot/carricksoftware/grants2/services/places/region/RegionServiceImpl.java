@@ -25,6 +25,7 @@ public class RegionServiceImpl implements RegionService {
     private final Map<UUID, RegionDTO> regionMap;
 
     public RegionServiceImpl() {
+        super();
         this.regionMap = new HashMap<>();
 
         RegionDTO regionDTO1 = RegionDTO.builder()
@@ -50,7 +51,7 @@ public class RegionServiceImpl implements RegionService {
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
                 .build();
-        
+
         regionMap.put(regionDTO1.getId(), regionDTO1);
         regionMap.put(regionDTO2.getId(), regionDTO2);
         regionMap.put(regionDTO3.getId(), regionDTO3);

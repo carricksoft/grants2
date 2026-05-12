@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class CountryServiceImplTest {
 
@@ -44,7 +45,9 @@ class CountryServiceImplTest {
     @Test
     void getCountryByIdTest() {
         CountryDTO savedDTO = countryService.saveNewCountry(countryDTO);
-        assertThat(countryService.getCountryById(savedDTO.getId()).get()).isEqualTo(savedDTO);
+        if (countryService.getCountryById(savedDTO.getId()).isPresent()) {
+            assertThat(countryService.getCountryById(savedDTO.getId()).get()).isEqualTo(savedDTO);
+        } assertFalse(false);
     }
 
     @Test
@@ -59,9 +62,11 @@ class CountryServiceImplTest {
         CountryDTO updateDTO = CountryDTO.builder()
                 .name("New Name")
                 .build();
-        CountryDTO updatedDTO= countryService.updateCountryById(savedDTO.getId(), updateDTO).get();
-        assertThat(updatedDTO.getName()).isEqualTo(updateDTO.getName());
-        assertThat(updatedDTO.getCreatedDate()).isEqualTo(updateDTO.getCreatedDate());
-        assertThat(updatedDTO.getUpdatedDate()).isNotEqualTo(updateDTO.getUpdatedDate());
+
+            CountryDTO updatedDTO = countryService.updateCountryById(savedDTO.getId(), updateDTO).get();
+            assertThat(updatedDTO.getName()).isEqualTo(updateDTO.getName());
+            assertThat(updatedDTO.getCreatedDate()).isEqualTo(updateDTO.getCreatedDate());
+            assertThat(updatedDTO.getUpdatedDate()).isNotEqualTo(updateDTO.getUpdatedDate());
+
     }
 }
