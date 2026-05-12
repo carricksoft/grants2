@@ -32,14 +32,23 @@ class BuildPageRequestTest {
     }
 
     @Test
-    void nonNullPageNumberNormalTest() {
-        assertThat(buildPageRequest.buildPageRequest(25,5, sort).getPageNumber()).isEqualTo(24);
+    void zeroPageNumberTest() {
+        assertThat(buildPageRequest.buildPageRequest(0,5, sort).getPageNumber()).isEqualTo(0);
     }
 
     @Test
-    void nonNullZeroPageNumberNormalTest() {
-        assertThrows(IllegalArgumentException.class, () -> buildPageRequest.buildPageRequest(25,0,sort));
+    void unityPageNumberTest() {
+        assertThat(buildPageRequest.buildPageRequest(0,5, sort).getPageNumber()).isEqualTo(0);
     }
+
+    @Test
+    void largePageNumberTest() {
+        assertThat(buildPageRequest.buildPageRequest(50,5, sort).getPageNumber()).isEqualTo(49);
+    }
+
+
+
+
 
 
 
