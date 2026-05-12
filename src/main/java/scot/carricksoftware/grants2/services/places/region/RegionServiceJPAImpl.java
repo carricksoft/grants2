@@ -72,7 +72,6 @@ public class RegionServiceJPAImpl implements RegionService {
 
         regionRepository.findById(id).ifPresentOrElse(foundRegion -> {
             foundRegion.setName(regionDTO.getName());
-            foundRegion.setUpdatedDate(LocalDateTime.now());
             atomicReference.set(Optional.of(regionMapper
                     .regionToRegionDto(regionRepository.save(foundRegion))));
         }, () -> atomicReference.set(Optional.empty()));
