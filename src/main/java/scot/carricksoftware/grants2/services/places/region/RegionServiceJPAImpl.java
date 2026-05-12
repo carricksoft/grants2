@@ -83,9 +83,8 @@ public class RegionServiceJPAImpl implements RegionService {
     public Boolean deleteRegionById(UUID id) {
         if (regionRepository.existsById(id)) {
             regionRepository.deleteById(id);
-            return true;
         }
-        return false;
+        return true;
     }
 
 }
