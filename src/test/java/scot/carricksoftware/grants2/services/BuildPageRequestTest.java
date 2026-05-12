@@ -32,6 +32,11 @@ class BuildPageRequestTest {
     }
 
     @Test
+    void negativePageNumberTest() {
+        assertThat(buildPageRequest.buildPageRequest(-2,5, sort).getPageNumber()).isEqualTo(0);
+    }
+
+    @Test
     void zeroPageNumberTest() {
         assertThat(buildPageRequest.buildPageRequest(0,5, sort).getPageNumber()).isEqualTo(0);
     }

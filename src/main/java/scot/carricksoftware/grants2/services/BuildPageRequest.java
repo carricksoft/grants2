@@ -22,7 +22,7 @@ public class BuildPageRequest {
         int queryPageSize;
 
         if (null != pageNumber)  {
-            if (pageNumber < 1) {
+            if (pageNumber <= 1) {
                 queryPageNumber = 0;
             } else {
                 queryPageNumber = pageNumber - 1;
