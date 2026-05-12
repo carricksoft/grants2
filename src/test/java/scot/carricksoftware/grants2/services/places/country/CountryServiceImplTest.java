@@ -7,6 +7,7 @@ package scot.carricksoftware.grants2.services.places.country;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
+import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 
 
@@ -45,9 +46,8 @@ class CountryServiceImplTest {
     @Test
     void getCountryByIdTest() {
         CountryDTO savedDTO = countryService.saveNewCountry(countryDTO);
-        if (countryService.getCountryById(savedDTO.getId()).isPresent()) {
-            assertThat(countryService.getCountryById(savedDTO.getId()).get()).isEqualTo(savedDTO);
-        } assertFalse(false);
+        assertThat(countryService.getCountryById(savedDTO.getId()).get()).isEqualTo(savedDTO);
+
     }
 
     @Test

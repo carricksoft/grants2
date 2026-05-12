@@ -95,7 +95,6 @@ public class CountryServiceImpl implements CountryService {
         CountryDTO existingCountryDTO = countryMap.get(id);
         existingCountryDTO.setCreatedDate(countryDTO.getCreatedDate());
         existingCountryDTO.setName(countryDTO.getName());
-        existingCountryDTO.setUpdatedDate(LocalDateTime.now());
 
         countryMap.put(existingCountryDTO.getId(), existingCountryDTO);
         return Optional.of(existingCountryDTO);
