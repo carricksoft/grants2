@@ -18,7 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RegionServiceImplTest {
 
+    @SuppressWarnings("FieldNotUsedInToString")
     RegionService regionService;
+
+    @SuppressWarnings("FieldNotUsedInToString")
     RegionDTO regionDTO;
 
     @BeforeEach
@@ -68,6 +71,9 @@ class RegionServiceImplTest {
 
     @Override
     public String toString() {
-        return "RegionServiceImplTest{}";
+        return "RegionServiceImplTest{" +
+                "regionService=" + regionService +
+                ", regionDTO=" + regionDTO +
+                '}';
     }
 }

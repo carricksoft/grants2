@@ -28,6 +28,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequiredArgsConstructor
 public class RegionServiceJPAImpl implements RegionService {
 
+    @SuppressWarnings("FieldNotUsedInToString")
     private final RegionRepository regionRepository;
     private final RegionMapper regionMapper;
     private final BuildPageRequest buildPageRequest;
@@ -89,6 +90,10 @@ public class RegionServiceJPAImpl implements RegionService {
 
     @Override
     public String toString() {
-        return "RegionServiceJPAImpl{}";
+        return "RegionServiceJPAImpl{" +
+                "regionRepository=" + regionRepository +
+                ", regionMapper=" + regionMapper +
+                ", buildPageRequest=" + buildPageRequest +
+                '}';
     }
 }

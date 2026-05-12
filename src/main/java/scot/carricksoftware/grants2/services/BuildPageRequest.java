@@ -22,10 +22,10 @@ public class BuildPageRequest {
         int queryPageSize;
 
         if (null != pageNumber)  {
-            if (pageNumber <= 1) {
-                queryPageNumber = 0;
-            } else {
+            if (1 <= pageNumber) {
                 queryPageNumber = pageNumber - 1;
+            } else {
+                queryPageNumber = 0;
             }
         } else {
             queryPageNumber = DEFAULT_PAGE.getValue();

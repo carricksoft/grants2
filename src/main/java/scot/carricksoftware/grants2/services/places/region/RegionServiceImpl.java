@@ -101,5 +101,10 @@ public class RegionServiceImpl implements RegionService {
         return Optional.of(existingRegionDTO);
     }
 
-
+    @Override
+    public String toString() {
+        return "RegionServiceImpl{" +
+                "regionMap=" + regionMap +
+                '}';
+    }
 }
