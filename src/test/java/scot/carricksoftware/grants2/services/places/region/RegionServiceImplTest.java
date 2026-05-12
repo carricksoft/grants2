@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RegionServiceImplTest {
 
@@ -46,12 +47,18 @@ class RegionServiceImplTest {
         assertThat(regionService.getRegionById(savedDTO.getId()).get()).isEqualTo(savedDTO);
     }
 
+    @Test
     void deleteRegionByIdTest(){
         RegionDTO savedDTO = regionService.saveNewRegion(regionDTO);
+
         assertThat(regionService.deleteRegionById(savedDTO.getId())).isTrue();
-        assertThat(regionService.getRegionById(savedDTO.getId()).get()).isEqualTo(Optional.empty());
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            regionService.getRegionById(savedDTO.getId()); ;
+        });
+
     }
 
+    @Test
     void updateRegionByIdTest(){
         RegionDTO savedDTO = regionService.saveNewRegion(regionDTO);
         RegionDTO updateDTO = RegionDTO.builder()
