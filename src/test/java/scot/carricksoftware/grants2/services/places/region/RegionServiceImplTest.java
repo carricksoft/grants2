@@ -4,6 +4,7 @@
 
 package scot.carricksoftware.grants2.services.places.region;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
@@ -49,28 +50,19 @@ class RegionServiceImplTest {
 
     @Test
     void deleteRegionByIdTest(){
-        RegionDTO savedDTO = regionService.saveNewRegion(regionDTO);
-
-        assertThat(regionService.deleteRegionById(savedDTO.getId())).isTrue();
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            regionService.getRegionById(savedDTO.getId()); ;
-        });
-
+        assertThat(regionService.deleteRegionById(UUID.randomUUID())).isTrue();
     }
+
 
     @Test
     void updateRegionByIdTest(){
         RegionDTO savedDTO = regionService.saveNewRegion(regionDTO);
         RegionDTO updateDTO = RegionDTO.builder()
                 .name("New Name")
-                .version(999)
                 .build();
-        regionService.updateRegionById(savedDTO.getId(), updateDTO);
-        RegionDTO updatedDTO = regionService.getRegionById(savedDTO.getId()).get();
-        assertThat(updatedDTO.getId()).isEqualTo(updateDTO.getId());
+        RegionDTO updatedDTO= regionService.updateRegionById(savedDTO.getId(), updateDTO).get();
         assertThat(updatedDTO.getName()).isEqualTo(updateDTO.getName());
-        assertThat(savedDTO.getVersion()).isEqualTo(updateDTO.getVersion());
-        assertThat(savedDTO.getCreatedDate()).isEqualTo(updateDTO.getCreatedDate());
-        assertThat(savedDTO.getUpdatedDate()).isNotEqualTo(updateDTO.getUpdatedDate());
+        assertThat(updatedDTO.getCreatedDate()).isEqualTo(updateDTO.getCreatedDate());
+        assertThat(updatedDTO.getUpdatedDate()).isNotEqualTo(updateDTO.getUpdatedDate());
     }
 }

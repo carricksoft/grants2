@@ -65,7 +65,6 @@ public class RegionServiceImpl implements RegionService {
     @Override
     public Optional<RegionDTO> getRegionById(UUID id) {
         log.debug("RegionService::getRegionById");
-
         return Optional.of(regionMap.get(id));
     }
 
