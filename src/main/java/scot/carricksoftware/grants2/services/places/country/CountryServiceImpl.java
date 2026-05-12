@@ -24,6 +24,7 @@ public class CountryServiceImpl implements CountryService {
     private final Map<UUID, CountryDTO> countryMap;
 
     public CountryServiceImpl() {
+        super();
         this.countryMap = new HashMap<>();
 
         CountryDTO countryDTO1 = CountryDTO.builder()
@@ -49,7 +50,7 @@ public class CountryServiceImpl implements CountryService {
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
                 .build();
-        
+
         countryMap.put(countryDTO1.getId(), countryDTO1);
         countryMap.put(countryDTO2.getId(), countryDTO2);
         countryMap.put(countryDTO3.getId(), countryDTO3);

@@ -25,6 +25,7 @@ public class PlaceServiceImpl implements PlaceService {
     private final Map<UUID, PlaceDTO> placeMap;
 
     public PlaceServiceImpl() {
+        super();
         this.placeMap = new HashMap<>();
 
         PlaceDTO placeDTO1 = PlaceDTO.builder()
@@ -50,7 +51,7 @@ public class PlaceServiceImpl implements PlaceService {
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
                 .build();
-        
+
         placeMap.put(placeDTO1.getId(), placeDTO1);
         placeMap.put(placeDTO2.getId(), placeDTO2);
         placeMap.put(placeDTO3.getId(), placeDTO3);
