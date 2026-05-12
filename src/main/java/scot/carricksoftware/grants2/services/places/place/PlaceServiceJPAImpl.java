@@ -71,7 +71,6 @@ public class PlaceServiceJPAImpl implements PlaceService {
 
         placeRepository.findById(id).ifPresentOrElse(foundPlace -> {
             foundPlace.setName(placeDTO.getName());
-            foundPlace.setUpdatedDate(LocalDateTime.now());
             atomicReference.set(Optional.of(placeMapper
                     .placeToPlaceDto(placeRepository.save(foundPlace))));
         }, () -> atomicReference.set(Optional.empty()));
@@ -83,9 +82,8 @@ public class PlaceServiceJPAImpl implements PlaceService {
     public Boolean deletePlaceById(UUID id) {
         if (placeRepository.existsById(id)) {
             placeRepository.deleteById(id);
-            return true;
         }
-        return false;
+        return true;
     }
 
 }

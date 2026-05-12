@@ -94,10 +94,9 @@ public class PlaceServiceImpl implements PlaceService {
     public Optional<PlaceDTO> updatePlaceById(UUID id, PlaceDTO placeDTO) {
         log.debug("PlaceService::upDateById");
         PlaceDTO existingPlaceDTO = placeMap.get(id);
+
         existingPlaceDTO.setCreatedDate(placeDTO.getCreatedDate());
         existingPlaceDTO.setName(placeDTO.getName());
-        existingPlaceDTO.setUpdatedDate(LocalDateTime.now());
-
         placeMap.put(existingPlaceDTO.getId(), existingPlaceDTO);
         return Optional.of(existingPlaceDTO);
 
