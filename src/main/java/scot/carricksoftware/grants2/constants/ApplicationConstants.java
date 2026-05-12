@@ -6,8 +6,9 @@ package scot.carricksoftware.grants2.constants;
 
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("UtilityClass")
 @Component
-public class ApplicationConstants {
+public final class ApplicationConstants {
     private ApplicationConstants() {
         // to stop checkstyle complaining
     }

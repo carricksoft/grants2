@@ -27,7 +27,7 @@ public class BootstrapPlace implements CommandLineRunner {
     }
 
     private void loadPlaceData() {
-        if (placeRepository.count() == 0) {
+        if (0 == placeRepository.count()) {
             Place place1 = Place.builder()
                     .name("Place 1")
                     .version(1)

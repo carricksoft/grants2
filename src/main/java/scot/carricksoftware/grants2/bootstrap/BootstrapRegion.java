@@ -26,7 +26,7 @@ public class BootstrapRegion implements CommandLineRunner {
     }
 
     private void loadRegionData() {
-        if (regionRepository.count() == 0) {
+        if (0 == regionRepository.count()) {
             Region region1 = Region.builder()
                     .name("Region 1")
                     .version(1)

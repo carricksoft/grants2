@@ -25,7 +25,7 @@ public class BootstrapCountry implements CommandLineRunner {
     }
 
     private void loadCountryData() {
-        if (countryRepository.count() == 0) {
+        if (0 == countryRepository.count()) {
             Country country1 = Country.builder()
                     .name("Country 1")
                     .version(1)

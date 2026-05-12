@@ -19,7 +19,7 @@ public class BuildPageRequest {
         int queryPageNumber;
         int queryPageSize;
 
-        if (pageNumber != null && pageNumber > 0) {
+        if (null != pageNumber  && 0 <= pageNumber ) {
             queryPageNumber = pageNumber - 1;
         } else {
             queryPageNumber = DEFAULT_PAGE;
