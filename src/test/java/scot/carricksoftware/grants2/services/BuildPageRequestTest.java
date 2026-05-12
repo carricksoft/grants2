@@ -5,12 +5,18 @@
 package scot.carricksoftware.grants2.services;
 
 
+import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 import org.springframework.data.domain.Sort;
+import scot.carricksoftware.grants2.entities.places.Region;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BuildPageRequestTest {
     private BuildPageRequest buildPageRequest;
@@ -51,6 +57,13 @@ class BuildPageRequestTest {
     @Test
     void buldNoPageSizeHugeTest() {
         assertThat(buildPageRequest.buildPageRequest(10, 1001, sort).getPageSize()).isEqualTo(25);
+    }
+
+    @Test
+    void buildPageZeroPageNumberTest() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            buildPageRequest.buildPageRequest(10, 0, sort);
+        });
     }
 
 
