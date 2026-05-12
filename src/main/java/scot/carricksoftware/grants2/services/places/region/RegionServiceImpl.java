@@ -95,7 +95,6 @@ public class RegionServiceImpl implements RegionService {
         RegionDTO existingRegionDTO = regionMap.get(id);
         existingRegionDTO.setCreatedDate(regionDTO.getCreatedDate());
         existingRegionDTO.setName(regionDTO.getName());
-        existingRegionDTO.setUpdatedDate(LocalDateTime.now());
 
         regionMap.put(existingRegionDTO.getId(), existingRegionDTO);
         return Optional.of(existingRegionDTO);

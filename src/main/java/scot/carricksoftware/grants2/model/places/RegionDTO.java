@@ -33,9 +33,7 @@ public class RegionDTO extends BaseEntityDTO {
     @JsonProperty("name")
     private String name;
 
-
     private Country country;
-
 
     private Set<Place> places;
 
