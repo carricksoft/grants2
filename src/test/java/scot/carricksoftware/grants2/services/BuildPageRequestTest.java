@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BuildPageRequestTest {
@@ -22,8 +23,8 @@ class BuildPageRequestTest {
     }
 
     @Test
-    void dummyTest() {
-        assertTrue(true);
+    void nullPageNumberTest() {
+        assertThat(buildPageRequest.buildPageRequest(null,5, sort));
     }
 
 
