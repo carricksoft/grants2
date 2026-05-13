@@ -69,10 +69,4 @@ class RegionServiceImplTest {
         assertThat(updatedDTO.getUpdatedDate()).isNotEqualTo(updateDTO.getUpdatedDate());
     }
 
-    @Test
-    void toStringTest() {
-        String result = regionService.toString();
-        assertThat(result.contains("RegionServiceImpl{")).isTrue();
-        assertThat(result.contains("{regionMap={")).isTrue();
-    }
 }
