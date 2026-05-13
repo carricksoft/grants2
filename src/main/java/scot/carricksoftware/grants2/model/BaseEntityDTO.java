@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Getter
 @Setter
 @SuperBuilder

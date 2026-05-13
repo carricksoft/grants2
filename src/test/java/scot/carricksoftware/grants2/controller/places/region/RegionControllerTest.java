@@ -67,6 +67,7 @@ class RegionControllerTest {
 
     private RegionDTO testRegionDTO;
 
+    @Autowired
     private RegionController regionController;
 
     @BeforeEach

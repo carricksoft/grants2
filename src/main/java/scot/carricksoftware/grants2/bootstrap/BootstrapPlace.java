@@ -14,6 +14,7 @@ import scot.carricksoftware.grants2.repositories.places.PlaceRepository;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Component
 @RequiredArgsConstructor
 public class BootstrapPlace implements CommandLineRunner {

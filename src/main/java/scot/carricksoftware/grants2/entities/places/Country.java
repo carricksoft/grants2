@@ -20,6 +20,7 @@ import scot.carricksoftware.grants2.entities.BaseEntity;
 
 import java.util.Set;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Getter
 @Setter
 @SuperBuilder

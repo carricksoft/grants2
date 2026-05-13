@@ -13,6 +13,7 @@ import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Component
 @RequiredArgsConstructor
 public class BootstrapCountry implements CommandLineRunner {

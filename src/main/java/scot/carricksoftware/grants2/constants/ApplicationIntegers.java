@@ -4,6 +4,7 @@
 
 package scot.carricksoftware.grants2.constants;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 public enum ApplicationIntegers {
 
     DEFAULT_PAGE(0),

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static scot.carricksoftware.grants2.constants.ApplicationIntegers.DEFAULT_PAGE_SIZE;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 class BuildPageRequestTest {
     private BuildPageRequest buildPageRequest;
 

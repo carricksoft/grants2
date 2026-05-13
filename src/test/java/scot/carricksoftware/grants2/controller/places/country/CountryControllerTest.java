@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import scot.carricksoftware.grants2.controller.places.CountryController;
+import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
 import scot.carricksoftware.grants2.services.places.country.CountryService;
 import scot.carricksoftware.grants2.services.places.country.CountryServiceImpl;
@@ -29,6 +30,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -60,6 +62,9 @@ class CountryControllerTest {
 
     @Captor
     ArgumentCaptor<UUID> uuidArgumentCaptor;
+
+    @Autowired
+    private CountryController countryController;
 
 
     private CountryService countryService;
@@ -171,7 +176,10 @@ class CountryControllerTest {
         assertThat(testCountryDTO.getId()).isEqualTo(uuidArgumentCaptor.getValue());
     }
 
-
+    @Test
+    void deleteRegionNotFoundTest() {
+        assertThrows(NotFoundException.class, () -> countryController.deleteById(UUID.randomUUID()));
+    }
 
 
 }
