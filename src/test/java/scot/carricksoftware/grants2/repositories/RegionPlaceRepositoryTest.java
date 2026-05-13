@@ -29,8 +29,8 @@ class RegionPlaceRepositoryTest {
     @Autowired
     PlaceRepository placeRepository;
 
-    Region testRegion;
-    Place testPlace;
+    private Region testRegion;
+    private Place testPlace;
 
     @BeforeEach
     void setUp() {

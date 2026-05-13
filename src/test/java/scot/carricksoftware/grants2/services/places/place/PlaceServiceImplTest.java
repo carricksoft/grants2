@@ -7,7 +7,6 @@ package scot.carricksoftware.grants2.services.places.place;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
-import scot.carricksoftware.grants2.model.places.RegionDTO;
 
 
 import java.time.LocalDateTime;
@@ -17,8 +16,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class PlaceServiceImplTest {
 
-    PlaceService placeService;
-    PlaceDTO placeDTO;
+    private PlaceService placeService;
+    private PlaceDTO placeDTO;
 
     @BeforeEach
     void setUp() {

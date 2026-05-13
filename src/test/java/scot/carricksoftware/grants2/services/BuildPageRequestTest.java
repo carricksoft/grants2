@@ -8,13 +8,8 @@ package scot.carricksoftware.grants2.services;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
-import scot.carricksoftware.grants2.exceptions.NotFoundException;
-
-import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static scot.carricksoftware.grants2.constants.ApplicationIntegers.DEFAULT_PAGE_SIZE;
 
 class BuildPageRequestTest {

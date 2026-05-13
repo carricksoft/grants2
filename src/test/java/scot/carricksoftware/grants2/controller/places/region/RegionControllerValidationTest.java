@@ -53,9 +53,10 @@ class RegionControllerValidationTest {
     @Captor
     ArgumentCaptor<RegionDTO> regionArgumentCaptor;
 
-    RegionService regionService;
+    private RegionService regionService;
 
     @SuppressWarnings("unused")
+    private
     RegionDTO testRegionDTO;
 
     @BeforeEach

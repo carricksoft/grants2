@@ -5,7 +5,7 @@
 package scot.carricksoftware.grants2.constants;
 
 public enum ApplicationIntegers {
-    NAME_LENGTH(128),
+
     DEFAULT_PAGE(0),
     DEFAULT_PAGE_SIZE(25);
 

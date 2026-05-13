@@ -56,6 +56,7 @@ class PlaceControllerValidationTest {
     private PlaceService placeService;
 
     @SuppressWarnings("unused")
+    private
     PlaceDTO testPlaceDTO;
 
     @BeforeEach

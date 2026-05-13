@@ -7,15 +7,12 @@ package scot.carricksoftware.grants2.services.places.country;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
-import scot.carricksoftware.grants2.model.places.PlaceDTO;
-import scot.carricksoftware.grants2.model.places.RegionDTO;
 
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class CountryServiceImplTest {
 

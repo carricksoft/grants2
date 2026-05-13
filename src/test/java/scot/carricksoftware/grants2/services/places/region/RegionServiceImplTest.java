@@ -4,24 +4,23 @@
 
 package scot.carricksoftware.grants2.services.places.region;
 
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RegionServiceImplTest {
 
     @SuppressWarnings("FieldNotUsedInToString")
+    private
     RegionService regionService;
 
     @SuppressWarnings("FieldNotUsedInToString")
+    private
     RegionDTO regionDTO;
 
     @BeforeEach

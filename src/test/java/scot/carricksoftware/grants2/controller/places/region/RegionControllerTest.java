@@ -63,11 +63,11 @@ class RegionControllerTest {
     @Captor
     ArgumentCaptor<UUID> uuidArgumentCaptor;
 
-    RegionService regionService;
+    private RegionService regionService;
 
-    RegionDTO testRegionDTO;
+    private RegionDTO testRegionDTO;
 
-    RegionController regionController;
+    private RegionController regionController;
 
     @BeforeEach
     void setUp() {
@@ -176,9 +176,7 @@ class RegionControllerTest {
 
     @Test
     void deleteRegionNotFoundTest() {
-            Exception exception = assertThrows(NotFoundException.class, () -> {
-                regionController.deleteById(UUID.randomUUID());
-            });
+            assertThrows(NotFoundException.class, () -> regionController.deleteById(UUID.randomUUID()));
     }
 
 }
