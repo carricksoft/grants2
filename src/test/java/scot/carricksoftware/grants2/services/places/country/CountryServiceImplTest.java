@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class CountryServiceImplTest {
 
-    CountryService countryService;
-    CountryDTO countryDTO;
+    private CountryService countryService;
+    private CountryDTO countryDTO;
 
     @BeforeEach
     void setUp() {

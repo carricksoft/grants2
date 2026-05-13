@@ -53,9 +53,10 @@ class CountryControllerValidationTest {
     @Captor
     ArgumentCaptor<CountryDTO> countryArgumentCaptor;
 
-    CountryService countryService;
+    private CountryService countryService;
 
     @SuppressWarnings("unused")
+    private
     CountryDTO testCountryDTO;
 
     @BeforeEach

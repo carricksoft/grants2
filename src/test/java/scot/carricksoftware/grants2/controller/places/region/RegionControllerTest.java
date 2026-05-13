@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import scot.carricksoftware.grants2.controller.places.RegionController;
+import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 import scot.carricksoftware.grants2.services.places.region.RegionService;
 import scot.carricksoftware.grants2.services.places.region.RegionServiceImpl;
@@ -29,6 +30,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -65,8 +67,11 @@ class RegionControllerTest {
 
     RegionDTO testRegionDTO;
 
+    RegionController regionController;
+
     @BeforeEach
     void setUp() {
+        regionController = new RegionController(regionServiceMock);
         regionService = new RegionServiceImpl();
         testRegionDTO = regionService.listRegions(null,1,25)
                         .getContent().get(0);
@@ -169,7 +174,11 @@ class RegionControllerTest {
         assertThat(testRegionDTO.getId()).isEqualTo(uuidArgumentCaptor.getValue());
     }
 
-
-
+    @Test
+    void deleteRegionNotFoundTest() {
+            Exception exception = assertThrows(NotFoundException.class, () -> {
+                regionController.deleteById(UUID.randomUUID());
+            });
+    }
 
 }

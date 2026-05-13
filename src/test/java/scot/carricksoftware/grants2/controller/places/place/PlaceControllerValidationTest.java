@@ -53,7 +53,7 @@ class PlaceControllerValidationTest {
     @Captor
     ArgumentCaptor<PlaceDTO> placeArgumentCaptor;
 
-    PlaceService placeService;
+    private PlaceService placeService;
 
     @SuppressWarnings("unused")
     PlaceDTO testPlaceDTO;

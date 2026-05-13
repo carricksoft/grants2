@@ -26,7 +26,7 @@ class CountryControllerListParametersIT {
     @Autowired
     WebApplicationContext wac;
 
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @BeforeEach
     void setUp() {

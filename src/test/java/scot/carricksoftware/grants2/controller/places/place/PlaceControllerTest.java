@@ -61,9 +61,9 @@ class PlaceControllerTest {
     ArgumentCaptor<UUID> uuidArgumentCaptor;
 
 
-    PlaceService placeService;
+    private PlaceService placeService;
 
-    PlaceDTO testPlaceDTO;
+    private PlaceDTO testPlaceDTO;
 
     @BeforeEach
     void setUp() {

@@ -62,9 +62,9 @@ class CountryControllerTest {
     ArgumentCaptor<UUID> uuidArgumentCaptor;
 
 
-    CountryService countryService;
+    private CountryService countryService;
 
-    CountryDTO testCountryDTO;
+    private CountryDTO testCountryDTO;
 
     @BeforeEach
     void setUp() {
