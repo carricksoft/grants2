@@ -18,6 +18,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import scot.carricksoftware.grants2.controller.places.PlaceController;
+import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.services.places.place.PlaceService;
 import scot.carricksoftware.grants2.services.places.place.PlaceServiceImpl;
@@ -28,6 +29,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -60,6 +62,8 @@ class PlaceControllerTest {
     @Captor
     ArgumentCaptor<UUID> uuidArgumentCaptor;
 
+    @Autowired
+    private PlaceController placeController;
 
     private PlaceService placeService;
 
@@ -168,6 +172,11 @@ class PlaceControllerTest {
 
         verify(placeServiceMock).deletePlaceById(uuidArgumentCaptor.capture());
         assertThat(testPlaceDTO.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+    }
+
+    @Test
+    void deletePlaceNotFoundTest() {
+        assertThrows(NotFoundException.class, () -> placeController.deleteById(UUID.randomUUID()));
     }
 
 

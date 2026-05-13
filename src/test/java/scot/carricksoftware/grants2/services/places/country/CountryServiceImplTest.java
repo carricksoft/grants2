@@ -14,17 +14,19 @@ import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+
 class CountryServiceImplTest {
 
     private CountryService countryService;
     private CountryDTO countryDTO;
+    private final int ninetyNine = 99;
 
     @BeforeEach
     void setUp() {
         countryService = new CountryServiceImpl();
         countryDTO = CountryDTO.builder()
                 .name("Test Name")
-                .version(99)
+                .version(ninetyNine)
                 .build();
     }
 
@@ -33,7 +35,7 @@ class CountryServiceImplTest {
         CountryDTO savedDTO = countryService.saveNewCountry(countryDTO);
         assertThat(savedDTO.getId()).isNotNull();
         assertThat(savedDTO.getName()).isEqualTo("Test Name");
-        assertThat(savedDTO.getVersion()).isEqualTo(99);
+        assertThat(savedDTO.getVersion()).isEqualTo(ninetyNine);
         assertThat(savedDTO.getCreatedDate().getDayOfYear())
                 .isEqualTo(LocalDateTime.now().getDayOfYear());
         assertThat(savedDTO.getUpdatedDate().getDayOfYear())

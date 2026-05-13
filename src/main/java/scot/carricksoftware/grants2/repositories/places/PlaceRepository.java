@@ -11,7 +11,7 @@ import scot.carricksoftware.grants2.entities.places.Place;
 
 import java.util.UUID;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "InterfaceNeverImplemented"})
 public interface PlaceRepository extends JpaRepository<Place, UUID> {
     Page<Place> findAllByNameIsLikeIgnoreCase(String place, Pageable pageable);
     @SuppressWarnings("NullableProblems")

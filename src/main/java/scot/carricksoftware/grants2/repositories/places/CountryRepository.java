@@ -11,7 +11,7 @@ import scot.carricksoftware.grants2.entities.places.Country;
 
 import java.util.UUID;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "InterfaceNeverImplemented"})
 public interface CountryRepository extends JpaRepository<Country, UUID> {
     Page<Country> findAllByNameIsLikeIgnoreCase(String country, Pageable pageable);
     @SuppressWarnings("NullableProblems")
