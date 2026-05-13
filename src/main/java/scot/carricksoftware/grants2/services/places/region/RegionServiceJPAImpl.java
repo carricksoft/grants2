@@ -88,12 +88,5 @@ public class RegionServiceJPAImpl implements RegionService {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "RegionServiceJPAImpl{" +
-                "regionRepository=" + regionRepository +
-                ", regionMapper=" + regionMapper +
-                ", buildPageRequest=" + buildPageRequest +
-                '}';
-    }
+
 }
