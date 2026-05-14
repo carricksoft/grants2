@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static scot.carricksoftware.grants2.controller.places.CountryController.COUNTRY_PATH;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @WebMvcTest(CountryController.class)
 @ExtendWith(MockitoExtension.class)
 @Slf4j

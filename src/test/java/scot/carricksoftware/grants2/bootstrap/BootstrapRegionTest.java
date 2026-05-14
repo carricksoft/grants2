@@ -10,32 +10,32 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import scot.carricksoftware.grants2.repositories.places.CountryRepository;
+import scot.carricksoftware.grants2.repositories.places.RegionRepository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("ClassHasNoToStringMethod")
 @SpringBootTest
-class BootstrapCountryTest {
+class BootstrapRegionTest {
 
     @Autowired
-    CountryRepository countryRepositoryMock;
+    RegionRepository regionRepositoryMock;
 
     @Autowired
-    CountryRepository countryRepository;
+    RegionRepository regionRepository;
 
     @Autowired
-    BootstrapCountry bootstrapCountry;
+    BootstrapRegion bootstrapRegion;
 
 
     @Test
     @Transactional
     @Rollback
     void runTest(){
-        countryRepository.deleteAll();
-        assertThat(countryRepository.count()).isEqualTo(0);
-        bootstrapCountry.run();
-        assertThat(countryRepository.count()).isEqualTo(3);
+        regionRepository.deleteAll();
+        assertThat(regionRepository.count()).isEqualTo(0);
+        bootstrapRegion.run();
+        assertThat(regionRepository.count()).isEqualTo(3);
     }
 
 }

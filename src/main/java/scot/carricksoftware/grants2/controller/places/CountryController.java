@@ -27,6 +27,7 @@ import scot.carricksoftware.grants2.services.places.country.CountryService;
 import java.util.UUID;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Slf4j
 @AllArgsConstructor
 @RestController

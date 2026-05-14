@@ -18,6 +18,7 @@ import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @SpringBootTest
 class CountryControllerListIT {
     @Autowired

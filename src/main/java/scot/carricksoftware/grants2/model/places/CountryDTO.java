@@ -18,6 +18,7 @@ import scot.carricksoftware.grants2.model.BaseEntityDTO;
 import java.util.Set;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @SuperBuilder
 @Getter
 @Setter

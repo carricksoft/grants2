@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Slf4j
 @Service
 public class CountryServiceImpl implements CountryService {

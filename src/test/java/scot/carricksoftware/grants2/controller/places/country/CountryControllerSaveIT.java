@@ -24,6 +24,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @SpringBootTest
 class CountryControllerSaveIT {
     @Autowired

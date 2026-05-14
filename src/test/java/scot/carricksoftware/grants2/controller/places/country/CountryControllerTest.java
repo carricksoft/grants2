@@ -46,6 +46,7 @@ import static scot.carricksoftware.grants2.controller.places.CountryController.C
 import static scot.carricksoftware.grants2.controller.places.CountryController.COUNTRY_PATH_ID;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @WebMvcTest(CountryController.class)
 @ExtendWith(MockitoExtension.class)
 @Slf4j
