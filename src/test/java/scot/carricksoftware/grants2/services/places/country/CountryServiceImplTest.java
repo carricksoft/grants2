@@ -15,6 +15,7 @@ import java.util.UUID;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 class CountryServiceImplTest {
 
     private CountryService countryService;

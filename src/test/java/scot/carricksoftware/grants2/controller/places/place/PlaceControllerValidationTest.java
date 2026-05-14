@@ -16,7 +16,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import scot.carricksoftware.grants2.controller.places.PlaceController;
+import scot.carricksoftware.grants2.controller.rest.places.place.PlaceController;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.services.places.place.PlaceService;
 import scot.carricksoftware.grants2.services.places.place.PlaceServiceImpl;
@@ -28,7 +28,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static scot.carricksoftware.grants2.controller.places.PlaceController.PLACE_PATH;
+import static scot.carricksoftware.grants2.controller.rest.places.place.PlaceController.PLACE_PATH;
 
 
 @WebMvcTest(PlaceController.class)

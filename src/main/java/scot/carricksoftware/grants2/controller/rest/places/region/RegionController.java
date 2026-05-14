@@ -2,7 +2,7 @@
  * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
  */
 
-package scot.carricksoftware.grants2.controller.places;
+package scot.carricksoftware.grants2.controller.rest.places.region;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

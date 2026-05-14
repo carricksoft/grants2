@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import scot.carricksoftware.grants2.controller.places.CountryController;
+import scot.carricksoftware.grants2.controller.rest.places.country.CountryController;
 import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.CountryDTO;

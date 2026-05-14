@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import scot.carricksoftware.grants2.controller.places.RegionController;
+import scot.carricksoftware.grants2.controller.rest.places.region.RegionController;
 import scot.carricksoftware.grants2.entities.places.Region;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.mappers.places.RegionMapper;

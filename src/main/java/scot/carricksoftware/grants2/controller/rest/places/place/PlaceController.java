@@ -2,7 +2,7 @@
  * Copyright (c) 2026.  Andrew Grant, Carrick Software. All rights reserved
  */
 
-package scot.carricksoftware.grants2.controller.places;
+package scot.carricksoftware.grants2.controller.rest.places.place;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +27,7 @@ import scot.carricksoftware.grants2.services.places.place.PlaceService;
 import java.util.UUID;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Slf4j
 @AllArgsConstructor
 @RestController

@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import scot.carricksoftware.grants2.controller.places.CountryController;
+import scot.carricksoftware.grants2.controller.rest.places.country.CountryController;
 import scot.carricksoftware.grants2.entities.places.Country;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.mappers.places.CountryMapper;
@@ -24,6 +24,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @SpringBootTest
 class CountryControllerUpdateIT {
     @Autowired

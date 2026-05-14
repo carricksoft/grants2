@@ -7,7 +7,7 @@ package scot.carricksoftware.grants2.controller.places.place;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import scot.carricksoftware.grants2.controller.places.PlaceController;
+import scot.carricksoftware.grants2.controller.rest.places.place.PlaceController;
 import scot.carricksoftware.grants2.entities.places.Place;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
@@ -19,6 +19,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @SpringBootTest
 class PlaceControllerGetIT {
     @Autowired

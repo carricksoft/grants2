@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import scot.carricksoftware.grants2.controller.places.RegionController;
+import scot.carricksoftware.grants2.controller.rest.places.region.RegionController;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 import scot.carricksoftware.grants2.repositories.places.RegionRepository;
 

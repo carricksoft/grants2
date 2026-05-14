@@ -17,6 +17,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import scot.carricksoftware.grants2.entities.BaseEntity;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Getter
 @Setter
 @SuperBuilder

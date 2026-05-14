@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import scot.carricksoftware.grants2.controller.places.CountryController;
+import scot.carricksoftware.grants2.controller.rest.places.country.CountryController;
 import scot.carricksoftware.grants2.model.places.CountryDTO;
 import scot.carricksoftware.grants2.repositories.places.CountryRepository;
 

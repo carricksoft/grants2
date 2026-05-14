@@ -17,7 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import scot.carricksoftware.grants2.controller.places.PlaceController;
+import scot.carricksoftware.grants2.controller.rest.places.place.PlaceController;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.PlaceDTO;
 import scot.carricksoftware.grants2.services.places.place.PlaceService;
@@ -41,8 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static scot.carricksoftware.grants2.controller.places.PlaceController.PLACE_PATH;
-import static scot.carricksoftware.grants2.controller.places.PlaceController.PLACE_PATH_ID;
+import static scot.carricksoftware.grants2.controller.rest.places.place.PlaceController.PLACE_PATH;
+import static scot.carricksoftware.grants2.controller.rest.places.place.PlaceController.PLACE_PATH_ID;
 
 
 @WebMvcTest(PlaceController.class)

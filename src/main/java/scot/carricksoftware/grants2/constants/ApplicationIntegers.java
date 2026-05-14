@@ -4,6 +4,9 @@
 
 package scot.carricksoftware.grants2.constants;
 
+import lombok.Getter;
+
+@Getter
 @SuppressWarnings("ClassHasNoToStringMethod")
 public enum ApplicationIntegers {
 
@@ -15,7 +18,4 @@ public enum ApplicationIntegers {
         value = i;
     }
 
-    public int getValue() {
-        return value;
-    }
 }

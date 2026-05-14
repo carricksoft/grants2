@@ -18,7 +18,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
-import scot.carricksoftware.grants2.controller.places.RegionController;
+import scot.carricksoftware.grants2.controller.rest.places.region.RegionController;
 import scot.carricksoftware.grants2.exceptions.NotFoundException;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 import scot.carricksoftware.grants2.services.places.region.RegionService;
@@ -42,8 +42,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static scot.carricksoftware.grants2.controller.places.RegionController.REGION_PATH;
-import static scot.carricksoftware.grants2.controller.places.RegionController.REGION_PATH_ID;
+import static scot.carricksoftware.grants2.controller.rest.places.region.RegionController.REGION_PATH;
+import static scot.carricksoftware.grants2.controller.rest.places.region.RegionController.REGION_PATH_ID;
 
 
 @WebMvcTest(RegionController.class)

@@ -16,7 +16,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import scot.carricksoftware.grants2.controller.places.RegionController;
+import scot.carricksoftware.grants2.controller.rest.places.region.RegionController;
 import scot.carricksoftware.grants2.model.places.RegionDTO;
 import scot.carricksoftware.grants2.services.places.region.RegionService;
 import scot.carricksoftware.grants2.services.places.region.RegionServiceImpl;
@@ -28,7 +28,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static scot.carricksoftware.grants2.controller.places.RegionController.REGION_PATH;
+import static scot.carricksoftware.grants2.controller.rest.places.region.RegionController.REGION_PATH;
 
 
 @WebMvcTest(RegionController.class)
